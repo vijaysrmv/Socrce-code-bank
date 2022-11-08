@@ -1,0 +1,40 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        plaid.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for plaid integration
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<!-- <div class="overlay d-flex align-items-center justify-content-center" aria-modal="true" role="dialog" attr.aria-describedby="modalContentBody">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" id="modalContentBody">
+            <div class="modal-header">
+                abc
+            </div>
+            <div class="modal-body text-center">
+                <form>
+                    <div class="row"></div>
+                </form>
+                <div class="modal-footer text-right">
+                    <button type="button" class="btn btn-select" attr.aria-label="Save Non Financial Data" (click)="saveData()">
+						<i class="fa fa-save"></i>Save
+					</button>
+                    <button type="button" class="btn btn-select" attr.aria-label="Cancel Non Financial Data" (click)="Cancel()">
+						<i class="fa fa-close"></i>Cancel
+					</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<app-select-account [plaidAccounts]="true" (discard)="discardFunding($event)" (clickSubmit)="selectAccount($event)"></app-select-account>

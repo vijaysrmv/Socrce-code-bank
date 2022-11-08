@@ -1,0 +1,123 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        upload-documents.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for upload documents.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.row {
+    .col-md-12 {
+        .docs-subtitle {
+            font-style: italic;
+            font-size: 14px;
+        }
+    }
+}
+
+.upload-document {
+    label {
+        font-weight: inherit;
+    }
+    .upload-document-form {
+        margin: 15px 0px 0px;
+        .upload-docs-box {
+            width: 150px;
+            // display: inline-block;
+            text-align: center;
+        }
+        .images-list {
+            width: 120px;
+            height: 80px;
+            margin: 10px;
+            text-align: center;
+            // font-size: 30px;
+            padding: 18px;
+            position: relative;
+            @include prefix(transition, all .2s linear);
+            border: 1px dashed $border-color;
+            // overflow: hidden;
+            .upload-icon {
+                font-size: 30px;
+            }
+            .upload-img-prev {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                bottom: 0px;
+                right: 0px;
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+                // .camera_icon {
+                //     font-size: 40px;
+                // }
+                .close-img-pre {
+                    position: absolute;
+                    top: -9px;
+                    right: -7px;
+                    font-size: 16px;
+                    z-index: 20;
+                    background: #fff;
+                    border-radius: 50%;
+                }
+            }
+            input[type=file] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+                &:disabled {
+                    cursor: not-allowed;
+                }
+            }
+        }
+        .add-more {
+            font-size: 15px;
+            color: $heading-color;
+            margin: 10px 0px 20px 10px;
+            button {
+                background: none;
+                color: $heading-color;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        .add-more span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+.upload-docs-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.document-name {
+    font-size: 13px;
+    margin: 0px;
+    line-height: 16px;
+    padding: 0px 15px;
+}

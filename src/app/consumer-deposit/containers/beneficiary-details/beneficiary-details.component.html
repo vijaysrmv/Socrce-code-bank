@@ -1,0 +1,301 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Consumer OAO
+File Name              :        beneficiary-details.component.html
+Author                 :        Amir Masood
+Date (DD/MM/YYYY)      :        29/01/2019
+Description            :        beneficiary details page ui
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment" *ngIf="!reviewPage">
+    <div class="container">
+        <h1 class="heading" id="main-header">Enter Beneficiary Details</h1>
+    </div>
+</div>
+<div class="beneficiary-details" [ngClass]="!reviewPage ? 'container' : ''">
+    <div *ngIf="!reviewPage" class="position-relative d-flex justify-content-end">
+        <button type="button" class="btn btn-select pull-right" (click)="addBeneficiaryApplicant()" *ngIf="!(beneficiaryFormCount === MAX_COUNT)">Add Beneficiary</button>
+    </div>
+
+    <form [formGroup]="beneficiaryForm" autocomplete="off">
+        <div class="row" formArrayName="beneficiaryList" *ngFor="let item of beneficiaryForm['controls'].beneficiaryList['controls']; let i=index">
+            <div formGroupName="{{i}}" [ngClass]="[(beneficiaryCount > 1 && reviewPage) ? 'col-xs-12 col-sm-12 col-md-6 padding_right_25' : 'col-xs-12 col-sm-12 col-md-12']">
+                <div class="info-header-main">
+                    <div class="info-header">
+                        Beneficiary #{{i+1}}
+                        <div class="separator_div"></div>
+                    </div>
+                    <div class="info-buttons">
+                        <ng-container *ngIf="reviewPage">
+                            <button type="button" class="btn icon-btn" *ngIf="beneficiaryManager[i].editContent" aria-label="Save" (click)="saveData(i)">
+                                <i class="fa fa-save"></i>Save
+                            </button>
+                            <button type="button" class="btn icon-btn" attr.aria-label="{{beneficiaryManager[i].editContent ? 'Cancel': 'Edit Beneficiary details'}}" (click)="toggleSectionEdit('beneficiary-details', i)">
+                                <i class="fa" [ngClass]="beneficiaryManager[i].editContent ? 'fa-close': 'fa-edit'"></i>{{beneficiaryManager[i].editContent ? 'Cancel': 'Edit'}}
+                            </button>
+                        </ng-container>
+                        <!-- <button type="button" class="btn btn-select delete-applicant-icon" attr.aria-label="Remove beneficiary" title="Remove Beneficiary" (click)="openConfirmationModal(i)">
+                            <i class="fa fa-trash"></i>
+                        </button> -->
+                        <button type="button" class="btn remove-applicant-btn" [ngClass]="reviewPage ? '' : 'left-aligned'" attr.aria-label="Click to remove beneficiary {{i+1}}" (click)="openConfirmationModal(i)">
+                            <i class="fa fa-trash"></i>Remove
+                        </button>
+                    </div>
+                </div>
+                <div class="beneficiary-form" [ngClass]="beneficiaryManager[i].editContent ? '' : 'non-editable-view'">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-firstName{{i}}">First Name
+								<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+								<span class="sr-only" title="required">Required</span>
+							</label>
+                            <input type="text" autocomplete="nope" class="form-control" name="firstName" id="beneficiary-firstName{{i}}" placeholder="Enter First Name" attr.aria-describedby="beneficiary-firstNameError{{i}}" formControlName="firstname" [readonly]="!beneficiaryManager[i].editContent">
+                            <div class="error-div" id="beneficiary-firstNameError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.required">
+                                        Please provide the Beneficiary's first name.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.pattern">
+                                        Please note text entered for first name cannot contain special characters or numbers.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.pattern">
+                                        Please note a minimum of 2 characters are required for first name.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.firstname.errors?.pattern">
+                                        Please note a maximum of 20 characters (including spaces) are allowed for first name.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-middleName{{i}}">Middle Name</label>
+                            <input type="text" autocomplete="nope" class="form-control" name="middleName" id="beneficiary-middleName{{i}}" [placeholder]="(beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.value) ? 'Enter Middle Name': '---'"
+                                attr.aria-describedby="beneficiary-middleNameError{{i}}" formControlName="middlename" [readonly]="!beneficiaryManager[i].editContent">
+                            <div class="error-div" id="beneficiary-middleNameError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors?.pattern">
+                                        Please note text entered for middle name cannot contain special characters or numbers.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors?.pattern">
+                                        Please note a minimum of 1 characters are required for middle name.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.middlename.errors?.pattern">
+                                        Please note a maximum of 10 characters (including spaces) are allowed for middle name.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-lastName{{i}}">Last Name
+								<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+								<span class="sr-only" title="required">Required</span>
+							</label>
+                            <input type="text" autocomplete="nope" class="form-control" name="lastName" id="beneficiary-lastName{{i}}" placeholder="Enter Last Name" attr.aria-describedby="beneficiary-lastNameError{{i}}" formControlName="lastname" [readonly]="!beneficiaryManager[i].editContent">
+                            <div class="error-div" id="beneficiary-lastNameError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.required">
+                                        Please provide the Beneficiary's last name.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.pattern">
+                                        Please note text entered for last name cannot contain special characters or numbers.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.pattern">
+                                        Please note a minimum of 2 characters are required for last name.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.lastname.errors?.pattern">
+                                        Please note a maximum of 40 characters (including spaces) are allowed for last name.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4 datepicker">
+                            <label class="display-block" for="beneficiary-DOB{{i}}">Date of Birth
+							</label>
+                            <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" [ngClass]="beneficiaryManager[i].beneficiaryDobInvalid ? 'invalid': ''" name="beneficiaryDOB" id="beneficiary-DOB{{i}}"
+                                [placeholder]="(beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.value) ? 'MM/DD/YYYY': '---'" attr.aria-describedby="beneficiaryDOBError{{i}}" formControlName="dob"
+                                (blur)="onDateChanged(beneficiaryForm.value.beneficiaryList[i]['dob'], 'beneficiaryDob', i)" [readonly]="!beneficiaryManager[i].editContent" />
+                            <span customMask [maskType]="'dob'" [maskData]="beneficiaryForm.value.beneficiaryList[i]['dob']" [ngClass]="beneficiaryManager[i].editContent ? '': 'non-edit-state'"></span>
+
+                            <my-date-picker name="beneficiaryDOBPicker" id="beneficiary-DOB-Picker{{i}}" formControlName="dobPicker" [options]="dobOptions" (inputFieldChanged)="dateValidation($event, 'beneficiaryDob', i)" [hidden]="!beneficiaryManager[i].editContent" (dateChanged)="onDateChanged($event.formatted, 'beneficiaryDob', i)"></my-date-picker>
+                            <div class="error-div" id="beneficiaryDOBError{{i}}">
+                                <ng-container *ngIf="(beneficiaryManager[i].beneficiaryDobInvalid || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.errors) && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.touched)">
+                                    <!-- <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.errors?.required">
+                                        Please enter the Beneficiary's date of birth.
+                                    </div> -->
+                                    <div *ngIf="beneficiaryManager[i].beneficiaryDobInvalid && !beneficiaryManager[i].beneficiaryDobError && beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.errors?.incorrect">
+                                        Applicants must be 18 years or older.
+                                    </div>
+                                    <div *ngIf="beneficiaryManager[i].beneficiaryDobError && !beneficiaryManager[i].beneficiaryDobInvalid && beneficiaryForm.controls.beneficiaryList['controls'][i].controls.dob.errors?.incorrect">
+                                        Please enter a valid date of birth.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-SSN{{i}}">Social Security Number</label>
+                            <input appBlockCopyPaste autocomplete="off" type="text" inputmode="numeric" [pattern]="ssnPattern" [textMask]="ssnMask" class="form-control" name="beneficiarySSN" id="beneficiary-SSN{{i}}" placeholder="Enter Social Security Number" attr.aria-describedby="beneficiary-SSNError{{i}}"
+                                formControlName="ssn" (focus)="onFocusSsn(i)" *ngIf="beneficiaryManager[i].editContent" />
+                            <input autocomplete="off" type="text" class="form-control" name="beneficiarySSN-disabled" id="beneficiary-SSN{{i}}" [placeholder]="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.value ? 'Enter Social Security Number' : '---'" attr.aria-describedby="beneficiary-SSNError{{i}}"
+                                [value]="beneficiaryForm.controls.beneficiaryList['controls'][i].getRawValue()['ssn']" readonly *ngIf="!beneficiaryManager[i].editContent" />
+
+                            <span customMask [maskType]="'ssn'" [maskData]="beneficiaryForm.controls.beneficiaryList['controls'][i].getRawValue()['ssn']" [ngClass]="beneficiaryManager[i].editContent ? '': 'non-edit-state'"></span>
+                            <div class="error-div" id="beneficiary-SSNError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors?.pattern">
+                                        Please verify that the social security number entered for the Beneficiary is correct.
+                                    </div>
+                                    <div *ngIf="!beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors?.pattern && beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors?.minlength">
+                                        Please verify that the social security number entered for the Beneficiary is correct.
+                                    </div>
+                                    <div *ngIf="!beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors?.pattern && beneficiaryForm.controls.beneficiaryList['controls'][i].controls.ssn.errors?.duplicateSsn">
+                                        SSN cannot be same as any other applicant.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4 input-prefix" [ngClass]="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.value ? 'align-prefix-review' : ''">
+                            <label for="beneficiary-phone{{i}}">Phone Number
+                                <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+								<span class="sr-only" title="required">Required</span>
+                            </label>
+                            <span class="input-prefix-box" *ngIf="!reviewPage || beneficiaryManager[i].editContent || (reviewPage && beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.value)" [ngClass]="beneficiaryManager[i].editContent ? '': 'non-editable'">+1</span>
+                            <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="phonePattern" [textMask]="phoneMask" class="form-control" name="phone" id="beneficiary-phone{{i}}" [placeholder]="(beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.value) ? 'Enter Phone Number': '---'"
+                                attr.aria-describedby="beneficiary-PhoneNumberError{{i}}" formControlName="primaryphonenumber" [readonly]="!beneficiaryManager[i].editContent" />
+                            <span customMask [maskType]="'phone'" [maskData]="beneficiaryForm.controls.beneficiaryList['controls'][i].getRawValue().primaryphonenumber" [ngClass]="beneficiaryManager[i].editContent ? '': 'non-edit-state'"></span>
+                            <div class="error-div" id="beneficiary-PhoneNumberError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.required">
+                                        Please enter your phone number.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.required">
+                                        Please note 10 digits are required for phone number.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.required">
+                                        Please note a maximum of 10 digits are allowed for phone number.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.pattern && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.primaryphonenumber.errors?.required">
+                                        Please enter a valid phone number.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-numberandstreet{{i}}">Number & Street</label>
+                            <input type="text" autocomplete="nope" (blur)="trim(i, 'beneficiaryList', 'numberandstreet'); standardizeAddress('beneficiaryList', i)" class="form-control" name="numberStreet" id="beneficiary-numberandstreet{{i}}" [placeholder]="beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i]['controls'].numberandstreet.value ? 'Enter Number and Street Address': '---'"
+                                attr.aria-describedby="beneficiary-numberandstreetError{{i}}" formControlName="numberandstreet" [readonly]="!beneficiaryManager[i].editContent" />
+                            <div class="error-div" id="beneficiary-numberandstreetError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors?.pattern">
+                                        Please enter a valid street address in a format similar to 123 Main Street. Special characters are not allowed.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors?.pattern">
+                                        Please enter the Beneficiary's complete number and street address.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.numberandstreet.errors?.pattern">
+                                        Please note a maximum of 40 characters (including spaces) are allowed for number and street address.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-aptorsuite{{i}}">Apt or Suite</label>
+                            <input type="text" autocomplete="nope" (blur)="trim(i, 'beneficiaryList', 'aptorsuite')" class="form-control" name="aptSuite" id="beneficiary-aptorsuite{{i}}" [placeholder]="(beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.value) ? 'Enter Apt or Suite': '---'"
+                                attr.aria-describedby="beneficiary-aptorsuiteError{{i}}" formControlName="aptorsuite" [readonly]="!beneficiaryManager[i].editContent" />
+                            <div class="error-div" id="beneficiary-aptorsuiteError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.errors?.pattern">
+                                        Please note a maximum of 40 characters are allowed for apt or suite.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.aptorsuite.errors?.pattern">
+                                        Please make sure you have entered valid characters for apt or suite.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-zipCode{{i}}">Zip Code</label>
+                            <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="zipCodePattern" [textMask]="zipcodeMask" class="form-control" name="zipCode" id="beneficiary-zipCode{{i}}" [placeholder]="beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i]['controls'].zipcode.value ? 'Enter Zip Code': '---'"
+                                attr.aria-describedby="beneficiary-zipCodeError{{i}}" formControlName="zipcode" (blur)="zipLookUp(i)" [readonly]="!beneficiaryManager[i].editContent" />
+                            <div class="error-div" id="beneficiary-zipCodeError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.errors?.minlength">
+                                        Please enter a valid 5 digit Zip Code.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.errors?.maxlength">
+                                        Please note a maximum of 5 digits are allowed for Zip Code.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.zipcode.errors?.incorrect">
+                                        Please enter a valid Zip Code.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-city{{i}}">City</label>
+                            <input type="text" autocomplete="nope" (blur)="trim(i, 'beneficiaryList', 'city')" class="form-control" name="city" id="beneficiary-city{{i}}" [placeholder]="beneficiaryManager[i].editContent || beneficiaryForm.controls.beneficiaryList['controls'][i]['controls'].city.value ? 'Select City': '---'"
+                                attr.aria-describedby="beneficiary-cityError{{i}}" formControlName="city" [readonly]="!beneficiaryManager[i].editContent" />
+                            <div class="error-div" id="beneficiary-cityError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.touched)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors?.pattern">
+                                        Please note the text entered for city cannot contain special characters or numbers.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors?.minlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors?.pattern">
+                                        Please note a minimum of 2 characters are required for city.
+                                    </div>
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors?.maxlength && !beneficiaryForm.controls.beneficiaryList['controls'][i].controls.city.errors?.pattern">
+                                        Please note a maximum of 26 characters (including spaces) are allowed for city.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label for="beneficiary-state{{i}}">State</label>
+                            <select class="form-control" name="state" id="beneficiary-state{{i}}" formControlName="state" [hidden]="!beneficiaryManager[i].editContent">
+								<option value="" [selected]="!beneficiaryForm.controls.beneficiaryList['controls'][i].value.state">Select State</option>
+								<option *ngFor="let item of allStates" [attr.aria-label]="item.statename" [ngValue]="item.statecode">{{item.statename}}</option>
+							</select>
+                            <input type="text" class="form-control" [placeholder]="beneficiaryForm.controls.beneficiaryList['controls'][i]['controls'].state.value ? 'Select State': '---'" name="stateLabel" id="beneficiary-state{{i}}" [value]="getStateText(beneficiaryForm.controls.beneficiaryList['controls'][i]['controls'].state.value) || ''"
+                                *ngIf="!beneficiaryManager[i].editContent" readonly />
+                          <div class="error-div" id="beneficiary-stateError{{i}}" *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.state.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.state.dirty || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.state.touched)"> -->
+                        <!-- <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.state.errors?.required">
+                                    Please select the Beneficiary's state.
+                                </div>
+                            </div> 
+                        </div>-->
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-md-4">
+                            <label class="display-block" for="beneficiary-relationship{{i}}" id="relationshipOwner">Relationship to Owner
+								<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+								<span class="sr-only" title="required">Required</span>
+                            </label>
+                            <select class="form-control" name="relationshipToOwner" id="beneficiary-relationship{{i}}" attr.aria-describedby="beneficiary-relationError{{i}}" formControlName="relationship" [hidden]="!beneficiaryManager[i].editContent" *ngIf="beneficiaryManager[i].editContent">
+								<option value="" disabled="true" [selected]=!beneficiaryForm.getRawValue().beneficiaryList[i].relationship>Please Select</option>
+								<option *ngFor="let relation of relationshipList" [attr.aria-label]="relation.value" [value]="relation.id">{{relation.value}}</option>
+							</select>
+                            <input type="text" class="form-control" aria-labelledby="relationshipOwner" [placeholder]="beneficiaryForm.value.beneficiaryList[i].relationship ? 'Select Relationship': '---'" name="relationshipLabel" [value]="getRelationshipText(beneficiaryForm.value.beneficiaryList[i].relationship)"
+                                *ngIf="!beneficiaryManager[i].editContent" readonly />
+                            <div class="error-div" id="beneficiary-relationError{{i}}">
+                                <ng-container *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.relationship.errors && (beneficiaryForm.controls.beneficiaryList['controls'][i].controls.relationship.touched || beneficiaryForm.controls.beneficiaryList['controls'][i].controls.relationship.dirty)">
+                                    <div *ngIf="beneficiaryForm.controls.beneficiaryList['controls'][i].controls.relationship.errors?.required">
+                                        Please select the Beneficiary's relation with Owner.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <app-footer-action *ngIf="!reviewPage" [showMandatoryMessage]="true" [showBack]="true" [showContinue]="true" [showSaveExit]="true" (clickBack)="prevStep()" (clickSaveExit)="saveDataAndExit()" (clickContinue)="nextStep()"></app-footer-action>
+</div>
+
+<app-modal-box *ngIf="showConfirmationModal" [showConfirmationModal]="showConfirmationModal" [showCountDiv]="false" [isBeneficiary]="true" (deleteJointDetailForm)="deleteForm($event)"></app-modal-box>

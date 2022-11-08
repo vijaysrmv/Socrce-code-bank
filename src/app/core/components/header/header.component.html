@@ -1,0 +1,28 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        header.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for header page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<header>
+    <div class="container position-relative">
+        <div class="row">
+            <div class="col-xs-8 col-md-8 col-sm-9">
+                <div class="logo display-inline-block">
+                    <img src="/ccf-oao-assets/images/logo.jpg" alt="Newgen Bank logo" />
+                </div>
+            </div>
+        </div>
+        <app-stepper *ngIf="showStepper" [stepperIndex]="stepperIndex" [personalStepper]="activatePersonalStepper"></app-stepper>
+    </div>
+</header>

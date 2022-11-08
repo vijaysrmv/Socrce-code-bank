@@ -1,0 +1,98 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        assets
+File Name              :        variables.scss
+Author                 :        Deepak kumar
+Date (DD/MM/YYYY)      : 
+Description            :        defined common variables.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+.clearfix {
+    clear: both;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/*Global variables*/
+
+$font-family-heading: 'Montserrat',
+sans-serif;
+$font-family-body: 'Montserrat',
+sans-serif;
+$font-family-stepper: 'Montserrat',
+sans-serif;
+$body-color: #333;
+$primary-color: #0a2876;
+$secondary-color: #f60;
+$primary-color-light: #283045;
+$header-background-color: #0a2876;
+$banner-bg-color: #0a2876;
+$heading-color: #0a2876;
+$border-color: #e2e2e2;
+$light-grey-color: #c6c6c6;
+$white-color: #ffffff;
+$green-color: #3eaf49;
+$error-color: #bd362f;
+$alert-danger: #bd362f;
+$danger-color: #bd362f;
+$image-path: './ccf-oao-assets/images/';
+$light-blue-color: #ddefff;
+$sucess-color: #28a745;
+$step-count-bg: #dfdfdf;
+$radio-toggle-btn-color: #2a2a2a;
+$radio-toggle-btn-active-color: $white-color;
+
+/*variable that we are using in project*/
+
+$link-color: $primary-color;
+$footer-bg: $primary-color;
+$stepper-font-family: $font-family-stepper;
+$heading-banner-bg: $heading-color;
+$heading-banner-color: $white-color;
+$text-color: $body-color;
+$danger-text-color: $danger-color;
+$success-text-color: $sucess-color;
+$continue-btn-bg: $secondary-color;
+// $back-btn-bg: ;
+$toggle-btn-active-bg: $secondary-color;
+$toggle-btn-disabled-bg: $light-grey-color;
+$disabled-btn-bg: $light-grey-color;
+$accordion-toggle-btn-bg: $secondary-color;
+$accordion-toggle-btn-color: $white-color;
+$heading-color: $heading-color;
+$heading-bar-bg: $secondary-color;
+$select-btn-bg: $primary-color;
+$btn-color: $white-color;
+$remove-btn-bg: $secondary-color;
+$save-exit-btn-bg: $white-color;
+$disabled-btn-bg: $light-grey-color;
+$stepper-current-tab-bg: $step-count-bg;
+$stepper-next-tab-bg: $white-color;
+$stepper-prev-tab-bg: $green-color;
+$sub-checkbox-bg: $secondary-color;
+$checkbox-bg: $primary-color;
+$question-index-bg: $secondary-color;
+$question-index-color: $white-color;
+$question-connnecting-line: $secondary-color;
+$body-top-border: $primary-color;
+$joint-count-div-color: $secondary-color;
+$download-disclosure-link: $secondary-color;
+$product-header-bg: $primary-color;
+$product-text-color: $white-color;
+$radio-toggle-disabled-bg: $light-grey-color;
+$radio-toggle-active-bg: $green-color;

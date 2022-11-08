@@ -1,0 +1,93 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        app.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for app page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<page-loader class="page-loader"></page-loader>
+<!-- <ng-progress [speed]="200" [color]="'#fc6fb1'" [showSpinner]="false" [ease]="'easeOutQuad'" [trickleSpeed]="250"></ng-progress> -->
+<ng2-toasty aria-live="assertive" role="alert" [position]="'top-center'"></ng2-toasty>
+<resume-popup></resume-popup>
+
+<div class="modal fade sessionExpireAlert d-flex align-items-center" bsModal #modal="bs-modal" [config]="config" (onHidden)="onHidden()" *ngIf="isModalShown" tabindex="-1" appModalFocus aria-modal="true" role="dialog" attr.aria-labelledby="sessionAlertTitle"
+    attr.aria-describedby="sessionAlertContent">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <ng-container *ngIf="sessionExpired; then expiredAlert else continueAlert"></ng-container>
+                <!-- <h3>Your session is about to expire</h3>
+                <p class="para">To remain logged in, please click the button below</p>
+                <div class="d-flex justify-content-center">
+                    <h4 class="time-counter">
+                        <i class="fa fa-clock-o"></i>
+                        <span>{{timeLeft}}</span>
+                    </h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn session-btn" (click)="confirm()">Keep me logged in</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="app-container">
+    <div class="sticky-footer">
+        <app-header></app-header>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content footer-text">
+                <p class="copright-text">
+                    &copy;{{year}} Newgen Bank. All rights reserved.
+                </p>
+                <!-- <div class="clearfix"></div> -->
+            </div>
+            <div class="footer-content footer-logo">
+                <img src="/ccf-oao-assets/images/fdic.svg" width="40px" alt="" />
+                <img src="/ccf-oao-assets/images/ehl.svg" width="40px" style="margin-left: 15px;" alt="" />
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </footer>
+</div>
+
+
+<ng-template #continueAlert>
+    <h3 id="sessionAlertTitle">Your session is about to expire</h3>
+    <div id="sessionAlertContent">
+        <p class="para">To remain logged in, please click the button below</p>
+        <div class="d-flex justify-content-center">
+            <h4 class="time-counter">
+                <i class="fa fa-clock-o"></i>
+                <span>{{timeLeft}}</span>
+            </h4>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn session-btn" (click)="confirm()">Keep me logged in</button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #expiredAlert>
+    <h3 id="sessionAlertTitle">Your session has expired.</h3>
+    <div id="sessionAlertContent">
+        <p class="para" *ngIf="resumeApplication">To resume your application please click the button below.</p>
+        <p class="para" *ngIf="!resumeApplication">To start again please click the button below.</p>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn session-btn" (click)="resume()">{{resumeApplication ? 'Resume Application': 'Start Again'}}</button>
+        </div>
+    </div>
+</ng-template>

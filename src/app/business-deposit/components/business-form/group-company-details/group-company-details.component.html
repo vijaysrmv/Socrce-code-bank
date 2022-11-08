@@ -1,0 +1,263 @@
+<div class="container mt-5">
+    <div class="txtButton">
+        <div class="textinp mr-2">
+            <h5>Are you a part of a group ?</h5>
+        </div>
+        <div class="btn" aria-label="Basic example">
+            <button type="button" class="btn btn-next mr-1">Yes</button>
+            <button type="button" class="btn btn-next">No</button>
+        </div>
+    </div>
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section" [ngClass]="editBusinessDetails ? '' : 'non-editable-view'">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Company Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="ID_Type">ID Type</label>
+                        <select class="form-control" name="ID_Type" id="ID_Type" formControlName="type">
+							<option *ngFor="let id of identificationType" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="company_Number">Number
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="company_Number" placeholder="Enter Company Number" attr.aria-describedby="BusinessNameError" formControlName="company_Number" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="issue_Date">Issue Date </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="issue_Date" id="issue_Date" placeholder="MM/DD/YYYY" attr.aria-describedby="issue_Date" formControlName="issue_Date" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="expiry_Date">Expiry Date </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="expiry_Date" id="expiry_Date" placeholder="MM/DD/YYYY" attr.aria-describedby="expiry_Date" formControlName="expiry_Date" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="p_issue">Place Of Issue
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="p_issue" placeholder="Place Of Issue" attr.aria-describedby="p_issue" formControlName="p_issue" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="Legal_Entity_Name">Entity Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="Legal_Entity_Name" placeholder="Entity Name" attr.aria-describedby="Legal_Entity_Name" formControlName="Legal_Entity_Name" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="short_Name">Short Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="short_Name" placeholder="Short Name" attr.aria-describedby="short_Name" formControlName="short_Name" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="countryOf_Incorporation">Country Of Incorporation</label>
+                        <select class="form-control" name="countryOf_Incorporation" id="countryOf_Incorporation" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="c_Domecile">Country Of Domecile / Physical Presence</label>
+                        <select class="form-control" name="c_Domecile" id="c_Domecile" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="c_Buisness">Country Of Buisness Operations</label>
+                        <select class="form-control" name="c_Buisness" id="c_Buisness" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="Incorporation_Date">Date Of Incorporation </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="Incorporation_Date" id="Incorporation_Date" placeholder="MM/DD/YYYY" attr.aria-describedby="Incorporation_Date" formControlName="Incorporation_Date"
+                        />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="w_Address">WebSite Address </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="w_Address" placeholder="Website Address" attr.aria-describedby="w_Address" formControlName="w_Address" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="r_Authority">Registration Authority</label>
+                        <select class="form-control" name="r_Authority" id="r_Authority" formControlName="type">
+							<option *ngFor="let id of idTypes" [attr.aria-label]="id.description" [value]="id.idtype">
+								{{ id.description }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="e_Registration">Emirates Of Registration</label>
+                        <select class="form-control" name="e_Registration" id="e_Registration" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="r_Authority_Optional">Registration Authority Name(If Others) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="r_Authority_Optional" placeholder="Registration Authority Name(If Others)" attr.aria-describedby="r_Authority_Optional" formControlName="r_Authority_Optional" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="l_type">Legal Entity Type</label>
+                        <select class="form-control" name="ltype" id="l_type" formControlName="type">
+							<option *ngFor="let id of legalEntityType" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="l_category">Legal Entity Category</label>
+                        <select class="form-control" name="l_category" id="l_category" formControlName="type">
+							<option *ngFor="let id of idTypes" [attr.aria-label]="id.description" [value]="id.idtype">
+								{{ id.description }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="v_Number">VAT Number </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="v_Number" placeholder="VAT Number" attr.aria-describedby="vNumber" formControlName="vNumber" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="p_Industry">Prime Industry</label>
+                        <select class="form-control" name="p_Industry" id="p_Industry" formControlName="type">
+							<option *ngFor="let id of primaryIndustry" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="s_Industry">Secondary Industry</label>
+                        <select class="form-control" name="s_Industry" id="s_Industry" formControlName="type">
+							<option *ngFor="let id of primaryIndustry" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="sector_1">Sector</label>
+                        <select class="form-control" name="sector_1" id="sector_1" formControlName="type">
+							<option *ngFor="let id of sectorOfCustomer" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="b_Description">Buisness Detail Description </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="b_Description" placeholder="Buisness Detail Description" attr.aria-describedby="b_Description" formControlName="b_Description" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="numberOf_emp">Number Of Employees</label>
+                        <input type="text" class="form-control" name="numberOf_emp" id="numberOf_emp" formControlName="numberOf_emp" placeholder="Number Of Employee" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="current_TurnOver">Current Company TurnOver(AED)</label>
+                        <input type="text" class="form-control" name="current_TurnOver" id="current_TurnOver" formControlName="current_TurnOver" placeholder="Current Company TurnOver(AED)" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="project_TurnOver">Projected Company TurnOver(AED)</label>
+                        <input type="text" class="form-control" name="project_TurnOver" id="project_TurnOver" placeholder="Projected Company TurnOver(AED)" formControlName="project_TurnOver" />
+                    </div>
+
+                    <!-- <div class="form-group col-xs-12 col-md-4">
+                        <label for="sector">Sister Companies</label>
+                        <select class="form-control" name="sector" id="sector" formControlName="type">
+							<option>Yes</option>
+							<option>No</option>
+						</select>
+                    </div> -->
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="authorized_Capital">Authorized Capital(AED) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="authorized_Capital" placeholder="Authorized Capital" attr.aria-describedby="authorized_Capital" formControlName="authorized_Capital" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="relation_ship">Relationship</label>
+                        <select class="form-control" name="relation_ship" id="relation_ship" formControlName="type">
+							<option value="Select Entity Name" selected="true">Select</option>
+							<option *ngFor="let id of relationshipArray" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-5">
+                            <button type="button" (click)="addDataToGroupCompany()" class="btn btn-next" aria-label="Add">
+								Add
+							</button>
+                        </div>
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Legal Entity Name</th>
+                                        <th>Trade Name</th>
+                                        <th>Country Of Incorporation</th>
+                                        <th>Date of Incorporation/Formation</th>
+                                        <th>Emirates of Registration</th>
+                                        <th>Legal Entity Type</th>
+                                        <th>Legal Entity Category</th>
+                                        <th>Identifier Number</th>
+                                        <th>Relationship</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rowdata of groupCompanyArray">
+                                        <td>{{ rowdata.Legal_Entity_Name }}</td>
+                                        <td>{{ rowdata.short_Name }}</td>
+                                        <td>{{ rowdata.countryOf_Incorporation }}</td>
+                                        <td>{{ rowdata.Incorporation_Date }}</td>
+                                        <td>{{ rowdata.e_Registration }}</td>
+                                        <td>{{ rowdata.l_type }}</td>
+                                        <td>{{ rowdata.l_category }}</td>
+                                        <td>{{ rowdata.v_Number }}</td>
+                                        <td>{{ rowdata.relation_ship }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

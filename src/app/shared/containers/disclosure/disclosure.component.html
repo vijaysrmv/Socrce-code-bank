@@ -1,0 +1,822 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        disclosure.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for disclosure page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+	<div class="container">
+		<h1 class="heading" id="main-header">We're almost finished !</h1>
+	</div>
+</div>
+<div class="container">
+	<div class="service-offered-section display-none">
+		<h1 class="heading text-center service-heading" *ngIf="serviceCount > 0">
+			Choose the option that suits you best.
+		</h1>
+		<div class="row d-flex justify-content-center flex-wrap" *ngIf="servicesOffered">
+			<div class="col-xs-12 col-sm-4 col-md-3 service-box" *ngIf="servicesOffered.debitcard">
+				<!--*ngIf="servicesOffered && servicesOffered.debitcard"> -->
+				<div class="services" [ngClass]="servicesOffered.debitcard.selected ? 'selected-product' : ''">
+					<p class="no-margin">
+						<img src="../../../../ccf-oao-assets/images/debit-card.png" alt="Debit Card" />
+					</p>
+					<p class="heading service-type">Debit Card</p>
+					<div class="service-text">
+						<p class="service-content">
+							Make your purchases without the hassle of writing a check or carrying cash. Your VISA Debit Card
+							lets you make purchases anywhere VISA is accepted.
+						</p>
+					</div>
+					<p class="text-center no-margin">
+						<button
+							type="button"
+							class="btn btn-select"
+							[ngClass]="servicesOffered.debitcard.selected ? 'remove' : ''"
+							id="selectApplicantDebit"
+							attr.aria-label="{{
+								servicesOffered.debitcard.selected ? 'Remove Debit Card' : 'Select Debit Card'
+							}}"
+							(click)="toggleService('debitCard', servicesOffered.debitcard)"
+						>
+							{{ servicesOffered.debitcard.selected ? "Remove" : "Select" }}
+						</button>
+					</p>
+					<p class="atm-opted">
+						<span
+							class="display-inline-block"
+							*ngIf="
+								servicesOffered.debitcard.selected &&
+								servicesOffered.debitcard.cardapplicant &&
+								servicesOffered.debitcard.cardapplicant !== ''
+							"
+						>
+							<!-- *ngIf="(servicesOffered.debitcard.cardapplicant && servicesOffered.debitcard.cardapplicant !== '') || (servicesOffered.debitcard.carddelivery && servicesOffered.debitcard.carddelivery !== '')" -->
+							<i class="fa fa-check text-green"></i>{{ servicesOffered.debitcard.cardapplicant }}
+							<i class="fa fa-check text-green"></i
+							>{{
+								servicesOffered.debitcard.deliverymethod === "MAIL"
+									? "via MAIL"
+									: servicesOffered.debitcard.deliverymethod
+							}}
+						</span>
+					</p>
+					<div class="product-overlay text-left" *ngIf="showApplicantOption" [@slideUpDownAnimation]>
+						<div *ngIf="selectUser">
+							<ul class="feature-list list-unstyled">
+								<li class="d-flex justify-content-between">
+									<div class="product-feature-title font-weight-bold">Select Card Applicants</div>
+									<!-- <div class="product-feature-value" >
+                                       
+                                    </div> -->
+								</li>
+							</ul>
+							<div class="col-xs-12 col-md-12 no-padding no-margin applicant-list">
+								<div class="checkbox" *ngFor="let applicant of servicesOffered.debitcard.applicantlist">
+									<label class="custom-checkbox">
+										<input
+											type="checkbox"
+											name="applicantCard"
+											attr.id="{{ applicant.applicanttype }}Applicant-{{ applicant.pid }}"
+											value="true"
+											[(ngModel)]="applicant.selected"
+										/>{{ applicant.firstname | uppercase }}
+										{{ applicant.lastname | uppercase }}
+										<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-12 text-center">
+								<button
+									type="button"
+									class="btn btn-select proceed-service"
+									[disabled]="checkDebitDisability()"
+									(click)="showDeliveryPopup()"
+								>
+									NEXT
+								</button>
+							</div>
+							<button
+								class="btn icon-btn overlay-icon"
+								(click)="closePopUp('debitCard', servicesOffered.debitcard)"
+							>
+								<i aria-hidden="true" class="fa fa-times-circle"></i>
+								<i class="sr-only">Click to close service overlay</i>
+							</button>
+						</div>
+						<div *ngIf="chooseOption" id="bothApplicant">
+							<ul class="feature_list list-unstyled no-margin">
+								<li class="d-flex justify-content-between">
+									<div class="product-feature-title font-weight-bold">Select Delivery Method</div>
+								</li>
+							</ul>
+							<div class="col-xs-12 col-md-12 no-padding no-margin">
+								<div class="radio">
+									<label class="custom-radio">
+										<input
+											type="radio"
+											name="account"
+											value="MAIL"
+											[(ngModel)]="servicesOffered.debitcard.deliverymethod"
+											id="via_email"
+										/>
+										<span class="inline-block">Mail my debit card(s) to me.</span>
+										<span class="radio-check"></span>
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-12 no-padding no-margin">
+								<div class="radio">
+									<label class="custom-radio">
+										<input
+											type="radio"
+											name="account"
+											value="PICKUP"
+											[(ngModel)]="servicesOffered.debitcard.deliverymethod"
+											id="via_branch"
+										/>
+										<span class="inline-block">Pickup my card(s) at a branch.</span>
+										<span class="radio-check"></span>
+									</label>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-12 text-center">
+								<button
+									type="button"
+									class="btn btn-select proceed-service"
+									[disabled]="!servicesOffered.debitcard.deliverymethod"
+									(click)="selectChoseWay('debitCard', servicesOffered.debitcard)"
+								>
+									SELECT
+								</button>
+							</div>
+							<button
+								class="btn icon-btn overlay-icon"
+								(click)="closePopUp('debitCard', servicesOffered.debitcard)"
+							>
+								<i aria-hidden="true" class="fa fa-times-circle"></i>
+								<i class="sr-only">Click to close service overlay</i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-3 service-box" *ngIf="servicesOffered.overdraft">
+				<div class="services" [ngClass]="servicesOffered.overdraft.selected ? 'selected-product' : ''">
+					<p class="no-margin">
+						<img src="../../../../ccf-oao-assets/images/Courtesy Pay.png" alt="Overdraft Protection" />
+					</p>
+					<p class="heading service-type">Overdraft Protection</p>
+					<div class="service-text">
+						<p class="service-content">
+							Overdraft Protection service covers both ATM transactions and everyday debit transactions in the
+							event you have an insufficient balance to cover the transaction. There’s no cost to enroll and
+							you don’t pay anything unless you use it.
+						</p>
+					</div>
+					<p class="text-center no-margin">
+						<button
+							type="button"
+							class="btn btn-select"
+							[ngClass]="servicesOffered.overdraft.selected ? 'remove' : ''"
+							id="selectApplicantDebit"
+							attr.aria-label="{{
+								servicesOffered.overdraft.selected
+									? 'Remove Overdraft Protection'
+									: 'Select Overdraft Protection'
+							}}"
+							(click)="toggleService('overDraft', servicesOffered.overdraft)"
+						>
+							{{ servicesOffered.overdraft.selected ? "Remove" : "Select" }}
+						</button>
+					</p>
+					<div class="product-overlay text-left" *ngIf="chooseODOption" [@slideUpDownAnimation]>
+						<ul class="feature_list list-unstyled no-margin">
+							<li class="d-flex justify-content-between no-padding">
+								<div class="product-feature-title font-weight-bold">&nbsp;</div>
+							</li>
+						</ul>
+						<div class="col-xs-12 col-md-12 no-padding no-margin">
+							<div class="radio">
+								<label class="custom-radio">
+									<input
+										type="radio"
+										name="account"
+										[value]="true"
+										[(ngModel)]="servicesOffered.overdraft.overdraft"
+										id="agree_term"
+										(click)="selectChoseWay('overDraft', servicesOffered.overdraft)"
+									/>
+									<span class="inline-block"
+										>I have read through the Fees for Overdrawing Checking Accounts document, and I want
+										Newgen Bank to authorize and pay overdrafts on my everyday debit card transactions.</span
+									>
+									<span class="radio-check"></span>
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-12 no-padding no-margin">
+							<div class="radio">
+								<label class="custom-radio">
+									<input
+										type="radio"
+										name="account"
+										[value]="false"
+										[(ngModel)]="servicesOffered.overdraft.overdraft"
+										id="disagree_term"
+										(click)="selectChoseWay('overDraft', servicesOffered.overdraft)"
+									/>
+									<span class="inline-block">
+										I DO NOT want Newgen Bank to authorize and pay overdrafts on my everyday debit card
+										transactions.</span
+									>
+
+									<span class="radio-check"></span>
+								</label>
+							</div>
+						</div>
+						<ul class="feature-list list-unstyled no-margin">
+							<li>
+								<div class="product-feature-value right">
+									<button
+										class="btn icon-btn overlay-icon"
+										title="close product overlay"
+										(click)="closePopUp('overDraft', servicesOffered.overdraft)"
+									>
+										<i aria-hidden="true" class="fa fa-times-circle"></i>
+										<i class="sr-only">Click to close service overlay</i>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-xs-12 col-sm-4 col-md-3 service-box" *ngIf="servicesOffered.simplesaver">
+                <div class="services" [ngClass]="servicesOffered.simplesaver.selected? 'selected-product' : ''">
+                    <p class="no-margin">
+                        <img src="../../../../ccf-oao-assets/images/SimpleSaver.png" alt="Simple Saver" />
+                    </p>
+                    <p class="heading service-type">SimpleSaver®</p>
+                    <div class="service-text">
+                        <p class="service-content">
+                            Saving made simple. Just add SimpleSaver to any of our checking accounts, and we'll automatically round up your debit card transactions to the next whole dollar amount. Then, we'll transfer that amount to an interest-bearing savings account.*
+                        </p>
+                        <p class="service-content">
+                            *We charge a $2.00 monthly fee for SimpleSaver®, but we waive this fee if you are enrolled in e-Statements.
+                        </p>
+                    </div>
+                    <p class="text-center no-margin">
+                        <button type="button" class="btn btn-select" [ngClass]="servicesOffered.simplesaver.selected? 'remove' : ''" attr.aria-label="{{servicesOffered.simplesaver.selected? 'Remove SimpleSaver' : 'Select SimpleSaver'}}" (click)="toggleService('simpleSaver', servicesOffered.simplesaver)">
+                            {{servicesOffered.simplesaver.selected? 'Remove' : 'Select'}}
+                        </button>
+                    </p>
+                    <p class="atm-opted">&nbsp;</p>
+                </div>
+            </div> -->
+		</div>
+		<div class="text-center" *ngIf="servicesOffered && servicesOffered.debitcard">
+			You will receive debit card in approximately 10 business days after account is opened and funded.
+		</div>
+	</div>
+
+	<div class="disclosure">
+		<div class="info-header-main">
+			<div class="info-header" id="disclosure">
+				FATCA Disclosure
+				<div class="separator_div"></div>
+			</div>
+		</div>
+		<div class="dislosure-section">
+			<h4 class="sub-heading">U.S. ENTITIES - Complete only if you are a U.S. Person</h4>
+			<ul class="disclosure-list display-block">
+				<li>
+					<label class="display-inline-block">Is the entity a Specified U.S. Person?</label>
+					<div class="toggle-btn display-inline-block" style="margin-left: 15px">
+						<label>
+							<input
+								type="radio"
+								class="toggle-option"
+								name="USPerson"
+								value="true"
+								(click)="toggleUSPerson(true)"
+							/>
+							<span class="checked-option">Yes</span>
+						</label>
+						<label>
+							<input
+								type="radio"
+								class="toggle-option"
+								name="USPerson"
+								value="false"
+								(click)="toggleUSPerson(false)"
+							/>
+							<span class="checked-option">No</span>
+						</label>
+					</div>
+					<ul class="no-padding" *ngIf="isUSPerson !== null && isUSPerson" [@slideProductPopupAnimation]>
+						<li>
+							<div class="row">
+								<div class="form-group col-xs-12 col-sm-12 col-md-4">
+									<label for="businessTaxIdNumber">Business Tax ID Number</label>
+									<input type="text" />
+								</div>
+							</div>
+						</li>
+					</ul>
+					<ul class="no-padding" *ngIf="isUSPerson !== null && !isUSPerson" [@slideProductPopupAnimation]>
+						<li>If any of the boxes below are applicable to your Entity, please tick the relevant box:</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a corporation the stock of which
+								is regularly traded on one or more established securities markets
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a Corporation which is a member
+								of the same expanded affiliated group as defined in section 1471(e)(2) of the U.S. Internal
+								Revenue Code (the Code)(broadly a greater than 50% relationship) as a Corporation the stock of
+								which is regularly
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />traded on one or more established securities
+								markets
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is an organization exempt from
+								taxation under section 501(a) of the Code or an individual retirement plan as defined in
+								section 7701(a)(37) of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is the United States or any wholly
+								owned agency or instrumentality thereof ;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a U.S. State, any U.S.
+								territory, any political subdivision of any of the foregoing, or any wholly owned agency or
+								instrumentality of any one or more of the foregoing;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a bank as defined in section 581
+								of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a real estate investment trust
+								as defined in section 856 of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a regulated investment company
+								as defined in section 851 of the Code, or any entity registered with the U.S. Securities
+								Exchange Commission under the Investment Company Act of 1940;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a common trust fund as defined
+								in section 584(a) of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The Entity is a trust that is exempt from tax
+								under section 664(c) of the Code or that is described in section 4947(a)(1) of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The entity is a dealer in securities,
+								commodities, or derivative financial instruments (including notional principal contracts,
+								futures, forwards and options) that is registered as such under the laws of the United States
+								or any U.S. State;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />The entity is a broker as defined in section
+								6045(c) of the Code;
+								<span class="checkmark"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="main-term-check" />Non-Financial Foreign Entities (e.g. entities
+								that are not U.S. Entities or Foreign Financial Institutions)
+								<span class="checkmark"></span>
+							</label>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<h4 class="sub-heading">FOREIGN FINANCIAL INSTITUTIONS</h4>
+			<ul class="disclosure-list display-block">
+				<li>
+					<label class="custom-checkbox">
+						<input
+							type="checkbox"
+							name="main-term-check"
+							[checked]="isFinancialInstWithGIIN"
+							(click)="toggleFinancialInstWithGIIN()"
+						/>Foreign Financial Institutions with GIINs
+						<span class="checkmark"></span>
+					</label>
+					<ul *ngIf="isFinancialInstWithGIIN" [@slideProductPopupAnimation]>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />
+								If you have a Global Intermediary Identification Number (GIIN) and are not a Direct Reporting
+								NFFE, please provide your GIIN:
+								<span class="checkmark sub-check"></span>
+							</label>
+							<ul class="no-padding">
+								<li>
+									<div class="row">
+										<div class="form-group col-xs-12 col-sm-12 col-md-4">
+											<label for="businessTaxIdNumber">Enter GIIN</label>
+											<input type="text" class="form-control" />
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li>
+							If you have provided a GIIN above, confirm the type of Foreign Financial Institution below:
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Participating FFI;
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Reporting Model 1 FFI;
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Reporting Model 2 FFI; or
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Registered Deemed Compliant FFI (other than a
+								reporting Model 1 FFI, Sponsored FFI, Nonreporting IGA FFI)
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Sponsored FFI
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<label class="custom-checkbox">
+						<input
+							type="checkbox"
+							name="main-term-check"
+							[checked]="isFinancialInstWithoutGIIN"
+							(click)="toggleFinancialInstWithoutGIIN()"
+						/>Foreign Financial Institutions without GIINs
+						<span class="checkmark"></span>
+					</label>
+					<ul *ngIf="isFinancialInstWithoutGIIN" [@slideProductPopupAnimation]>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Certified Deemed Compliant Foreign Financial
+								Institution
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Nonreporting IGA FFI
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Nonparticipating Foreign Financial Institution
+								(including a Limited FFI or an FFI related to a Reporting IGA FFI other than a
+								Deemed-Compliant FFI, Participating FFI or Exempt Beneficial Owner)
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Exempt Beneficial Owner
+								<span class="checkmark sub-check"></span>
+							</label>
+							<ul>
+								<li>
+									<label class="custom-checkbox">
+										<input type="checkbox" name="sub-term-check" />A foreign government, government of a U.S.
+										possession, or non-U.S. central bank of issue
+										<span class="checkmark sub-check"></span>
+									</label>
+								</li>
+								<li>
+									<label class="custom-checkbox">
+										<input type="checkbox" name="sub-term-check" />An international organization
+										<span class="checkmark sub-check"></span>
+									</label>
+								</li>
+								<li>
+									<label class="custom-checkbox">
+										<input type="checkbox" name="sub-term-check" />An exempt retirement plan
+										<span class="checkmark sub-check"></span>
+									</label>
+								</li>
+								<li>
+									<label class="custom-checkbox">
+										<input type="checkbox" name="sub-term-check" />An investment entity wholly owned by Exempt
+										Beneficial Owners
+										<span class="checkmark sub-check"></span>
+									</label>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<h4 class="sub-heading">NON-FINANCIAL FOREIGN ENTITIES (NFFEs)</h4>
+			<ul class="disclosure-list display-block">
+				<li>
+					<label class="custom-checkbox">
+						<input
+							type="checkbox"
+							name="main-term-check"
+							[checked]="isActiveNFFE"
+							(click)="toggleActiveNFFE()"
+						/>ACTIVE NFFE (please complete Section B if you are a Passive NFFE)
+						<span class="checkmark"></span>
+					</label>
+					<ul *ngIf="isActiveNFFE" [@slideProductPopupAnimation]>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Trading entity (entity engaged in a trade or
+								business where less than 50% of the NFFE's gross income in the preceding calendar year is
+								derived from passive income (e.g. interest income, dividend income, rental income and income
+								from other financial investments) AND less than 50% of the assets held by the NFFE in the
+								preceding calendar year are assets that produce or are held for the production of passive
+								income).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Publicly traded corporation (a corporation the
+								stock of which is regularly traded on one or more established securities markets)
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />NFFE affiliate (broadly a greater than 50%
+								relationship) of a publicly traded corporation
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Non-financial start-up company (any entity
+								organized less than 24 months prior to the date of the classification - excludes financial
+								institutions). Date of organization:
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />An entity that is liquidating or reorganizing
+								(an entity which has not been a financial institution in the last five years and is in the
+								process of liquidating its assets or reorganizing with the intent to continue or recommence
+								operations in a business other than that of a financial institution).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />An "excepted" NFFE as described in relevant
+								U.S. Treasury Regulations
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />A non-profit organization (e.g. an entity
+								exclusively established for religious, charitable, scientfiic, artistic, cultura,l athletic or
+								educational purposes or a professional organization, business league, chamber of commerce).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Territory NFFE (an entity registered, created
+								or incorporated in a U.S. territory: American Samoa, Guam, the Northern Mariana Islands,
+								Puerto Rico or the U.S. Virgin Islands and all the owners of the Territory NFFE are bona fide
+								residents of that U.S. Territory).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Non-U.S. government (including a political
+								sub-division of such government, a public body performing a function of such government or a
+								political sub-division thereo,f a government of a U.S. Territory, an international
+								organization, a non-U.S. central bank of issue or an entity wholly-owned by at least one of
+								the foregoing).
+
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />A holding and/or financing company
+								(substantially all activities of the company consist of holding the outstanding shares of, or
+								providing financing and services to, one or more subsidiaries that engage in trades or
+								businesses other than that of a financial institution. Such holding and/or financing company
+								does not qualify if it is an investment fund such as a private equity fund, venture capital
+								fund, leveraged buyout fund or any investment vehicle whose purpose it is to acquire or fund
+								companies and then hold interests in those companies as capital assets for investment
+								purposes).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />A financing and hedging company (being a
+								company primarily engaged in financing and hedging transactions with or for Related Entities
+								(as defined for FATCA) that are not financial institutions. Note: a financing and hedging
+								company that (i) provides such services to any entity that is not a Related Entity or (ii)
+								belongs to a group primarily engaged in a business other than that of a financial institution,
+								does not qualify).
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<label class="custom-checkbox">
+						<input
+							type="checkbox"
+							name="main-term-check"
+							[checked]="isPassiveNFFE"
+							(click)="togglePassiveNFFE()"
+						/>PASSIVE NFFEs
+						<span class="checkmark"></span>
+					</label>
+					<ul *ngIf="isPassiveNFFE" [@slideProductPopupAnimation]>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Passive NFFE which is neither a Direct
+								Reporting NFFE nor a Sponsored Direct Reporting NFFE
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Passive NFFE which is a Direct Reporting NFFE
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-checkbox">
+								<input type="checkbox" name="sub-term-check" />Passive NFFE which is a Sponsored Direct
+								Reporting NFFE
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="disclosure">
+		<div class="info-header-main">
+			<div class="info-header" id="disclosure">
+				Disclosures
+				<div class="separator_div"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<i class="sr-only" aria-label="All disclosures link will be open in new window"></i>
+			<ul class="disclosure-list display-block" role="radiogroup" aria-labelledby="disclosure">
+				<li>
+					<label class="custom-checkbox">
+						<input type="checkbox" name="main-term-check" [ngModel]="acceptESign" (change)="eSignChange()" />
+						<span
+							>I have read and consent to the
+							<button class="e-sign-link" (click)="disclosureClick($event, eSignDisclosure)">
+								E-Sign Disclosure
+							</button>
+							for following document and agree to conduct business in accordance with the terms and conditions
+							contained therein</span
+						>
+						<span class="checkmark"></span>
+					</label>
+
+					<!-- eSignDisclosure -->
+
+					<!-- <label class="custom-checkbox">
+						<input type="checkbox" name="main-term-check" attr.aria-label="click to e-sign disclosure" [ngModel]="acceptESign" (change)="eSignChange()" />
+						I have read and consent to the following and agree to conduct business in accordance with the terms and conditions contained therein:
+						<span class="checkmark"></span>
+					</label>
+                    <ul>
+                        <li class="e-sign-disclosure">
+                            <a (click)="disclosureClick($event, eSignDisclosure)">E-Sign Disclosure</a>
+                        </li>
+                    </ul> -->
+				</li>
+			</ul>
+			<ul class="disclosure-list display-block" *ngIf="acceptESign" [@slideProductPopupAnimation]>
+				<li>
+					<label class="custom-checkbox">
+						<input
+							type="checkbox"
+							name="main-term-check"
+							[checked]="checkCount === disclosures.length"
+							(change)="disclosureChange($event)"
+						/>
+						<span>
+							I have read through the following documents and agree to conduct business in accordance with the
+							terms and conditions contained therein
+						</span>
+						<span class="checkmark"></span>
+					</label>
+					<ul #disclosureList>
+						<li *ngFor="let disclosure of disclosures">
+							<label class="custom-checkbox" *ngIf="disclosure.status">
+								<input type="checkbox" name="sub-term-check" (change)="subDiclosureChange($event)" />
+								<a (click)="disclosureClick($event, disclosure)">{{ disclosure.disclosuresdescription }}</a>
+								<span class="checkmark sub-check"></span>
+							</label>
+						</li>
+						<li class="download-disclosure" *ngIf="disclosures.length">
+							<button (click)="downloadDisclosures($event)" attr.disabled="disableDownloadAllLink">
+								<i class="fa fa-download"></i>Download All Disclosures
+							</button>
+						</li>
+						<li *ngIf="disabledDisclosuresText">
+							Note: Terms and Conditions disclosure includes
+							{{ disabledDisclosuresText }} disclosures, where applicable.
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- <ng-container *ngIf="servicesOffered">
+        <ng-container *ngIf="servicesOffered.oktopay; then footerIfOkToPay else elseFooter"></ng-container>
+    </ng-container> -->
+	<app-footer-action
+		[showBack]="true"
+		[showSaveExit]="true"
+		[showContinue]="true"
+		(clickBack)="prevStep()"
+		(clickSaveExit)="saveData()"
+		(clickContinue)="nextStep()"
+	></app-footer-action>
+</div>

@@ -1,0 +1,68 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        select-choice.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for select choice page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ng-template #selectchoice>
+    <div class="banner-header discard-funding">
+        <div class="container">
+            <h1 class="heading">Choose any one Account</h1>
+        </div>
+        <!-- <span aria-hidden="true" (click)="discardFunding()" class="close-modal-icon">&times;</span> -->
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-body select-account-options">
+                    <!-- <h2 class="sub-heading">Select one account</h2> -->
+                    <ul class="list-unstyled">
+                        <li *ngFor="let choice of choices; let i = index;">
+                            <label class="custom-radio" [ngClass]="!choice.balanceAvailable ? 'disable-radio' : ''">
+                                <input type="radio" name="challenge" [value]="choice" [(ngModel)]="choiceId" [disabled]="!choice.balanceAvailable" />
+                                {{choice.account}}
+                                <span class="radio-check"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12 text-right option-btn-grp">
+                <button type="button" class="btn btn-cancel" (click)="discardFunding()">Cancel</button>
+                <!-- <button type="button" class="btn btn-select" attr.aria-label="click for payment" (click)="initiatePayment('internal')">Pay</button> -->
+                <button type="button" class="btn btn-select" (click)="submitChoice()" [disabled]="!choiceId">Submit</button>
+            </div>
+        </div>
+
+        <!-- <div class="mfa-box">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-md-12 select-account-options">
+                    <h2 class="sub-heading">Select one account</h2>
+                    <ul class="list-unstyled">
+                        <li *ngFor="let choice of choices; let i = index;">
+                            <label class="custom-radio" [ngClass]="!choice.balanceAvailable ? 'disable-radio' : ''"> 
+                                <input type="radio" [disabled]="!choice.balanceAvailable" name="challenge" class="mfa-option" [(ngModel)]="choiceId" [value]="choice" />
+                                <span class="radio-check">{{choice.account}}</span>            
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-select" (click)="submitChoice()" [disabled]="!choiceId">Submit</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</ng-template>

@@ -1,0 +1,72 @@
+[
+	{
+		"questionid": 1,
+		"questiontext": "Are you a frequent traveler?",
+		"visible": true,
+		"answertype": "single",
+		"hasChild": true,
+		"childQuesId": 2,
+		"riskflag": false,
+		"answertext": "",
+		"hasParent": false,
+		"required": true,
+		"error": false
+	},
+	{
+		"questionid": 2,
+		"questiontext": "Do you travel outside the US?",
+		"visible": false,
+		"answertype": "single",
+		"hasChild": false,
+		"riskflag": true,
+		"answertext": "",
+		"hasParent": true,
+		"parentQuesId": 1,
+		"required": false,
+		"error": false
+	},
+	{
+		"questionid": 5,
+		"questiontext": "What is the source of funds for this initial deposit?",
+		"visible": true,
+		"answertype": "multi",
+		"hasChild": true,
+		"childQuesId": 6,
+		"riskflag": false,
+		"answertext": "",
+		"hasParent": false,
+		"required": true,
+		"error": false,
+		"answers": [],
+		"limitError": false,
+		"selectedAnswer": [],
+		"currentlySelected": ""
+	},
+	{
+		"questionid": 6,
+		"questiontext": "if Other, provide Description",
+		"visible": false,
+		"answertype": "text",
+		"hasChild": false,
+		"riskflag": false,
+		"answertext": "",
+		"hasParent": true,
+		"parentQuesId": 5,
+		"required": false,
+		"min": false,
+		"max": false,
+		"error": false
+	},
+	{
+		"questionid": 22,
+		"questiontext": "Are you currently, or have you ever been a politically exposed person (PEP) or a senior political figure?",
+		"visible": true,
+		"answertype": "single",
+		"hasChild": false,
+		"riskflag": true,
+		"answertext": "",
+		"hasParent": false,
+		"required": true,
+		"error": false
+	}
+]

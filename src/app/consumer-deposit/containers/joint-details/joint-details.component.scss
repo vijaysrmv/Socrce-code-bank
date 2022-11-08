@@ -1,0 +1,29 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen Bank 
+Application            : 
+Module                 :        Personal Deposit
+File Name              :        joint-details.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for joint details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.margin-bottom20 {
+    margin-bottom: 20px;
+}
+
+@media (max-width:567px) {
+    .edit-layout {
+        .btn-select {
+            margin-bottom: 15px;
+        }
+    }
+}

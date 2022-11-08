@@ -1,0 +1,72 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        otp.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for otp page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment banner-top">
+    <div class="container">
+        <h1 class="heading" id="main-header" for="otpDescription">Enter Your Verification Code</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="otp-section">
+        <h1 class="heading">Verification Code</h1>
+        <p class="project-title" id="otpDescription">{{ responseDisplayName ? responseDisplayName : 'Please enter the verification code sent to the registered Email: ' + email }}</p>
+        <div class="otp-form">
+            <div class="row d-flex justify-content-center">
+                <div class="otp-container">
+                    <div class="otp-box d-flex justify-content-between" #otpFields>
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter first digit" name="otp1" id="otp1" maxlength="1" (keydown)="checkNumericField($event, 1)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length > 1) ? -1 : 0" />
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter second digit" name="otp2" id="otp2" maxlength="1" (keydown)="checkNumericField($event, 2)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length === 2) ? 0 : -1" />
+
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter third digit" name="otp3" id="otp3" maxlength="1" (keydown)="checkNumericField($event, 3)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length === 3) ? 0 : -1" />
+
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter fourth digit" name="otp4" id="otp4" maxlength="1" (keydown)="checkNumericField($event, 4)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length === 4) ? 0 : -1" />
+
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter fifth digit" name="otp5" id="otp5" maxlength="1" (keydown)="checkNumericField($event, 5)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length === 5) ? 0 : -1" />
+
+                        <input type="text" autocomplete="off" [textMask]="numberMask" inputmode="numeric" pattern="[0-9]*" class="form-control otp-input" aria-label="Enter last digit" name="otp6" id="otp6" maxlength="1" (keydown)="checkNumericField($event, 6)" (mousedown)="setInputSelection($event)"
+                            [tabindex]="(otp.length === 6) ? 0 : -1" *ngIf="otpLength > 5" />
+                    </div>
+                    <p class="text-center resend-otp">
+                        If you have not received the code<br/>you can request a <button (click)="resendOtp()" [ngClass]="resendDisabled ? 'resend-disabled': ''">new code</button>
+                        <span *ngIf="resendDisabled"> in <strong class="resend-time">{{resendOtpTime}}</strong> minutes</span>
+                    </p>
+                    <div class="input-number d-flex justify-content-between" *ngIf="isNotMobile">
+                        <button id="num1" class="num-btn" (click)="clickNumPad($event)">1</button>
+                        <button id="num2" class="num-btn" (click)="clickNumPad($event)">2</button>
+                        <button id="num3" class="num-btn" (click)="clickNumPad($event)">3</button>
+                        <button id="num4" class="num-btn" (click)="clickNumPad($event)">4</button>
+                        <button id="num5" class="num-btn" (click)="clickNumPad($event)">5</button>
+                        <button id="num6" class="num-btn" (click)="clickNumPad($event)">6</button>
+                        <button id="num7" class="num-btn" (click)="clickNumPad($event)">7</button>
+                        <button id="num8" class="num-btn" (click)="clickNumPad($event)">8</button>
+                        <button id="num9" class="num-btn" (click)="clickNumPad($event)">9</button>
+                        <button id="clearBtn" (click)="clickNumPad($event)" aria-label="Clear OTP">C</button>
+                        <button id="num0" class="num-btn" (click)="clickNumPad($event)">0</button>
+                        <button id="deleteBtn" (click)="clickNumPad($event)" aria-label="Delete character">
+                            <img src="/ccf-oao-assets/images/delete.svg" width="20" alt="delete text icon" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer-action [showContinue]="true" [disableContinue]="otp.length !== otpLength" (clickContinue)="validateOtp()"></app-footer-action>
+</div>

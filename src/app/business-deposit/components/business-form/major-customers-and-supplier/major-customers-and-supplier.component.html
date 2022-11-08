@@ -1,0 +1,159 @@
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Customer/Buyers Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="nameType">Country</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="nameType" name="buildnameTypeingNumber" placeholder="Country" attr.aria-describedby="nameType" formControlName="nameType" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="SSN_Tax_ID">Company Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="SSN_Tax_ID" name="SSN_Tax_ID" placeholder="Company Name" attr.aria-describedby="SSN_Tax_ID" formControlName="SSN_Tax_ID" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="countryOfIncorporation">Sale %</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="countryOfIncorporation" placeholder="Sale %" name="countryOfIncorporation" attr.aria-describedby="countryOfIncorporation" formControlName="countryOfIncorporation" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="City_Place">Payment mode </label>
+                        <select class="form-control" name="City_Place" id="City_Place" formControlName="City_Place">
+							<option value="City_Place" selected="true">Bank Transfer</option>
+							<option>TT</option>
+							<option>Cheques</option>
+							<option>Cash</option>
+							<option>LC/LG</option>
+							<option>Others</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="product_name">Currency</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="product_name" name="product_name" placeholder="Currency" attr.aria-describedby="product_name" formControlName="product_name" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-5">
+                        <button type="button" (click)="addDataToCustomerTable()" class="btn btn-next" aria-label="Add">
+							Add
+						</button>
+                    </div>
+
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Company Name</th>
+                                    <th>Sale %</th>
+                                    <th>Payment mode</th>
+                                    <th>Currency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rowdata of customerBuyerArray">
+                                    <td>{{ rowdata.nameType }}</td>
+                                    <td>{{ rowdata.SSN_Tax_ID }}</td>
+                                    <td>{{ rowdata.countryOfIncorporation }}</td>
+                                    <td>{{ rowdata.City_Place }}</td>
+                                    <td>{{ rowdata.product_name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Supplier/Creditors Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="nameType">Country</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="nameType" name="buildnameTypeingNumber" placeholder="Country" attr.aria-describedby="nameType" formControlName="nameType" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="SSN_Tax_ID">Company Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="SSN_Tax_ID" name="SSN_Tax_ID" placeholder="Company Name" attr.aria-describedby="SSN_Tax_ID" formControlName="SSN_Tax_ID" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="countryOfIncorporation">Purchase %</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="countryOfIncorporation" placeholder="Purchase %" name="countryOfIncorporation" attr.aria-describedby="countryOfIncorporation" formControlName="countryOfIncorporation" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="City_Place">Payment mode </label>
+                        <select class="form-control" name="City_Place" id="City_Place" formControlName="City_Place">
+							<option value="City_Place" selected="true">Bank Transfer</option>
+							<option>TT</option>
+							<option>Cheques</option>
+							<option>Cash</option>
+							<option>LC/LG</option>
+							<option>Others</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="product_name">Currency</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="product_name" name="product_name" placeholder="Currency" attr.aria-describedby="product_name" formControlName="product_name" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-5">
+                        <button type="button" (click)="addDataToSupplierTable()" class="btn btn-next" aria-label="Add">
+							Add
+						</button>
+                    </div>
+
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Company Name</th>
+                                    <th>Purchase %</th>
+                                    <th>Payment mode</th>
+                                    <th>Currency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rowdata of supplierCreditorArray">
+                                    <td>{{ rowdata.nameType }}</td>
+                                    <td>{{ rowdata.SSN_Tax_ID }}</td>
+                                    <td>{{ rowdata.countryOfIncorporation }}</td>
+                                    <td>{{ rowdata.City_Place }}</td>
+                                    <td>{{ rowdata.product_name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

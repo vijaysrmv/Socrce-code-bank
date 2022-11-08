@@ -1,0 +1,203 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        getting-started.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for getting started page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Getting Started</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="need-to-apply-section text-center">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="heading">Opening your account is quick, easy, and secure.</h2>
+                <h3 class="heading">Here's what you need to apply:</h3>
+            </div>
+            <div class="documents-section row">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <img src="../../../../ccf-oao-assets/images/address.png" alt="Contact Icon" />
+                    <p class="para">Address, phone number, email, social security number.</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <img src="../../../../ccf-oao-assets/images/id.png" alt="Identification Documents Icon" />
+                    <p class="para">Identification, such as a driver’s license, state ID or passport.</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <img src="../../../../ccf-oao-assets/images/payment.png" alt="Payment Method Icon" />
+                    <p class="para">A bank account or debit or credit card to fund your account.</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <!-- <p class="age_para">All applicants must be 18 years of age and a U.S. resident.</p> -->
+        </div>
+    </div>
+    <!-- <div class="btn-group display-inline-block d-flex justify-content-center" role="group" attr.aria-labelledby="customerType" data-toggle="buttons">
+        <button type="button" [disabled]="isIbpsFlow && !isIbpsLocked" class="btn" [ngClass]="isQ2Login? 'btn-select': ''" attr.aria-label="yes" attr.aria-describedby="customerType" (click)="isQ2Login = true">
+            Yes
+        </button>
+        <button type="button" [disabled]="isIbpsFlow && !isIbpsLocked" class="btn" [ngClass]="!isQ2Login && isQ2Login !== null? 'btn-select': ''" attr.aria-label="no" attr.aria-describedby="customerType" (click)="resetSession();">
+            No
+        </button>
+    </div> -->
+    <div>
+        <form [formGroup]="gettingStartedForm" autocomplete="none">
+            <div class="online-customer">
+                <div class="check-user">
+                    <h2 class="sub-heading" id="onlineCustomerCheck">Are you a Smart Bank Customer?</h2>
+                </div>
+                <div class="toggle-btn display-block" role="radiogroup" aria-labelledby="onlineCustomerCheck">
+                    <label>
+                        <input type="radio" class="toggle-option" formControlName="onlinecustomer" name="onlinecustomer"
+                            [value]="true" (click)="setOnlineCustomer(true)" />
+                        <span class="checked-option">Yes</span>
+                    </label>
+                    <label>
+                        <input type="radio" class="toggle-option" formControlName="onlinecustomer" name="onlinecustomer"
+                            [value]="false" (click)="setOnlineCustomer(false)" />
+                        <span class="checked-option">No</span>
+                    </label>
+                </div>
+                <div class="error-div" id="onlineCustomerError">
+                    <ng-container *ngIf="gettingStartedForm['controls'].onlinecustomer.errors && (gettingStartedForm['controls'].onlinecustomer.dirty || gettingStartedForm['controls'].onlinecustomer.touched)">
+                        <div *ngIf="gettingStartedForm['controls'].onlinecustomer.errors?.required">
+                            Please provide your response.
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="login-form">
+                    <ng-container *ngIf="!isQ2Login && isQ2Login !== null">
+                        <div class="new-customer">
+                            <div class="form-group">
+                                <label for="zipCode" class="font-weight-bold">Please enter zip code</label>
+                                <input autocomplete="none" type="text" inputmode="numeric" [pattern]="zipCodePattern" [textMask]="zipcodeMask" class="form-control" [ngClass]="(validZip === false || gettingStartedForm['controls'].zipcode.errors) ? 'invalid': ''" placeholder="Enter Zip Code"
+                                    name="zipCode" id="zipCode" attr.aria-describedby="zipCodeError" formControlName="zipcode" (change)="refreshValidation($event)">
+                                <div class="error-div" id="zipCodeError">
+                                    <ng-container *ngIf="(validZip === false || gettingStartedForm['controls'].zipcode.errors) && (gettingStartedForm['controls'].zipcode.dirty || gettingStartedForm['controls'].zipcode.touched)">
+                                        <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.required">
+                                            Please enter your Zip Code.
+                                        </div>
+                                        <div *ngIf="validZip === false && !gettingStartedForm['controls'].zipcode.errors?.required">
+                                            Please enter a valid Zip Code.
+                                        </div>
+                                        <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.minlength && validZip !== false">
+                                            Please enter a valid 5 digit Zip Code.
+                                        </div>
+                                        <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.maxlength && validZip !== false">
+                                            Please note a maximum of 5 digits are allowed for Zip Code.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="isQ2Login">
+                        <div class="row existing-customer">
+                            <div class="form-group col-md-12">
+                                <label class="text-left font-weight-bold">Online Banking Login</label>
+                                <div class="position-relative">
+                                    <input autocomplete="off" type="text" class="form-control" formControlName="username" placeholder="Enter Personal User ID" aria-describedby="userNameError" id="inputUsername" required>
+                                    <div class="error-div" id="userNameError">
+                                        <ng-container *ngIf="gettingStartedForm['controls'].username.errors && (gettingStartedForm['controls'].username.dirty || gettingStartedForm['controls'].username.touched)">
+                                            <div *ngIf="gettingStartedForm['controls'].username.errors?.required">
+                                                Please enter your user ID.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="text-left font-weight-bold">Password </label>
+                                <div class="position-relative">
+                                    <input autocomplete="off" type="password" class="form-control" formControlName="password" aria-describedby="passwordError" id="inputPassword" placeholder="Password" required>
+                                    <div class="error-div" id="passwordError">
+                                        <ng-container *ngIf="gettingStartedForm['controls'].password.errors && (gettingStartedForm['controls'].password.dirty || gettingStartedForm['controls'].password.touched)">
+                                            <div *ngIf="gettingStartedForm['controls'].password.errors?.required">
+                                                Please enter your password.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- <div class="new-customer">
+        <div class="zip-code-section">
+            <form novalidate [formGroup]="gettingStartedForm" autocomplete="nope">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 zip-field">
+                        <label for="zipCode" class="display-none">Zip Code</label>
+                        <input autocomplete="nope" type="text" inputmode="numeric" [pattern]="zipCodePattern" [textMask]="zipcodeMask" class="form-control" [ngClass]="(validZip === false || gettingStartedForm['controls'].zipcode.errors) ? 'invalid': ''" placeholder="Enter Zip Code" name="zipCode"
+                            id="zipCode" attr.aria-describedby="zipCodeError" formControlName="zipcode" (change)="refreshValidation($event)">
+                        <div class="error-div" id="zipCodeError" *ngIf="(validZip === false || gettingStartedForm['controls'].zipcode.errors) && (gettingStartedForm['controls'].zipcode.dirty || gettingStartedForm['controls'].zipcode.touched)">
+                            <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.required">
+                                Please enter your Zip Code.
+                            </div>
+                            <div *ngIf="validZip === false && !gettingStartedForm['controls'].zipcode.errors?.required">
+                                Please enter a valid Zip Code.
+                            </div>
+                            <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.minlength && validZip !== false">
+                                Please enter a valid 5 digit Zip Code.
+                            </div>
+                            <div *ngIf="gettingStartedForm['controls'].zipcode.errors?.maxlength && validZip !== false">
+                                Please note a maximum of 5 digits are allowed for Zip Code.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> -->
+    <div class="getting-started-disclosure">
+        <div class="comunication-consent">
+            <h3 class="heading font-weight-bold">Communication Consent</h3>
+            <p role="definition">
+                By clicking CONTINUE you expressly consent to allow Newgen Bank to contact you at the telephone, email, and/or address you have provided for the purpose of fulfilling your inquiry even if you have registered such contact information on the Do Not Call
+                Registry or requested Newgen Bank to not contact you by telephone, email, or direct mail. You are expressly allowing Newgen Bank to contact you by text message and/or telephone which may result in charges assessed from your cellular/mobile
+                carriers. Additionally, communication with you may include the use of automatic telephone dialing systems and/or the use of artificial or prerecorded messages to the residential or cellular number provided. You understand that you are
+                not required to consent to receiving autodialed calls/text messages as a condition for obtaining services from Newgen Bank.
+            </p>
+        </div>
+        <div class="d-flex justify-content-start align-items-start">
+            <div class='switch-radio-btn' for="edaDisclosure">
+                <label class="display-none" id="edaDisclosureLabel">Check Electronic Disclosure
+                    Agreement</label>
+                <input type='checkbox' id="edaDisclosure" aria-labelledby="edaDisclosureLabel" aria-describedby="disclosureDescription" [(ngModel)]="disclosureSelected" />
+                <span class='back'>
+                    <span class='toggle'></span>
+                <span class='label on'></span>
+                <span class='label off'></span>
+                </span>
+            </div>
+            <span class="consent" id="disclosureDescription">
+                <i class="sr-only" aria-label="Electronic Disclosure Agreement link will be open in new window"></i>
+                I have read the <button (click)="disclosureClick($event)" class="font-weight-bold">Electronic Disclosure
+                    Agreement</button> and agree to conduct
+                business in
+                accordance with the terms and conditions contained therein
+            </span>
+        </div>
+    </div>
+
+    <app-footer-action [showContinue]="true" [disableContinue]="!disclosureSelected" (clickContinue)="isQ2Login ? loginUser() : nextStep()"></app-footer-action>
+    <app-footer-links></app-footer-links>
+</div>

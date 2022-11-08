@@ -1,0 +1,36 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        responsible-details.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for responsible details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container" id="main-header">
+        <h1 class="heading" *ngIf="pid === 1">
+            {{ showForm ? "Tell us about the responsible individual" : "Upload responsible individual's ID" }}
+        </h1>
+        <h1 class="heading" *ngIf="pid !== 1">
+            {{ showForm ? "Tell us about the additional individual" : "Upload additional individual's ID" }}
+        </h1>
+    </div>
+</div>
+<div class="container personal-details position-relative">
+    <app-consumer-form [addressFor]="'responsible'" [pid]="pid" (showContinueAndSave)="setFooterActions($event)" [applicantType]="applicantType" [showPhyAddressButtons]="showPhyAddressButtons" (createApplication)="createApplication($event)" (removeApplicant)="removeApplicant()"
+        (patchFromIdScan)="patchFromIdScan($event)" (save)="saveAddressData($event)"></app-consumer-form>
+    <app-footer-action [showMandatoryMessage]="showForm" [disableSaveExit]="saveExitDisability" [disableContinue]="!showForm" [showBack]="true" [showSaveExit]="pid === 1 ? showForm : true" [showContinue]="true" (clickBack)="prevStep()" (clickSaveExit)="saveAndExit()"
+        (clickContinue)="nextStep()"></app-footer-action>
+
+    <app-modal-box *ngIf="addResponsibleUser" [questionLabel]="responsibleUserData.questionLabel" [infoLabel]="responsibleUserData.infoLabel" (continue)="onAddAccount($event)"></app-modal-box>
+
+    <!-- <app-modal-box *ngIf="addAuthorizeSigner" [questionLabel]="authorizesignerData.questionLabel" [infoLabel]="authorizesignerData.infoLabel" (continue)="onAddAccount($event)"></app-modal-box> -->
+</div>

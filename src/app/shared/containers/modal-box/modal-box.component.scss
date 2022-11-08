@@ -1,0 +1,130 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        modal-box.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for modal box page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    z-index: 999;
+    // background: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    .modal-dialog {
+        width: 40rem;
+        margin: 1.875rem;
+        .check-joint-modal {
+            .form-group {
+                &:first-child {
+                    text-align: left;
+                }
+                &:last-child {
+                    text-align: right;
+                }
+                .btn-group {
+                    .btn {
+                        width: 101px;
+                        padding: 10px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .count-joint-modal {
+            .form-group {
+                &:first-child {
+                    text-align: left;
+                }
+                &:last-child {
+                    text-align: right;
+                }
+                .btn-input-group {
+                    .btn-input {
+                        padding: 10px;
+                        width: 56px;
+                        background: $toggle-btn-disabled-bg;
+                    }
+                    div {
+                        &.btn-input {
+                            background-color: $joint-count-div-color;
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+        .delete-joint-confirmation {
+            padding: 22px;
+            @media (max-width: 660px) {
+                flex-direction: column
+            }
+            p {
+                padding-right: 28px;
+                font-size: 15px !important;
+                font-weight: bold;
+                margin-bottom: 0 !important;
+                @media (max-width: 660px) {
+                    &:first-child {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .modal-continue {
+        margin-top: 30px;
+        // padding-right: 31px;
+    }
+}
+
+@media(max-width: 668px) and (min-width: 576px) {
+    .overlay {
+        .modal-dialog {
+            .check-joint-modal,
+            .count-joint-modal {
+                .form-group {
+                    .btn-group {
+                        .btn {
+                            width: 83px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .overlay {
+        .modal-dialog {
+            .check-joint-modal,
+            .count-joint-modal {
+                .form-group {
+                    &:first-child {
+                        text-align: left;
+                    }
+                    &:last-child {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}

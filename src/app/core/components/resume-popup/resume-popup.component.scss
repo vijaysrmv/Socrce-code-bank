@@ -1,0 +1,93 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        resume-popup.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for resume popup
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.footer-link {
+    .service-box-inner {
+        background: #f5f5f5;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid $border-color;
+        @include prefix(border-radius, 5px);
+        .heading {
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: $heading-color;
+        }
+    }
+}
+
+.modal-header {
+    padding: 10px 15px;
+    .modal-title {
+        font-size: 18px;
+        color: $heading-color;
+    }
+}
+
+// .identity-modal {
+//     .verification-list {
+//         padding-left: 20px;
+//         margin: 0px;
+//         list-style-type: none;
+//         li {
+//             margin-bottom: 15px;
+//             p {
+//                 color: #000;
+//             }
+//             .selected-city {
+//                 background: $heading-color;
+//                 color: #fff;
+//             }
+//             label {
+//                 input[type="radio"],
+//                 input[type="checkbox"] {
+//                     opacity: 0;
+//                 }
+//                 .identity-option {
+//                     &:checked~.select-btn {
+//                         color: #fff;
+//                         background: $heading-color;
+//                         padding: 5px 15px;
+//                         margin-right: 12px;
+//                         transition: all .1s ease-in;
+//                         cursor: pointer;
+//                     }
+//                     &~.select-btn {
+//                         border: 1px solid $heading-color;
+//                         color: $heading-color;
+//                         background: #fff;
+//                         padding: 5px 15px;
+//                         margin-right: 12px;
+//                         transition: all .1s ease-in;
+//                         cursor: pointer;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// .verification-btn .prev-step {
+//     display: none;
+// }
+// .identity-option~.select-btn:hover {
+//     background-color: #eee;
+// }
+// .identity-option:checked~.select-btn:hover {
+//     background: $heading-color;
+// }

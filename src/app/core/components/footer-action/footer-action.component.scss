@@ -1,0 +1,64 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        footer-action.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for footer action page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+.footer-action-btn {
+    margin: 35px 0px 10px;
+}
+
+.footer-action-row {
+    .required-field-info {
+        margin-top: 20px;
+        em {
+            display: block;
+            text-align: right;
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .footer-action-btn {
+        display: flex;
+        flex-direction: column-reverse;
+        .btn {
+            &.btn-next,
+            &.save-exit-btn,
+            &.btn-back {
+                width: 100%;
+                margin: 0px 0px 10px;
+            }
+        }
+        .footer-right-buttons {
+            width: 100%;
+            float: none;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        // ul {
+        //     li {
+        //         width: 100%;
+        //         margin: 5px 0px;
+        //         .btn {
+        //             &.btn-next,
+        //             &.save-exit-btn,
+        //             &.btn-back {
+        //                 width: 100%;
+        //                 margin: 0px;
+        //             }
+        //         }
+        //     }
+        // }
+    }
+}

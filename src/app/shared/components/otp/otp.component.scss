@@ -1,0 +1,177 @@
+/*------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        otp.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for otp page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.banner-top {
+    position: relative;
+    .close-modal-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 25px;
+        height: 25px;
+        background: $heading-color;
+        // border: none;
+        border-radius: 50%;
+        color: $white-color;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+.otp-section {
+    .heading {
+        margin: 0px;
+        // font-family: $font-family-body;
+        color: $heading-color;
+        font-weight: normal;
+        font-size: 21px;
+    }
+    .project-title {
+        font-size: 15px;
+        font-family: $font-family-body;
+        margin-bottom: 5px;
+    }
+    .otp-form {
+        border-top: 4px solid $body-top-border;
+        padding-top: 40px;
+        .otp-container {
+            width: 320px;
+            .resend-otp {
+                // margin: 5px 0px;
+                margin: 5px auto;
+                button {
+                    padding: 0px;
+                    margin: 0px;
+                    background: transparent;
+                    border: none;
+                    color: $heading-color;
+                    // margin-right: 5px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    &.resend-disabled {
+                        color: #595959;
+                        cursor: not-allowed;
+                    }
+                }
+                a {
+                    text-decoration: none;
+                    color: $heading-color;
+                    font-weight: bold;
+                }
+                span {
+                    // width: 80px;
+                    text-align: left;
+                    strong {
+                        // width: 43px;
+                        display: inline-block;
+                    }
+                }
+                // .resend-time {
+                //     display: inline-block;
+                //     min-width: 38px;
+                // }
+            }
+            .otp-box {
+                width: 280px;
+                margin: 0px auto;
+                .input-box {
+                    position: relative;
+                    width: 45px;
+                    height: 45px;
+                    padding: 3px;
+                    display: inline-block;
+                    border: 1px solid $border-color;
+                }
+                .otp-input {
+                    width: 40px;
+                    height: 40px !important;
+                    border: 1px solid $border-color !important;
+                    text-align: center;
+                }
+            }
+            .input-number {
+                width: 165px;
+                margin: 5px auto;
+                flex-wrap: wrap;
+                button {
+                    width: 45px;
+                    height: 35px;
+                    display: inline-block;
+                    cursor: pointer;
+                    margin: 4px 0px;
+                    outline: none;
+                    background: $white-color;
+                    border: 1px solid $heading-color;
+                    color: $heading-color;
+                    border-radius: 2px;
+                    font-size: 16px;
+                    // &:last-child {
+                    //     visibility: hidden;
+                    // }
+                    &:focus {
+                        border-color: $heading-color;
+                        // background-color: #f5faff;
+                        @include prefix(box-shadow, 0 0 0 0.2rem rgba(0, 123, 255, 0.25));
+                    }
+                }
+            }
+        }
+    }
+}
+
+// @media (max-width:1024px) {
+//     .otp-section {
+//         .otp-form {
+//             .otp-container {
+//                 width: 25%;
+//                 .input-number {
+//                     width: 70%;
+//                 }
+//             }
+//         }
+//     }
+// }
+// @media (max-width:768px) {
+//     .otp-section {
+//         .otp-form {
+//             .otp-container {
+//                 width: 35%;
+//                 .input-number {
+//                     width: 70%;
+//                 }
+//             }
+//         }
+//     }
+// }
+// @media (max-width:567px) {
+//     .otp-section {
+//         .otp-form {
+//             .otp-container {
+//                 width: 235px;
+//                 .input-number {
+//                     width: 70%;
+//                 }
+//             }
+//         }
+//     }
+// }

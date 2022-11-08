@@ -1,0 +1,105 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        due-diligence-questionnaireForm.component.html
+Author                 :        Amir Masood
+Date (DD/MM/YYYY)      :        21/01/2020
+Description            :        Template for due diligence questionnaireForm page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment" *ngIf="!fundingPage">
+    <div class="container" id="main-header">
+        <h1 class="heading" *ngIf="accountType === 'businessDeposit'">Tell us more about your business</h1>
+        <h1 class="heading" *ngIf="accountType === 'consumerDeposit'">Tell us more about how you will use your account(s)
+        </h1>
+    </div>
+</div>
+<div class="container">
+    <div class="questionnaire-info-row" #questionnaire>
+
+        <div class="info-header-main" *ngIf="fundingPage">
+            <div class="info-header">
+                Tell us a few more things
+                <div class="separator_div"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="row" [ngClass]="question.parentqueid ? 'no-margin' : ''" *ngFor="let question of questionsList; let i = index">
+                <div class="form-group col-xs-12 col-sm-6 col-md-6 table100" *ngIf="question.visible">
+                    <label class="display-block text-inherit" for="label{{question.questionid}}" id="labelID{{question.questionid}}">{{question.questiontext}}
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <ng-container *ngIf="question.answertype === 'text'">
+                        <input type="text" autocomplete="off" class="form-control" placeholder="Please Enter" name="label{{question.questionid}}" id="label{{question.questionid}}" attr.aria-describedby="{{i}}-Error" [(ngModel)]="question.answertext" />
+                        <!-- (blur)="checkError(i)" /> -->
+                        <!-- <input type="text" class="form-control" placeholder="Please Enter" name="label{{question.questionid}}" id="{{question.questionid}}-label" attr.aria-describedby="{{i}}-Error" [value]="question.textanswer" readonly *ngIf="disableQuestions" [disabled]="disableQuestions"
+                        /> -->
+                    </ng-container>
+                    <ng-container *ngIf="question.answertype === 'single'">
+                        <div class="toggle-btn" role="radiogroup" attr.aria-labelledby="labelID{{question.questionid}}">
+                            <label>
+                                <input type="radio" class="toggle-option" [value]="true" name="label{{question.questionid}}"
+                                    (click)="toggleOptions(i, true)" [(ngModel)]="question.answertext" attr.aria-describedby="{{i}}-Error"/>
+                                <span class="checked-option">YES</span>
+                            </label>
+                            <label>
+                                <input type="radio" class="toggle-option" [value]="false"
+                                name="label{{question.questionid}}"
+                                    (click)="toggleOptions(i, false)" [(ngModel)]="question.answertext" attr.aria-describedby="{{i}}-Error"/>
+                                <span class="checked-option">NO</span>
+                            </label>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="question.answertype === 'multi'">
+                        <div class="col-xs-12 col-sm-10 col-md-10 no-padding">
+                            <div class="d-flex justify-content-between multiselect-dropdown">
+                                <select class="form-control" name="state" id="label{{question.questionid}}" attr.aria-describedby="{{i}}-Error" [(ngModel)]="question.currentlySelected" [disabled]="question.limitError">
+                                    <option value='' disabled="true" [selected]="!question.currentlySelected">Please
+                                        Select
+                                    </option>
+                                    <option *ngFor="let item of question.answers" [attr.aria-label]="item.description"
+                                        [ngValue]="item.id">{{item.description}}</option>
+                                </select>
+                                <button type="button" class="btn btn-select" aria-label="click add country" (click)="addMultiSelectedData(question)" [disabled]="question.limitError">Add</button>
+                            </div>
+                            <div class="added-country">
+                                <div class="country-name" *ngFor="let item of question.selectedAnswer">
+                                    {{item.description}} <button type="button" class="fa fa-close" aria-label="remove country" (click)="removeMultiSelectedData(question,item)"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="error-div" id="{{i}}-Error">
+                        <div *ngIf="question.error && question.answertype === 'text'">
+                            <ng-container *ngIf="question.answertext.length === 0">
+                                Please provide your response
+                            </ng-container>
+                            <ng-container *ngIf="question.answertext.length > 50">
+                                Please note that a maximum of 50 characters (including spaces) are allowed for Description
+                            </ng-container>
+                        </div>
+                        <div *ngIf="question.error && question.answertype !== 'text'">
+                            Please provide your response
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="fundingPage">
+                <div class="form-group col-md-12 text-right">
+                    <button type="button" class="btn btn-select" attr.aria-label="click to {{disableQuestions ? 'reset funding amount' : 'proceed for payment'}}" (click)="proceedFunding('questions')">
+                        {{disableQuestions ? 'Reset': 'Proceed'}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer-action *ngIf="!fundingPage" [showMandatoryMessage]="true" [showContinue]="true" [showSaveExit]="true" (clickSaveExit)="saveData()" (clickContinue)="nextStep()"></app-footer-action>
+</div>

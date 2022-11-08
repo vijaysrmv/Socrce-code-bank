@@ -1,0 +1,293 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        account-funding.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for account funding page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Let's fund your account(s)</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="account-funding-section">
+        <div class="funding-options">
+            <div [formGroup]="accountForm" class="amount-accounts-section">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 border-right">
+                        <div class="info-header-main">
+                            <div class="info-header">
+                                Enter the amount to fund the following new account(s)
+                                <div class="separator_div"></div>
+                            </div>
+                        </div>
+                        <div class="form-group input-prefix dollar-prefix-review accounts-for-funding" formArrayName="accountList" *ngFor="let item of accountForm.get('accountList')['controls']; let i = index;">
+                            <label for="product_{{i}}">
+                                {{productList[i].displayname}} <span>(Minimum of ${{getAmountString(productList[i].minopeningdeposit)}})</span>
+                            </label>
+                            <span class="input-prefix-box">$</span>
+                            <input numbersOnly [allowDecimal]="false" type="text" class="form-control" placeholder="Enter Amount" id="product_{{i}}" attr.aria-describedby="product_{{i}}_error'" [formControlName]="i" [formControl]="accountForm.get('accountList')['controls'][i]" *ngIf="!disableAmountFields"
+                                [textMask]="payAmountMask" />
+                            <input type="text" class="form-control" placeholder="Enter Amount" id="product_{{i}}" attr.aria-describedby="product_{{i}}_error" readonly [value]="accountForm.getRawValue().accountList[i]" *ngIf="disableAmountFields" />
+                            <span customMask [maskType]="'amountWithoutDecimal'" [maskData]="accountForm.getRawValue().accountList[i]"></span>
+                            <div class="error-div" id="product_{{i}}_error">
+                                <ng-container *ngIf="accountForm.get('accountList')['controls'][i].errors && (accountForm.get('accountList')['controls'][i].dirty || accountForm.get('accountList')['controls'][i].touched)">
+                                    <div *ngIf="accountForm.get('accountList')['controls'][i].errors?.required || accountForm.get('accountList')['controls'][i].errors?.minamount">
+                                        Please enter a minimum amount of ${{getAmountString(productList[i].minopeningdeposit)}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-select" attr.aria-label="click to {{disableAmountFields ? 'reset funding amount' : 'proceed'}}" (click)="proceedFunding('accounts')">
+                                {{disableAmountFields ? 'Reset': 'Proceed'}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="amount-div font-weight-bold">
+                            <p>Total Amount</p>
+                            <span class="display-block heading">${{getTotalAmountString()}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row container">
+                    <div class="col-xs-12 col-sm-3">
+                    
+                    </div>
+                </div> -->
+            </div>
+            <div class="questions-section" *ngIf="showQuestions" [@slideProductPopupAnimation]>
+                <div class="row">
+                    <due-diligence [disableQuestions]="disableQuestionFields" (proceedFund)="proceedFunding($event)"></due-diligence>
+                </div>
+            </div>
+            <div *ngIf="showPaymentOptions" [@slideProductPopupAnimation]>
+                <accordion [closeOthers]="true">
+                    <accordion-group panelClass="funding-group" *ngIf="existingUser && accountsExist">
+                        <div accordion-heading (click)="toggleAccordion('showInternalFund')">
+                            <div class="container">
+                                <label id="usingexistingAccount">Fund using existing Newgen Bank account</label>
+                                <button type="button" class="dropdown-circle float-right pull-right" aria-label="Click to fund using existing Newgen Bank account">
+                                    <i [ngClass]="accordionType.showInternalFund ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <form [formGroup]="exisitngAccounts" *ngIf="accountsExist">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel-body">
+                                            <ul class="list-unstyled" role="radiogroup" aria-labelledby="usingexistingAccount">
+                                                <li *ngFor="let currentAccount of existingAccountList; let i = index;">
+                                                    <label class="custom-radio" [ngClass]="[currentAccount.balance < getTotalAmount() ? 'disable-radio' : '']">
+                                                        <input type="radio" value="{{currentAccount.accountnumber}}" name="accountDetail" formControlName="accountDetail" [attr.disabled]="currentAccount.balance < getTotalAmount() || null" />
+                                                        {{currentAccount.accountdescription}}
+                                                        (XXXXXXX-{{currentAccount.accountnumber ? currentAccount.accountnumber.split('-')[1]: ''}})
+                                                        (Available Balance: ${{currentAccount.balance}})
+                                                        <span class="radio-check"></span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row container">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <button type="button" class="btn btn-select" aria-label="click for payment" (click)="initiatePayment('internal')" [disabled]="exisitngAccounts['controls'].accountDetail.errors?.required">Pay</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <p *ngIf="!accountsExist">No account found!</p>
+                        </div>
+                    </accordion-group>
+
+                    <accordion-group>
+                        <div accordion-heading (click)="toggleAccordion('showFinancial')">
+                            <div class="container">
+                                <label>Fund using External Transfer</label>
+                                <button type="button" class="dropdown-circle float-right pull-right" aria-label="Click to Fund using other Financial Institution">
+                                    <i [ngClass]="accordionType.showFinancial ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container" *ngIf="achForm">
+                            <div class="row" [formGroup]="achForm">
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="{{applicantId}}-accountName">Name on Account
+                                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        <span class="sr-only" title="required">Required</span>
+                                    </label>
+                                    <input type="text" autocomplete="nope" class="form-control" placeholder="Enter Account Name" name="accountName" id="{{applicantId}}-accountName" attr.aria-describedby="{{applicantId}}-accountName" formControlName="accountName" />
+                                    <div class="error-div" id="{{applicantId}}-accountNameError">
+                                        <ng-container *ngIf="achForm['controls'].accountName.errors && (achForm['controls'].accountName.dirty || achForm['controls'].accountName.touched)">
+                                            <div *ngIf="achForm['controls'].accountName.errors?.required">
+                                                Please provide your account name.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountName.errors?.pattern">
+                                                Please note text entered for account name cannot contain special characters or numbers.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountName.errors?.minlength && !achForm['controls'].accountName.errors?.pattern">
+                                                Please note a minimum of 2 characters are required for account name.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountName.errors?.maxlength && !achForm['controls'].accountName.errors?.pattern">
+                                                Please note a maximum of 20 characters (including spaces) are allowed for account name.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="{{applicantId}}-accountNumber">Account Number
+                                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        <span class="sr-only" title="required">Required</span>
+                                    </label>
+                                    <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="numberPattern" class="form-control" placeholder="Enter Account Number" name="accountNumber" id="{{applicantId}}-accountNumber" attr.aria-describedby="{{applicantId}}-accountNumberError"
+                                        formControlName="accountNumber" />
+                                    <div class="error-div" id="{{applicantId}}-accountNumberError">
+                                        <ng-container *ngIf="achForm['controls'].accountNumber.errors && (achForm['controls'].accountNumber.dirty || achForm['controls'].accountNumber.touched)">
+                                            <div *ngIf="achForm['controls'].accountNumber.errors?.required">
+                                                Please enter a valid account number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountNumber.errors?.minlength && !achForm['controls'].accountNumber.errors?.pattern">
+                                                Please note a minimum of 4 characters are required for account number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountNumber.errors?.maxlength && !achForm['controls'].accountNumber.errors?.pattern">
+                                                Please note a maximum of 17 characters (including spaces) are allowed for account number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].accountNumber.errors?.pattern">
+                                                Please verify that the account number you have entered is correct.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="accountType" id="accountType">Account Type
+                                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        <span class="sr-only" title="required">Required</span>
+                                    </label>
+                                    <div class="toggle-btn display-block" role="radiogroup" aria-labelledby="accountType">
+                                        <label>
+                                            <input type="radio" class="toggle-option" name="accountType"
+                                                aria-describedby="accountTypeError" value="CHECKING" formControlName="accountType"
+                                                (click)="toggleAccountType('CHECKING')" />
+                                            <span class="checked-option">Checking</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="toggle-option" name="accountType"
+                                                aria-describedby="accountTypeError" value="SAVING" formControlName="accountType"
+                                                (click)="toggleAccountType('SAVING')" />
+                                            <span class="checked-option">Saving</span>
+                                        </label>
+                                    </div>
+                                    <div class="error-div" id="accountTypeError">
+                                        <ng-container *ngIf="achForm['controls'].accountType.errors && (achForm['controls'].accountType.dirty || achForm['controls'].accountType.touched)">
+                                            <div *ngIf="achForm['controls'].accountType.errors?.required">
+                                                Please select Account Type.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="{{applicantId}}-routingNumber">Routing Number</label>
+                                    <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="numberPattern" class="form-control" placeholder="Enter Routing Number" name="routingNumber" id="{{applicantId}}-routingNumber" attr.aria-describedby="{{applicantId}}-routingNumberError"
+                                        (blur)="routingNumberChanged()" formControlName="routingNumber" />
+                                    <div class="error-div" id="{{applicantId}}-routingNumberError">
+                                        <ng-container *ngIf="achForm['controls'].routingNumber.errors && (achForm['controls'].routingNumber.dirty || achForm['controls'].routingNumber.touched)">
+                                            <div *ngIf="achForm['controls'].routingNumber.errors?.required">
+                                                Please enter a valid routing number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].routingNumber.errors?.minlength && !achForm['controls'].routingNumber.errors?.pattern">
+                                                Please note a minimum of 1 characters are required for routing number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].routingNumber.errors?.maxlength && !achForm['controls'].routingNumber.errors?.pattern">
+                                                Please note a maximum of 9 characters are allowed for routing number.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].routingNumber.errors?.pattern">
+                                                Please verify that the routing number you have entered is correct.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="{{applicantId}}-financialInstitute">Name of Financial Institute
+                                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        <span class="sr-only" title="required">Required</span>
+                                    </label>
+                                    <input type="text" autocomplete="nope" class="form-control" placeholder="Enter Financial Institute" name="financialInstitute" id="{{applicantId}}-financialInstitute" attr.aria-describedby="{{applicantId}}-financialInstituteError" formControlName="financialInstitute"
+                                        [readonly]="!achForm['controls'].financialInstitute.value" />
+                                    <div class="error-div" id="{{applicantId}}-financialInstituteError">
+                                        <ng-container *ngIf="achForm['controls'].financialInstitute.errors && (achForm['controls'].financialInstitute.dirty || achForm['controls'].financialInstitute.touched)">
+                                            <div *ngIf="achForm['controls'].financialInstitute.errors?.required">
+                                                Please provide your institution name.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].financialInstitute.errors?.pattern">
+                                                Please note text entered for institution name cannot contain special characters or numbers.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].financialInstitute.errors?.minlength && !achForm['controls'].financialInstitute.errors?.pattern">
+                                                Please note a minimum of 2 characters are required for institution name.
+                                            </div>
+                                            <div *ngIf="achForm['controls'].financialInstitute.errors?.maxlength && !achForm['controls'].financialInstitute.errors?.pattern">
+                                                Please note a maximum of 20 characters (including spaces) are allowed for institution name.
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="container">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="termsOfService" aria-label="click to accept terms of service" [(ngModel)]="isAchtermsSelected"/>
+                                        <span class="checkmark"></span>
+                                         I accept <a target="_blank" (click)="achTermOfServiceClick()">ACH Terms of Service</a> and authorize ACH debit entries. 
+                                        <span>I authorize Newgen Bank to initiate a single ACH/electronic debit to my account for the Total Amount listed above. I agree, that the ACH transaction I authorize, comply with all applicable laws. I understand that Newgen Bank will not credit my new account for 5 business days (that is until {{expectedDate}}). Payments made after 10:15 am Pacific Standard Time will be applied as of the next business day. To complete the payment process, click the “authorize and submit” button. Once payment is authorized, there cannot be any changes or corrections.</span>
+                                        <div class="error-div" *ngIf="achTermError">
+                                            Please accept ACH Terms of Service before proceeding
+                                        </div>
+                                    </label>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    <button type="button" class="btn btn-select pay-btn" attr.aria-label="click for payment" (click)="initiatePayment('ach')">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <app-plaid *ngIf="openPlaidPopup" [productList]="_getProductList()" [totalAmount]="getTotalAmount()" (plaidExit)="plaidExit($event)"></app-plaid>
+                    </accordion-group>
+
+                    <accordion-group (click)="toggleAccordion('showCard')">
+                        <div accordion-heading>
+                            <div class="container">
+                                <label>Fund using Credit/Debit Card</label>
+                                <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to Fund using Credit/Debit Card">
+                                    <i [ngClass]="accordionType.showCard ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <payment-card-form></payment-card-form>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3">
+                                    <button class="btn btn-select" aria-label="click for payment" (click)="initiatePayment('external')">Pay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+
+                </accordion>
+            </div>
+
+        </div>
+    </div>
+    <app-footer-action [showMandatoryMessage]="true" [showSaveExit]="true" (clickSaveExit)="saveData()"></app-footer-action>
+</div>

@@ -1,0 +1,57 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        track-application.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for track application page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.track-application {
+    margin: 10px auto 20px;
+    width: 475px;
+    float: none;
+    .project-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .track-application-form {
+        margin: 20px 0px 0px;
+        width: 100%;
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 4px;
+    }
+    label {
+        font-weight: inherit;
+    }
+}
+
+@media (min-width:768px) and (max-width:1023px) {
+    // Changed width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+    .track-application-form {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .track-application {
+        width: 95%;
+    }
+}

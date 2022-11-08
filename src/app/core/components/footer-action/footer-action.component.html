@@ -1,0 +1,49 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        footer-action.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for footer action page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="footer-action-row">
+    <ng-container *ngIf="showMandatoryMessage">
+        <div class="required-field-info">
+            <em>Fields marked with <span class="mandatory-field" aria-hidden="true">*</span><span class="sr-only" title="required">Required</span> are mandatory</em>
+        </div>
+    </ng-container>
+    <div class="footer-action-btn">
+        <button type="button" class="btn btn-back pull-left" *ngIf="showBack" [disabled]="disableBack" (click)="handleBack()" (enter)="handleBack()" aria-label="Go to Previous Page">
+            <i class="fa fa-long-arrow-left"></i> Back
+        </button>
+        <div class="footer-right-buttons pull-right text-right">
+            <button type="button" class="btn pull-left save-exit-btn" [ngClass]="changeExitColor ? 'save-exit-btn': 'btn-next'" *ngIf="showExit" [disabled]="disableExit" (click)="handleExit()" (enter)="handleExit()" aria-label="Exit application">
+                Submit
+            </button>
+            <button type="button" class="btn btn-next pull-left" *ngIf="showComplete" [disabled]="disableComplete" (click)="handleComplete()" (enter)="handleComplete()" aria-label="Complete Application">
+                Complete Application <i class="fa fa-long-arrow-right"></i>
+            </button>
+            <button type="button" class="btn save-exit-btn pull-left" *ngIf="showSaveExit" [disabled]="disableSaveExit" (click)="handleSaveExit()" (enter)="handleSaveExit()" aria-label="Save and Exit application">
+                Save & Exit
+            </button>
+            <button type="button" class="btn save-exit-btn pull-left" *ngIf="showSkip" (click)="handleSkip()" (enter)="handleSkip()" attr.aria-label="Skip application">
+                Skip <i class="fa fa-long-arrow-right"></i>
+            </button>
+            <button type="button" class="btn btn-next pull-left" *ngIf="showAgree" [disabled]="disableAgree" (click)="handleAgree()" (enter)="handleAgree()" aria-label="I Agree">
+                I Agree <i class="fa fa-long-arrow-right"></i>
+            </button>
+            <button type="button" class="btn btn-next pull-left" *ngIf="showContinue" [disabled]="disableContinue" (click)="handleContinue()" (enter)="handleContinue()" aria-label="Continue">
+                Continue <i class="fa fa-long-arrow-right"></i>
+            </button>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

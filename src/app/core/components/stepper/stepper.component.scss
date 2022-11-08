@@ -1,0 +1,93 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        stepper.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for stepper section
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.stepper {
+    padding-left: 0px;
+    &.row {
+        padding: 0px;
+        margin: 10px 0px -5px;
+        position: relative;
+        li {
+            padding: 6px 0px;
+            font-family: $stepper-font-family;
+            position: relative;
+            font-size: 15px;
+            text-align: center;
+            vertical-align: unset;
+            .step-count {
+                display: inline-block;
+                margin-right: 4px;
+                width: 25px;
+                height: 25px;
+                border: 1px solid $border-color;
+                border-radius: 50%;
+                font-size: 14px;
+                background: $stepper-next-tab-bg;
+                padding: 1px;
+                text-align: center;
+                vertical-align: inherit;
+                &.display768 {
+                    display: none;
+                }
+            }
+            &.current-step {
+                color: $primary-color;
+                font-weight: bold;
+                .step-count {
+                    color: $primary-color;
+                    background: $stepper-current-tab-bg;
+                    border: 1px solid $stepper-current-tab-bg;
+                }
+            }
+            &.previous-step {
+                color: $primary-color;
+                font-weight: bold;
+                .step-count {
+                    color: $white-color;
+                    background: $stepper-prev-tab-bg;
+                    border: 1px solid $stepper-prev-tab-bg;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .stepper {
+        &.row {
+            margin: 10px 0px -10px;
+            li {
+                display: none;
+                &.current-step {
+                    display: block;
+                }
+                .step-count {
+                    background: $stepper-current-tab-bg;
+                    color: $white-color;
+                    &.hide768 {
+                        display: none !important;
+                    }
+                    &.display768 {
+                        display: inline-block !important;
+                        margin: 0px 10px 0px 0px;
+                    }
+                }
+            }
+        }
+    }
+}

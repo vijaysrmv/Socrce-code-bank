@@ -1,0 +1,36 @@
+.colID {
+    display: flex;
+    flex-direction: row;
+}
+
+.rowNew {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0px;
+    margin-top: 7px;
+}
+
+.inputId {
+    width: 70px;
+    height: 30px;
+    margin-left: 5px;
+}
+
+.checkboxId {
+    margin-top: 7px;
+    height: 18px;
+    width: 18px;
+}
+
+.labelcls {
+    margin-top: 7px;
+    margin-left: 10px;
+    /* font-weight: bold; */
+}
+
+.percentage {
+    margin-top: 5px;
+    margin-left: 7px;
+    font-size: 18px;
+    font-weight: bold;
+}

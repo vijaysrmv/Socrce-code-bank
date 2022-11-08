@@ -1,0 +1,100 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        app.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for app page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+.content {
+    padding: 0px 0px;
+}
+
+.time-counter {
+    width: 125px;
+    text-align: center;
+}
+
+footer {
+    background: $footer-bg;
+    color: $white-color;
+    border-top: 1px solid $border-color;
+    font-size: 12px;
+    padding: 5px 0px;
+    .container {
+        .footer-content {
+            &.footer-text {
+                padding: 0px 0px;
+                width: 77%;
+                float: left;
+                p {
+                    margin: 0px;
+                    line-height: 18px;
+                    font-size: 13px;
+                    padding: 14px 0px;
+                    font-style: italic;
+                }
+            }
+            &.footer-logo {
+                width: 23%;
+                float: right;
+                text-align: right;
+                img {
+                    &:first-child {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:1023px) {
+    footer {
+        .container {
+            .footer-content {
+                &.footer-text {
+                    width: 70%;
+                }
+                &.footer-logo {
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:767px) {
+    footer {
+        .container {
+            .footer-content {
+                &.footer-text {
+                    width: 100%;
+                    float: none;
+                    text-align: center;
+                }
+                &.footer-logo {
+                    width: 100%;
+                    float: none;
+                    text-align: center;
+                    // margin-top: 15px;
+                    margin: 10px 0px 15px;
+                    img {
+                        &:first-child {
+                            margin-right: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

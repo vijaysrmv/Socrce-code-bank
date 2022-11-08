@@ -1,0 +1,75 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        identity.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for identity page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ng-template #businessIdentity>
+    <div appModalFocus aria-modal="true" role="dialog" attr.aria-labelledby="confirmIdentityTitle" attr.aria-describedby="confirmIdentityContent">
+        <form [formGroup]="questionnaireForm" autocomplete="false">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" id="confirmIdentityTitle">Confirm your identity</h4>
+            </div>
+            <div class="modal-body identity-modal" id="confirmIdentityContent">
+                <ul class="verification-list desktop-view">
+                    <li class="questionaire" *ngFor="let question of questionnarie; let i = index;">
+                        <p id="question{{i}}">{{question.displayname}}</p>
+                        <p role="radiogroup" attr.aria-labelledby="question{{i}}">
+                            <label *ngFor="let choice of question.choicelist">
+                                <ng-container class="form-group">
+                                    <input type="radio" class="identity-option" [formControlName]="question.name" value="{{choice.key}}" attr.name="{{question.name}}" />
+                                    <span class="select-btn">{{choice.display}}</span>
+                                </ng-container>
+                            </label>
+                        </p>
+                    </li>
+                </ul>
+                <ul class="verification-list mobile-view" *ngIf="mobileViewQuestion && mobileViewQuestion.choicelist">
+                    <li class="questionaire" role="radiogroup">
+                        <span class="list-number">{{mobileQuesIndex}}.</span>
+                        <p>{{mobileViewQuestion.displayname}}</p>
+                        <p>
+                            <label *ngFor="let choice of mobileViewQuestion.choicelist">
+                                <ng-container class="form-group">
+                                    <input type="radio" class="identity-option" [formControlName]="mobileViewQuestion.name" value="{{choice.key}}" name="{{mobileViewQuestion.name}}" />
+                                    <span class="select-btn">{{choice.display}}</span>
+                                </ng-container>
+                            </label>
+                        </p>
+                    </li>
+                </ul>
+                <div class="verification-btn model_popup_footer">
+                    <ul class="list-inline padding-left20">
+                        <li class="pull-right">
+                            <button *ngIf="showMobilePrevious" type="button" class="btn next-step btn-select next-ques pull-left" (click)="handlePrevQuestion()">
+                                <i class="fa fa-long-arrow-left"></i>
+                                Previous	
+                            </button>
+                            <button *ngIf="showMobileNext" type="button" class="btn next-step btn-select next-ques pull-right" (click)="handleNextQuestion()">
+                                Next
+                                <i class="fa fa-long-arrow-right"></i>
+                            </button>
+                            <button *ngIf="showMobileContinue" type="button" class="btn continue-step btn-next pull-right" [disabled]="!questionnaireForm.valid" (click)="handleContinue()">
+                                Continue
+                                <i class="fa fa-long-arrow-right"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer hide-mobile">
+                <app-footer-action [showContinue]="true" [disableContinue]="!questionnaireForm.valid" (clickContinue)="handleContinue()"></app-footer-action>
+            </div>
+        </form>
+    </div>
+</ng-template>

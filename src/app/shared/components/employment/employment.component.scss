@@ -1,0 +1,119 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        employment.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for employment page     
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.employment-information {
+    label {
+        font-weight: inherit;
+    }
+    .form-control-half {
+        width: 48%;
+        // float: left;
+    }
+    .form-control-short {
+        width: 21%;
+        padding-right: 0 !important;
+    }
+    .sub-label {
+        color: $body-color;
+        font-size: 13px;
+    }
+    // .margin-left-14 {
+    //     margin-left: 14px;
+    // }
+}
+
+.additional-emp-details {
+    background: #f9f9f9;
+    padding: 8px 15px 0px;
+    margin: 0px 0px 15px;
+    &:last-child {
+        margin: 0px 0px 0px;
+    }
+    .delete-applicant-row {
+        .delete-applicant-icon {
+            margin-top: 5px;
+            // position: absolute;
+            // top: -5px;
+            // bottom: 0;
+            // right: 15px;
+        }
+    }
+}
+
+.additional-income-link {
+    color: $heading-color !important;
+    margin: 0px 0px 10px;
+    background: none;
+    border: none;
+    text-decoration: underline !important;
+}
+
+// @media(max-width:1023px) {
+//     .remove-details {
+//         // position: absolute;
+//         // top: -30px;
+//         // right: 0;
+//         // text-align: right;
+//         // float: right;
+//         // width: auto;
+//     }
+// }
+@media (max-width:1023px) and (min-width:768px) {
+    .employment-information {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+        .form-control-half {
+            width: 47%;
+            &:last-child {
+                float: right;
+            }
+        }
+    }
+}
+
+@media(max-width:1023px) {
+    .additional-emp-details {
+        .delete-applicant-row {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            width: auto;
+            top: 3px;
+            label {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .employment-information {
+        .form-control-half {
+            width: 48%;
+            &:last-child {
+                float: right;
+            }
+        }
+    }
+}

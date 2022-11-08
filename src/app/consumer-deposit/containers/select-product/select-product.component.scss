@@ -1,0 +1,385 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        select-product.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for select product page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.width90 {
+    width: 85%;
+}
+
+@media (max-width:1024px) {
+    .select-product {
+        .accordion-product {
+            .selected-product-row {
+                .product-display-row {
+                    margin-top: -40px;
+                }
+                .product-box-header {
+                    h3 {
+                        padding: 0px 22px;
+                        text-transform: capitalize;
+                        font-size: 12px !important;
+                    }
+                }
+                margin-bottom: 20px;
+                .product-box-inner {
+                    min-height: 125px;
+                    .product-feature {
+                        display: none;
+                        .view-rate-box {
+                            top: 163px;
+                            .close-table {
+                                font-size: 20px;
+                                right: 4px;
+                            }
+                        }
+                        .product-footer {
+                            margin-top: 0px;
+                        }
+                    }
+                }
+            }
+            margin-bottom: 30px;
+            .product-box-inner {
+                min-height: 200px;
+                .product-box-header {
+                    h3 {
+                        font-size: 16px;
+                    }
+                    .checked-product-mark {
+                        left: 5px;
+                        span {
+                            font-size: 21px;
+                        }
+                    }
+                }
+                .product-feature {
+                    padding: 10px 15px;
+                    min-height: 290px;
+                    .feature-list {
+                        margin: 0px;
+                        padding-left: 0px;
+                        li {
+                            padding: 7px 0px;
+                            .view-rate-box {
+                                .cod-term-table {
+                                    button {
+                                        padding: 5px 10px;
+                                        font-size: 11px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &.saving-product-feature {
+                        // min-height: 210px;
+                    }
+                }
+                .product-overlay {
+                    ul {
+                        li {
+                            padding: 8px 0px;
+                        }
+                    }
+                }
+            }
+        }
+        .select-product-header {
+            h2 {
+                &.heading {
+                    &.heading-1 {
+                        font-size: 18px;
+                    }
+                }
+            }
+            .sub-title-accounts {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media (max-width:1023px) and (min-width:768px) {
+    .selected-product-row {
+        .product-display-row {
+            .col-md-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 33.3333333% !important;
+                flex: 33.3333333% !important;
+                max-width: 33.3333333% !important;
+            }
+        }
+    }
+    .product-display-row {
+        .col-md-4 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50% !important;
+            flex: 50% !important;
+            max-width: 50% !important;
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .select-product {
+        .accordion-product {
+            .selected-product-row {
+                .product-display-row {
+                    margin-top: -40px;
+                }
+                .product-box-header {
+                    h3 {
+                        padding: 0px 8px;
+                    }
+                    .checked-product-mark {
+                        left: 5px;
+                        top: 3px;
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+                margin-bottom: 20px;
+                .product-box-inner {
+                    min-height: 125px;
+                    .product-feature {
+                        display: none;
+                        .view-rate-box {
+                            top: 163px;
+                            .close-table {
+                                font-size: 20px;
+                                right: 4px;
+                            }
+                        }
+                        .product-footer {
+                            margin-top: 0px;
+                        }
+                    }
+                }
+            }
+            margin-bottom: 30px;
+            .product-box-inner {
+                min-height: 200px;
+                .product-box-header {
+                    h3 {
+                        font-size: 18px;
+                    }
+                }
+                .product-feature {
+                    padding: 10px 20px;
+                    .feature-list {
+                        margin: 0px;
+                        padding-left: 0px;
+                        li {
+                            padding: 5px 0px;
+                            .view-rate-box {
+                                padding: 10px 0px;
+                                top: 30px;
+                                .close-table {
+                                    top: -10px;
+                                    right: -10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    margin-bottom: 5px;
+                                }
+                                .cod-term-table {
+                                    button {
+                                        padding: 5px 10px;
+                                        font-size: 11px;
+                                    }
+                                }
+                            }
+                        }
+                        &.cod-list {
+                            li {
+                                overflow: scroll;
+                            }
+                        }
+                    }
+                    &.saving-product-feature {
+                        // min-height: 200px;
+                    }
+                    &.show-feature {
+                        display: block;
+                    }
+                }
+                .product-overlay {
+                    padding: 5px 20px;
+                    ul {
+                        li {
+                            padding: 8px 0px;
+                        }
+                    }
+                    .select-both-btn {
+                        padding: 6px 5px !important;
+                        margin-left: -7px;
+                    }
+                }
+            }
+        }
+        .select-product-header {
+            h2 {
+                &.heading {
+                    &.heading-1 {
+                        font-size: 18px;
+                    }
+                }
+            }
+            .sub-title-accounts {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) and (min-width: 568px) {
+    .select-product {
+        .accordion-product {
+            .product-box-inner {
+                .product-feature {
+                    min-height: 245px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .overlay {
+        .modal-dialog {
+            &.product-filter-dob {
+                .modal-body {
+                    padding: 20px 15px;
+                    width: 350px;
+                    margin: 0px auto;
+                    height: auto;
+                }
+            }
+        }
+    }
+    .select-product {
+        .accordion-product {
+            .selected-product-row {
+                .product-header-heading {
+                    .select-product-msg {
+                        font-size: 14px;
+                    }
+                }
+                .product-display-row {
+                    margin-top: -40px;
+                }
+                .product-box-header {
+                    h3 {
+                        padding: 0px 8px;
+                        font-size: 18px !important;
+                    }
+                    .checked-product-mark {
+                        left: 5px;
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+                margin-bottom: 20px;
+                .product-box-inner {
+                    .product-feature {
+                        display: none;
+                        min-height: auto;
+                        // .view-rate-box {
+                        //     .close-table {}
+                        // }
+                        .product-footer {
+                            margin-top: 0px;
+                        }
+                    }
+                }
+            }
+            margin-bottom: 30px;
+            .product-box-inner {
+                min-height: auto;
+                .product-box-header {
+                    h3 {
+                        font-size: 17px;
+                    }
+                }
+                .product-feature {
+                    display: none;
+                    .feature-list {
+                        li {
+                            .view-rate-box {
+                                // .close-table {}
+                                table {
+                                    width: 100%;
+                                }
+                                // .cod-term-table {
+                                //     button {}
+                                // }
+                            }
+                        }
+                        &.cod-list {
+                            li {
+                                overflow: scroll;
+                            }
+                        }
+                    }
+                    // &.saving-product-feature {}
+                }
+                .product-footer {
+                    .more-learn {
+                        display: block;
+                    }
+                    .tooltip-div {
+                        display: none;
+                    }
+                }
+                // .product-overlay {
+                //     ul {
+                //         li {}
+                //     }
+                //     .select-both-btn {}
+                // }
+            }
+        }
+        .select-product-header {
+            h2 {
+                &.heading {
+                    &.heading-1 {
+                        font-size: 18px;
+                    }
+                }
+            }
+            .sub-title-accounts {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media(max-width:420px) {
+    .overlay {
+        .modal-dialog {
+            &.product-filter-dob {
+                .modal-body {
+                    padding: 20px 15px;
+                    width: 100%;
+                    margin: 0px auto;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

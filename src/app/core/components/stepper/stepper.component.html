@@ -1,0 +1,31 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        stepper.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for stepper section
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ul class="list-unstyled list-inline stepper row d-flex justify-content-between hide768" role="menubar" attr.aria-label="Account opening steps">
+    <li class="align-items-center" *ngFor="let step of stepperList" role="menuitem" [ngClass]="{'previous-step': step.stepper === true && step.index != currentStepIndex, 'current-step': step.stepper === true && step.index === currentStepIndex}">
+        <!-- [ngStyle]="{'width' : getStepperWidth()}" -->
+        <div class="step-count display768">{{step.index}}/{{stepperList.length}}</div>
+        <div class="step-count hide768">
+            <ng-container *ngIf="step.stepper === false || step.index == currentStepIndex">
+                {{step.index}}
+            </ng-container>
+            <ng-container *ngIf="step.stepper === true && step.index != currentStepIndex">
+                <i class="fa fa-check"></i>
+            </ng-container>
+        </div>
+        <span>{{step.name}}</span>
+    </li>
+</ul>

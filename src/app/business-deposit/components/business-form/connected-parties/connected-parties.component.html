@@ -1,0 +1,337 @@
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Associate/Group Companies Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Shareholders Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="shareholderType">Shareholder Type</label>
+                        <select class="form-control" name="shareholderType" id="shareholderType" formControlName="shareholderType">
+							<option value="ShareholderType" selected="true">Company</option>
+							<option>Individual</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="nameShareholder">Name of Shareholder </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="nameShareholder" name="nameShareholder" placeholder="Name of Shareholder" attr.aria-describedby="nameShareholder" formControlName="nameShareholder" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="country">Country of Incorporation/Nationality</label>
+                        <select class="form-control" name="country" id="country" formControlName="country">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="dateIncorporation">Date of Incorporation/DOB</label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="dateIncorporation" id="dateIncorporation" placeholder="MM/DD/YYYY" attr.aria-describedby="dateIncorporation" formControlName="dateIncorporation"
+                        />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="taxID">Tax ID/SSN No./National ID</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="taxID" placeholder="Tax ID/SSN No./National ID" name="taxID" attr.aria-describedby="taxID" formControlName="taxID" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="shareholdingAmount">Shareholding Amount (AED) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="shareholdingAmount" placeholder="Shareholding Amount (AED)" name="shareholdingAmount" attr.aria-describedby="shareholdingAmount" formControlName="shareholdingAmount" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="shareholdingPerc">Shareholding %</label>
+                        <input type="text" class="form-control" name="shareholdingPerc" id="shareholdingPerc" placeholder="Shareholding %" formControlName="shareholdingPerc" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="ownershipStatus">Ownership Status</label>
+                        <input type="text" class="form-control" id="ownershipStatus" name="ownershipStatus" placeholder="Ownership Status" formControlName="ownershipStatus" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="typeOwnership">Type of Ownership</label>
+                        <input type="text" class="form-control" id="typeOwnership" name="typeOwnership" placeholder="Type of Ownership" formControlName="typeOwnership" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-5">
+                        <button type="button" (click)="addDataToTable()" class="btn btn-next" aria-label="Add">
+							Add
+						</button>
+                    </div>
+
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Shareholder Type</th>
+                                    <th>Name of Shareholder</th>
+                                    <th>Country of Incorporation/Nationality</th>
+                                    <th>Date of Incorporation/DOB</th>
+                                    <th>Tax ID/SSN No./National ID</th>
+                                    <th>Shareholding Amount (AED)</th>
+                                    <th>Shareholding %</th>
+                                    <th>Ownership Status</th>
+                                    <th>Type of Ownership</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let rowdata of paramterArray">
+                                    <td>{{ rowdata.shareholderType }}</td>
+                                    <td>{{ rowdata.nameShareholder }}</td>
+                                    <td>{{ rowdata.country }}</td>
+                                    <td>{{ rowdata.dateIncorporation }}</td>
+                                    <td>{{ rowdata.taxID }}</td>
+                                    <td>{{ rowdata.shareholdingAmount }}</td>
+                                    <td>{{ rowdata.shareholdingPerc }}</td>
+                                    <td>{{ rowdata.ownershipStatus }}</td>
+                                    <td>{{ rowdata.typeOwnership }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Board of Directors
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="title">Title</label>
+                        <select class="form-control" name="title" id="title" formControlName="title">
+							<option *ngFor="let id of title" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="firstName">First Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="firstName" name="firstName" placeholder="First Name" attr.aria-describedby="firstName" formControlName="firstName" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="lastName" name="lastName" placeholder="Last Name" attr.aria-describedby="lastName" formControlName="lastName" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" name="gender" id="gender" formControlName="gender">
+							<option *ngFor="let id of gender" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="maritalStatus">Marital Status</label>
+                        <select class="form-control" name="maritalStatus" id="maritalStatus" formControlName="maritalStatus">
+							<option *ngFor="let id of maritalStatus" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="maiden">Mother's Maiden Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="maiden" name="maiden" placeholder="Mother's Maiden Name" attr.aria-describedby="maiden" formControlName="maiden" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="dob" id="dob" placeholder="MM/DD/YYYY" attr.aria-describedby="dob" formControlName="dob" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="countryOfBirth">Country of Birth</label>
+                        <select class="form-control" name="countryOfBirth" id="countryOfBirth" formControlName="countryOfBirth">
+							<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="place">Place of Birth</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="place" placeholder="Place of Birth" name="place" attr.aria-describedby="place" formControlName="place" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="nationality">Nationality/Citizenship</label>
+                        <select class="form-control" name="nationality" id="nationality" formControlName="nationality">
+							<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="otherNationality">Other Nationality</label>
+                        <select class="form-control" name="otherNationality" id="otherNationality" formControlName="otherNationality">
+							<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="countryResidence">Country of Residence</label>
+                        <select class="form-control" name="countryResidence" id="countryResidence" formControlName="countryResidence">
+							<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="residencyStatus">Residency Status</label>
+                        <select class="form-control" name="residencyStatus" id="residencyStatus" formControlName="residencyStatus">
+							<option *ngFor="let id of residencyStatus" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="mobileNumber">Primary Mobile Number</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="mobileNumber" placeholder="Primary Mobile Number" name="mobileNumber" attr.aria-describedby="mobileNumber" formControlName="mobileNumber" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="legalEntityType">Legal Entity Type</label>
+                        <select class="form-control" name="legalEntityType" id="legalEntityType" formControlName="legalEntityType">
+							<option *ngFor="let id of legalEntityType" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="legalEntityCategory">Legal Entity Category</label>
+                        <select class="form-control" name="legalEntityCategory" id="legalEntityCategory" formControlName="legalEntityCategory">
+							<option *ngFor="let id of legalEntityCategory" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="shareholdingAmount1">Shareholding Amount (AED) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="shareholdingAmount1" placeholder="Shareholding Amount (AED)" name="shareholdingAmount1" attr.aria-describedby="shareholdingAmount1" formControlName="shareholdingAmount1" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="shareholdingPerc1">Shareholding %</label>
+                        <input type="text" class="form-control" name="shareholdingPerc1" id="shareholdingPerc1" placeholder="Shareholding %" formControlName="shareholdingPerc1" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-5">
+                        <button type="button" (click)="addDataToTable()" class="btn btn-next" aria-label="Add">
+							Add
+						</button>
+                    </div>
+
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Marital Status</th>
+                                    <th>Mother's Maiden Name</th>
+                                    <th>Date of Birth</th>
+                                    <th>Country of Birth</th>
+                                    <th>Place of Birth</th>
+                                    <th>Nationality/ Citizenship</th>
+                                    <th>Other Nationality</th>
+                                    <th>Country of Residence</th>
+                                    <th>Residency Status</th>
+                                    <th>Primary Mobile Number</th>
+                                    <th>Legal Entity Type</th>
+                                    <th>Legal Entity Category</th>
+                                    <th>Shareholding Amount (AED)</th>
+                                    <th>Shareholding %</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let rowdata of paramterArray">
+                                    <td>{{ rowdata.title }}</td>
+                                    <td>{{ rowdata.firstName }}</td>
+                                    <td>{{ rowdata.lastName }}</td>
+                                    <td>{{ rowdata.gender }}</td>
+                                    <td>{{ rowdata.maritalStatus }}</td>
+                                    <td>{{ rowdata.maiden }}</td>
+                                    <td>{{ rowdata.dob }}</td>
+                                    <td>{{ rowdata.countryOfBirth }}</td>
+                                    <td>{{ rowdata.place }}</td>
+                                    <td>{{ rowdata.nationality }}</td>
+                                    <td>{{ rowdata.otherNationality }}</td>
+                                    <td>{{ rowdata.countryResidence }}</td>
+                                    <td>{{ rowdata.residencyStatus }}</td>
+                                    <td>{{ rowdata.mobileNumber }}</td>
+                                    <td>{{ rowdata.legalEntityType }}</td>
+                                    <td>{{ rowdata.legalEntityCategory }}</td>
+                                    <td>{{ rowdata.shareholdingAmount1 }}</td>
+                                    <td>{{ rowdata.shareholdingPerc1 }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Beneficiaries
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Authorized Signatory
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

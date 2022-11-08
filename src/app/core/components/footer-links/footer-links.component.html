@@ -1,0 +1,55 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        footer-link.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for footer link page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="footer-link row d-flex justify-content-center">
+    <div class="col-xs-12 col-sm-6 col-md-4 text-center" *ngFor="let link of links">
+        <div class="service-box-inner">
+            <div class="inner-text">
+                <!-- <h4 class="heading">{{link.heading}}</h4> -->
+                <!-- <h4 class="sub-heading">{{link.subHeading}}</h4> -->
+                <h4 class="heading">{{link.subHeading}}</h4>
+            </div>
+            <a class="btn resume-btn" *ngIf="link.type === 'link'" [href]="link.buttonLink">{{link.buttonText}}</a>
+            <button type="button" class="btn resume-btn" *ngIf="link.type === 'modal'" (click)="this[link.buttonLink](template)">{{link.buttonText}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="broswer-support-msg">
+    <div class="text-center">
+        <span>This site is supported in Chrome 60<sup>+</sup>, Firefox 46<sup>+</sup>, Safari 10<sup>+</sup>, Edge 12<sup>+</sup>and IE 11.</span>
+    </div>
+    <div class="text-center">
+        <span><sup>+</sup> this and higher versions</span>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-body">
+        <p class="para">
+            After clicking the CONTINUE button, you will be redirected to a website that is not operated by Newgen Bank. Please review the website's privacy and security policies as they may differ from Newgen Bank.
+        </p>
+        <p class="para">If you "Continue", the link will open in a new window.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-cancel pull-right" attr.aria-label="Cancel" (click)="modalRef.hide()">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-select pull-right" attr.aria-label="Proceed" (click)="bookAppointment()">
+            Continue
+        </button>
+    </div>
+</ng-template>

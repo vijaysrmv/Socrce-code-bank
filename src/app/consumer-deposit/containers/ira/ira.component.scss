@@ -1,0 +1,81 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        counter-offer.component.scss
+Author                 :        Deepak kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for countrer offer page.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.ira-details {
+    p {
+        &.para {
+            margin-bottom: -5px;
+        }
+        &.sub-title {
+            color: $body-color;
+            font-size: 13px;
+            margin: 0px;
+        }
+    }
+    .details-info {
+        margin-top: 10px;
+        .row {
+            .account-purpose {
+                margin-bottom: 15px;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+            .retirement-option-list {
+                margin-bottom: 0px;
+                li {
+                    list-style-type: none;
+                }
+            }
+            .interested-option-list {
+                margin-bottom: 0px;
+                li {
+                    list-style-type: circle;
+                    ul {
+                        margin-top: 5px;
+                        li {
+                            list-style-type: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width:768px) and (max-width:1023px) {
+    // I have chaned width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+    .details-info {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+    }
+}
+
+@media(max-width:510px) {
+    .account-purpose {
+        label {
+            margin-bottom: 10px !important;
+        }
+    }
+}

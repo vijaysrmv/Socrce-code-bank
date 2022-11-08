@@ -1,0 +1,134 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        payment-card-form.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for payment card form page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 payment-section" [formGroup]="cardForm">
+        <div class="row">
+            <div class="form-group col-md-6 credit-card">
+                <label for="cardNumber">Card Number
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <input autocomplete="off" type="text" inputmode="numeric" [pattern]="cardNumberPattern" [textMask]="cardNumberMask" class="form-control" placeholder="Card Number" id="cardNumber" attr.aria-labelledby="cardNumberErr" formControlName="cardnumber" />
+                <span customMask [maskType]="'cardnumber'" [maskData]="cardForm.value['cardnumber']" [maskChar]="'x'"></span>
+                <small id="cardNumberErr" class="error-div form-text text-muted" *ngIf="cardForm['controls'].cardnumber.errors && (cardForm['controls'].cardnumber.dirty || cardForm['controls'].cardnumber.touched)">
+                    <p *ngIf="cardForm['controls'].cardnumber.errors?.required">Card number is required</p>
+                    <p *ngIf="cardForm['controls'].cardnumber.errors?.invalidCardNumber && !cardForm['controls'].cardnumber.errors?.required">
+                        Enter a valid card number
+                    </p>
+                </small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="firstNameONCard">First Name
+                <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                <span class="sr-only" title="required">Required</span>
+            </label>
+                <input autocomplete="off" type="text" class="form-control" placeholder="First Name" id="firstNameONCard" attr.aria-labelledby="firstNameONCardErr" formControlName="cardholderfirstname" />
+                <small id="firstNameONCardErr" class="error-div form-text text-muted">
+                <p *ngIf="cardForm['controls'].cardholderfirstname.errors && (cardForm['controls'].cardholderfirstname.dirty || cardForm['controls'].cardholderfirstname.touched)">
+                    <span *ngIf="cardForm['controls'].cardholderfirstname.errors?.required">
+                        First Name is required
+                    </span>
+                    <span *ngIf="cardForm['controls'].cardholderfirstname.errors?.pattern">
+                        First Name cannot contain special characters (except for a hyphen)
+                    </span>
+                    <span
+                    *ngIf="cardForm['controls'].cardholderfirstname.errors?.maxlength && !cardForm['controls'].cardholderfirstname.errors?.pattern">
+                    First name can contain a maximum of 20 characters (including spaces)
+                </span>
+                <span
+                    *ngIf="cardForm['controls'].cardholderfirstname.errors?.minlength && !cardForm['controls'].cardholderfirstname.errors?.maxlength && !cardForm['controls'].cardholderfirstname.errors?.pattern">
+                    First name can contain a minimum of 2 characters
+                </span>
+                </p>
+            </small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastNameOnCard">Last Name
+                <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                <span class="sr-only" title="required">Required</span>
+            </label>
+                <input autocomplete="off" type="text" class="form-control" placeholder="Last Name" id="lastNameOnCard" attr.aria-labelledby="lastNameOnCardErr" formControlName="cardholderlastname" />
+                <small id="lastNameOnCardErr" class="error-div form-text text-muted">
+                <p *ngIf="cardForm['controls'].cardholderlastname.errors && (cardForm['controls'].cardholderlastname.dirty || cardForm['controls'].cardholderlastname.touched)">
+                    <span *ngIf="cardForm['controls'].cardholderlastname.errors?.required">
+                        Last name is required
+                    </span>
+                    <span *ngIf="cardForm['controls'].cardholderlastname.errors?.pattern">
+                        Last name cannot contain special characters (except for a hyphen)
+                    </span>
+                    <span *ngIf="cardForm['controls'].cardholderlastname.errors?.maxlength && !cardForm['controls'].cardholderlastname.errors?.pattern">
+                        Last name can contain a maximum of 30 characters (including spaces)
+                    </span>
+                    <span
+                    *ngIf="cardForm['controls'].cardholderlastname.errors?.minlength && !cardForm['controls'].cardholderlastname.errors?.maxlength && !cardForm['controls'].cardholderfirstname.errors?.pattern">
+                    First name can contain a minimum of 2 characters
+                </span>
+                </p>
+            </small>
+            </div>
+        </div>
+        <!-- <div class="clearfix"></div> -->
+        <div class="payment-card-date">
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="expirydate" class="display-block">Expiration Date
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                    <input autocomplete="off" type="text" inputmode="numeric" [pattern]="monthPattern" [textMask]="dateMask" class="form-control placeholder-input display-inline-block expiry-date" placeholder="MM" id="expirydate" attr.aria-labelledby="expirydateErr" attr.aria-label="Enter Expiry Month"
+                        minlength="2" maxlength="2" formControlName="expmonth" />
+                    <span class="box-separator">/</span>
+
+                    <input autocomplete="off" type="text" inputmode="numeric" [pattern]="yearPattern" [textMask]="dateMask" class="form-control placeholder-input display-inline-block expiry-date" placeholder="YY" attr.aria-label="Enter Expiry Year" minlength="2" maxlength="2"
+                        formControlName="expyear" />
+                    <div class="clearfix"></div>
+                    <small class="error-div form-text text-muted">
+                    <p id="expirydateErr" *ngIf="((cardForm.errors || cardForm['controls'].expmonth.errors) && (cardForm['controls'].expmonth.dirty || cardForm['controls'].expmonth.touched)) || ((cardForm.errors || cardForm['controls'].expyear.errors) && (cardForm['controls'].expyear.dirty || cardForm['controls'].expyear.touched))">
+                        <span *ngIf="cardForm['controls'].expmonth.errors?.required || cardForm['controls'].expyear.errors?.required">
+                            Expiration date is required
+                        </span>
+                        <span *ngIf="(cardForm.errors?.invalidexpiry || cardForm['controls'].expmonth.errors?.pattern || cardForm['controls'].expyear.errors?.pattern) && !(cardForm['controls'].expmonth.errors?.required || cardForm['controls'].expyear.errors?.required)">
+                            Invalid expiration date
+                        </span>
+                    </p>
+                </small>
+                </div>
+                <div class="form-group col-6">
+                    <label for="cvvNumber" class="display-block cvv-number">CVV
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                    <input autocomplete="new-password" type="password" inputmode="numeric" [pattern]="numberPattern" class="form-control placeholder-input cvv-number" placeholder="CVV/CVV2" id="cvvNumber" attr.aria-labelledby="cvvNumberErr" minlength="3" maxlength="4" formControlName="cardcvv"
+                    />
+                    <small class="error-div form-text text-muted">
+                    <p id="cvvNumberErr" *ngIf="cardForm['controls'].cardcvv.errors && (cardForm['controls'].cardcvv.dirty || cardForm['controls'].cardcvv.touched)">
+                        <span *ngIf="cardForm['controls'].cardcvv.errors?.required">
+                            CVV number is required
+                        </span> 
+                        <span *ngIf="(cardForm['controls'].cardcvv.errors?.min || cardForm['controls'].cardcvv.errors?.max) && !(cardForm['controls'].cardcvv.errors?.required)">
+                            CVV number must be 3 or 4 digit
+                        </span> 
+                    </p>
+                </small>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- <div class="clearfix"></div> -->
+    </div>
+</div>

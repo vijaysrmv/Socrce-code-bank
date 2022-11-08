@@ -1,0 +1,171 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        business-review.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for business review page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Please verify that your information is correct</h1>
+    </div>
+</div>
+<div class="container personal-details position-relative" *ngIf="isDataLoaded">
+    <div class="info-section selected-product">
+        <div class="row product-display-row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                <div class="product-box-inner selected-product-review">
+                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                        <h3 class="no-margin">Selected Product </h3>
+                        <div class="checked-product-mark">
+                            <span class="fa fa-check"></span>
+                        </div>
+                    </div>
+                    <div class="product-feature">
+                        <ul class="feature-list list-unstyled">
+                            <li *ngFor="let product of selectedProducts">{{product}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="isDataLoaded">
+    <div *ngFor="let responsible of consumerData.responsibledetails; let i = index;">
+        <div class="banner-header banner-alignment" *ngIf="i > 0">
+            <div class="container">
+                <h1 class="heading">Individual Details #{{responsible.pid}}</h1>
+            </div>
+        </div>
+        <div class="container">
+            <app-consumer-form [applicantType]="responsible.applicanttype" [addressFor]="responsible.pid" [pid]="responsible.pid" [reviewPage]="true" (patchConsumerData)="patchAddResponsible($event)" (save)="saveData($event, 'responsibleInfo')" (removeApplicant)="removeApplicant(responsible.pid)"></app-consumer-form>
+        </div>
+    </div>
+</ng-container>
+<div class="details-form responsible-list" #relationshipTableRef>
+    <div class="banner-header banner-alignment">
+        <div class="container">
+            <h1 class="heading">Business Individuals List</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="responsible-list-table">
+                    <table class="table table-review" id="businessTable">
+                        <!-- [ngClass]="reviewPage ? 'table-review' : ''" -->
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Last Name</th>
+                                <th>Authorized Signer</th>
+                                <th>Beneficial Owner</th>
+                                <th>Significant Controller</th>
+                                <th><i class="sr-only">Action</i></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-uppercase" *ngIf="isDataLoaded">
+                            <tr *ngFor="let item of consumerData.responsibledetails; let i=index">
+                                <td>{{item.firstname}}</td>
+                                <td>{{item.lastname}}</td>
+                                <td>{{item.relationship.isauthorized ? 'Yes': 'No'}}</td>
+                                <td>{{item.relationship.isbeneficialowner ? 'Yes': 'No'}}</td>
+                                <td>{{item.relationship.issignificantcontroller ? 'Yes': 'No'}}</td>
+                                <td class="text-center">
+                                    <button type="button" attr.aria-label="Click to edit {{item.firstname}} applicant details" class="btn icon-btn" (click)="editResponsibleList(item.pid)">
+                                        <i class="fa fa-edit no-margin"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="error-div" id="relationshipError">
+                        <div *ngIf="significantRequiredError">
+                            Atleast 1 Significant Controller is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading">Business Details</h1>
+    </div>
+</div>
+<div class="container">
+    <business-form [reviewPage]="true" (save)="saveData($event, 'business')" (patchBusinessData)="patchBusinessData($event)" #businessDetails></business-form>
+</div>
+<div class="container">
+    <div class="info-header-main">
+        <div class="info-header">Preferred mode of communication
+            <div class="separator_div"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="">Please select preferred moda of communication</label>
+            <ul class="preferred-mode-option">
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        Branch Banking
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        Smart SMS
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        Smart Net
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        Smart IVR
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li>
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        Mobile Banking
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="details_form">
+        <h3 class="heading">Customer Consent</h3>
+        <p class="label-value">By clicking on 'I Agree', you authorize us to verify the information you submitted and to obtain credit reports concerning you. Upon your request we will tell you if a credit report was obtained and give you the name and address of the report
+            reporting agency that provided the report. You warrant to us that the information you are submitting is true and correct. By submitting this request, you agree to allow us to receive the information contained in your request, as well as the
+            status of your request.</p>
+    </div>
+    <app-footer-action [showMandatoryMessage]="true" [showBack]="true" [showSaveExit]="true" [showAgree]="true" (clickBack)="prevStep()" (clickSaveExit)="saveAndExit()" (clickAgree)="nextStep()"></app-footer-action>
+    <div class="clearfix"></div>
+    <identity-form (clickContinue)="submitQuestionnaireForm($event)"></identity-form>
+</div>

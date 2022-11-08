@@ -1,0 +1,131 @@
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Sanction Declaration
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>
+                    Do you have any dealings or transactions with any sanctioned countries such as Sudan, Iran, Iraq, Syria, Cuba, North Korea, Russia, Nigeria, Ukraine, Zimbabwe Mynmar/Burma and any other sanctioned countries as updated from time to time by the relevant
+                    authorities
+                </h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section">
+            <div class="info-header-main">
+                <div class="info-header">
+                    FATCA Declaration
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>1. Is this entity a publicly listed Company or an affiliate of a publicly listed Company?</h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>2. Is this entity Government owned ?</h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>3. Is the Country of Incorporation and/or Parent Company Country of Incorporation the U.S. ?</h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>
+                    4. Is the Country of Incorporation and/or Parent Company Country of Incorporation any Country other than the U.S ?
+                </h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>
+                    5. Is this entity an Active Non-Financial Foreign Entity or a Passive* Non-Financial Foreign Entity (NFFE)
+                </h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>
+                    6. Are you aware if any of the shareholders, beneficial owners, directors or partners (with >=10% ownership) of the Company are U.S. citizens (i.e.: hold a U.S. passport, hold a U.S. Green Card, or a U.S. Social Security Number)
+                </h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>7. Does this entity have a POA holder or authorised signatory with a U.S. mailing address ?</h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="txtButton">
+            <div class="textinp mr-2">
+                <h6>
+                    8. Is this entity’s income effectively connected with the conduct of a trade Business In the U.S ?
+                </h6>
+                <button type="button" class="btn btn-next mr-2">Yes</button>
+                <button type="button" class="btn btn-next">No</button>
+            </div>
+        </div>
+
+        <div class="colID">
+            <div class="form-group rowNew p-2">
+                <div class="rowNew">
+                    <label for="label"><b>Expected Types of Transections : </b></label>
+                </div>
+            </div>
+
+            <div class="rowNew p-2">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input checkboxId" id="exampleCheck1" />
+                    <label class="form-check-label labelcls" for="exampleCheck1">Cash Deposit</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-sm inputId" id="exampleInputPassword1" />
+                </div>
+
+                <div class="form-group">
+                    <p class="percentage">%</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

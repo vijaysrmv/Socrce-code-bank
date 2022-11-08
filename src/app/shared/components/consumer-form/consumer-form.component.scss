@@ -1,0 +1,233 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        consumer-form.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for consumer form page    
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.account-information {
+    position: relative;
+    label {
+        font-weight: inherit;
+    }
+    .info-section {
+        margin-bottom: 10px;
+        .padding-top-15 {
+            padding-top: 15px;
+        }
+        .disable-radio {
+            opacity: 0.5
+        }
+        .sub-label {
+            color: $body-color;
+            font-size: 13px;
+        }
+    }
+    .user-details {
+        .form-control-half {
+            width: 48%;
+            // float: left;
+        }
+        // .margin-left-14 {
+        //     margin-left: 14px;
+        // }
+        // margin: 0px 0px 15px;
+        &.joint-account-sep {
+            border-left: 1px dashed $border-color;
+            // padding-left: 25px;
+            // padding-right: 0px;
+        }
+        .docs-subtitle {
+            margin: -10px 0px 0px;
+            font-size: 14px;
+            color: $body-color;
+        }
+        .upload-dl {
+            width: 100%;
+            border: 1px solid $border-color;
+            border-radius: 3px;
+            margin: 0px 0px 20px;
+            overflow: hidden;
+            .id-label {
+                margin: 15px 0px;
+            }
+            .custom-radio {
+                margin: 15px 10px;
+                padding-left: 6px;
+                cursor: pointer;
+            }
+            .upload-docs {
+                margin: 0;
+                .upload-docs-box {
+                    padding: 25px 15px;
+                    // &:first-child {
+                    //     border-bottom: 1px solid #e2e2e2;
+                    // }
+                    label {
+                        font-size: 16px;
+                        margin-bottom: 15px;
+                    }
+                    .images-list {
+                        width: 120px;
+                        height: 80px;
+                        margin: 0px auto;
+                        text-align: center;
+                        // font-size: 30px;
+                        padding: 18px;
+                        position: relative;
+                        @include prefix(transition, all .2s linear);
+                        border: 1px dashed $border-color;
+                        // overflow: hidden;
+                        .upload-icon {
+                            font-size: 30px;
+                        }
+                        .upload-img-prev {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+                            bottom: 0px;
+                            right: 0px;
+                            img {
+                                height: 100%;
+                                width: 100%;
+                            }
+                            // .camera_icon {
+                            //     font-size: 40px;
+                            // }
+                            .close-img-pre {
+                                position: absolute;
+                                top: -6px;
+                                right: -4px;
+                                font-size: 16px;
+                                z-index: 20;
+                                background: #fff;
+                                border-radius: 50%;
+                            }
+                        }
+                        input[type=file] {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            opacity: 0;
+                            cursor: pointer;
+                            &:disabled {
+                                cursor: not-allowed;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .padding-side-25 {
+            padding: 0px 25px;
+        }
+        .border-right {
+            border-right: 1px solid $border-color;
+        }
+    }
+}
+
+.border-reprator {
+    width: calc(100% - 30px);
+    border-top: 1px solid $border-color;
+    margin: 0px auto 15px;
+}
+
+@media (max-width:667px) {
+    .account-information {
+        .user-details {
+            .upload-dl {
+                .custom-radio {
+                    margin: 15px 0px;
+                }
+                .upload-docs {
+                    .border-right {
+                        border-right: 0px !important;
+                        border-bottom: 1px solid $border-color !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .upload-dl {
+        .id-label {
+            width: 100% !important;
+            margin-bottom: 0px !important;
+        }
+        .custom-radio {
+            margin: 0px 0px 10px !important;
+        }
+    }
+    .account-information {
+        .user-details {
+            .form-control-half {
+                width: 47%;
+                &:last-child {
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width:768px) and (max-width:1023px) {
+    // Changed width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+    .account-information {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+    }
+    .occupancy-address {
+        .col-md-4 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50% !important;
+            flex: 50% !important;
+            max-width: 50% !important;
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .upload-dl {
+        .id-label {
+            margin: 10px 0px !important;
+        }
+        .custom-radio {
+            display: block;
+        }
+    }
+    .account-information {
+        .user-details {
+            .form-control-half {
+                width: 48%;
+                &:last-child {
+                    float: right;
+                    margin-top: 0px;
+                }
+            }
+        }
+    }
+}

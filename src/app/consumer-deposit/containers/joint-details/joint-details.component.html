@@ -1,0 +1,52 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        joint-details.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        template for joint details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div *ngIf="!reviewPage" class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">{{showForm ? 'Tell us about Joint Applicant(s)' : 'Upload Joint Applicant\'s ID'}}</h1>
+    </div>
+</div>
+<div class="container personal-details position-relative">
+    <!-- <div class="d-flex justify-content-end" *ngIf="!reviewPage">
+        <button type="button" class="btn btn-select pull-right margin-bottom20" (click)="addJointApplicant()" [disabled]="jointFormCount === MAX_COUNT">Add Applicant</button>
+    </div> -->
+    <!-- <div class="d-flex justify-content-end" *ngIf="!reviewPage">
+        <button type="button" class="btn btn-select pull-right margin-bottom20" (click)="removeJointApplicant()" [disabled]="jointFormCount === MAX_COUNT">Remove Applicant</button>
+    </div>
+    <div class="clearfix"></div> -->
+    <!-- <div *ngIf="!reviewPage" class="d-flex justify-content-center">
+        <div class="col-xs-12 col-sm-10 col-md-8 text-center">
+            <p class="docs-subtitle">
+                We have made it easy for you! Simply upload your driver's license, passport or State ID and we will pre-fill your details. If you prefer, you can type your information below.
+            </p>
+            <p class="docs-subtitle">
+                Please note ID uploads must be in .jpg, .jpeg or .png file formats 4MB or smaller.
+            </p>
+        </div>
+    </div> -->
+    <!-- <app-joint-form (confirmationModal)="showOrHideConfirmationModal($event)" (getJointCount)="getJointCount()" (showOrHideBeneficiaryModel)="showOrHideBeneficiaryModel($event)" (callGetData)="callGetData()" [applicantType]="applicantType" (setDocuments)="callSetDocuments($event)"></app-joint-form> -->
+    <app-consumer-form [addressFor]="'joint'" [pid]="pid" [applicantType]="applicantType" [showPhyAddressButtons]="true" (showContinueAndSave)="setFooterActions($event)" (removeApplicant)="removeApplicant()"></app-consumer-form>
+
+    <app-footer-action *ngIf="!reviewPage" [showMandatoryMessage]="showForm" [showBack]="true" [disableContinue]="!showForm" [showBack]="true" [showSaveExit]="true" [showContinue]="true" (clickBack)="prevStep()" (clickSaveExit)="saveData()" (clickContinue)="nextStep()"></app-footer-action>
+
+    <app-modal-box *ngIf="showBeneficiaryModal" [showCountDiv]="showCountDiv" [questionLabel]="beneficiaryModalData.questionLabel" [infoLabel]="beneficiaryModalData.infoLabel" [applicantCount]="beneficiaryModalData.applicantCount" (addApplicant)="addApplicant()"
+        (subtractApplicant)="subtractApplicant()" (continue)="addAccount($event)"></app-modal-box>
+
+    <app-modal-box *ngIf="showJointModal" [questionLabel]="jointModalData.questionLabel" [infoLabel]="jointModalData.infoLabel" [applicantCount]="jointModalData.applicantCount" (continue)="addJointApplicant($event)"></app-modal-box>
+
+    <app-modal-box *ngIf="showConfirmationModal" [showConfirmationModal]="showConfirmationModal" [showCountDiv]="false" (deleteJointDetailForm)="deleteJointDetailForm($event)"></app-modal-box>
+
+</div>

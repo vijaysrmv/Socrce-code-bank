@@ -1,0 +1,588 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        getting-started.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for getting started page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div
+	class="overlay"
+	appModalFocus
+	aria-modal="true"
+	aria-label="business categories description"
+	*ngIf="openCategories"
+>
+	<div class="modal-body business-category-modal">
+		<div class="business-header" tabindex="0">business categories description</div>
+		<div class="overflow-y-auto">
+			<ul class="business-category-list">
+				<li *ngFor="let item of highRiskBusiness; let i = index" tabindex="0">
+					<p class="category-name" attr.aria-describedby="cateDesc{{ i }}">{{ item.value }}:</p>
+					<p class="category-desc" id="cateDesc{{ i }}">
+						{{ item.description }}
+					</p>
+				</li>
+			</ul>
+		</div>
+		<button
+			type="button"
+			(click)="openCategories = false"
+			aria-label="click to close modal"
+			class="close-modal-icon"
+		>
+			<i class="fa fa-close"></i>
+		</button>
+	</div>
+</div>
+
+<div class="banner-header banner-alignment">
+	<div class="container">
+		<h1 class="heading" id="main-header">Getting Started</h1>
+	</div>
+</div>
+<div class="container window-height">
+	<div class="need-to-apply-section text-center">
+		<div class="container">
+			<div class="text-center">
+				<h2 class="heading">Opening your account is quick, easy, and secure.</h2>
+				<h3 class="heading">Here's what you need to apply:</h3>
+			</div>
+			<div class="documents-section row">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<img src="../../../../ccf-oao-assets/images/address.png" alt="Contact Icon" />
+					<p class="para">Address, phone number, email, social security number.</p>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<img src="../../../../ccf-oao-assets/images/id.png" alt="Identification Documents Icon" />
+					<p class="para">Identification, such as a driver’s license, state ID or passport.</p>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<img src="../../../../ccf-oao-assets/images/payment.png" alt="Payment Method Icon" />
+					<p class="para">A bank account or debit or credit card to fund your account.</p>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<p class="age_para">
+				All Beneficial Owners with 25% or more ownership will be required to be added in the application.
+			</p>
+			<p class="age_para">All applicants must be 18 years of age and a U.S. resident.</p>
+			<div class="check-user">
+				<h2 class="sub-heading" id="onlineCustomerCheck">
+					Are you a Smart Bank Customer? Please
+					<button type="button" class="link-button" (click)="onLoginClick()">CLICK HERE</button> to login.
+				</h2>
+			</div>
+		</div>
+	</div>
+	<h2 class="heading help-us-heading">
+		Help us understand your account needs by answering a few questions about your business.
+	</h2>
+	<div class="questions-section">
+		<div>
+			<form novalidate [formGroup]="initialForm" autocomplete="off">
+				<div class="question-row step-1" [ngClass]="{ 'connecting-line': questionState > 1 }">
+					<div class="process-steps pull-left display-inline-block">
+						<ul class="list-unstyled">
+							<li>
+								<div class="step-count">1</div>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12 col-md-5">
+							<label for="ownershipStr" class="text-inherit">
+								Please select the business type from the list below.
+							</label>
+							<select
+								class="form-control"
+								formControlName="ownershipstructure"
+								id="ownershipStr"
+								aria-describedby="ownershipStrErr"
+								(change)="onChangeofQuestion('ownershipstructure')"
+							>
+								<option value="" disabled="true" [selected]="!initialForm.value.ownershipstructure">
+									Select Structure
+								</option>
+								<option
+									*ngFor="let item of ownershipStructure"
+									[attr.aria-label]="item.ownership"
+									[value]="item.ownership_id"
+								>
+									{{ item.ownership }}
+								</option>
+							</select>
+							<div class="error-div" id="ownershipStrErr">
+								<ng-container
+									*ngIf="
+										initialForm['controls'].ownershipstructure.errors &&
+										(initialForm['controls'].ownershipstructure.dirty ||
+											initialForm['controls'].ownershipstructure.touched)
+									"
+								>
+									<div *ngIf="initialForm['controls'].ownershipstructure.errors?.required">
+										Please select one value.
+									</div>
+								</ng-container>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div
+					class="question-row business-cate step-2"
+					*ngIf="questionState > 1"
+					[ngClass]="{ 'connecting-line': questionState > 2 }"
+					[@slideDownUpAnimation]
+				>
+					<div class="process-steps pull-left display-inline-block">
+						<ul class="list-unstyled">
+							<li>
+								<div class="step-count">2</div>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12 col-md-12">
+							<label for="businessCategories" id="businessCategoriesLabel" class="text-inherit display-block">
+								Does your business fall into any of the following categories?
+							</label>
+							<div
+								class="toggle-btn display-block"
+								role="radiogroup"
+								aria-labelledby="businessCategoriesLabel"
+							>
+								<label>
+									<input
+										type="radio"
+										class="toggle-option"
+										[value]="true"
+										formControlName="restrictedcategories"
+										(change)="onChangeofQuestion('restrictedcategories', true)"
+									/>
+									<span class="checked-option">Yes</span>
+								</label>
+								<label>
+									<input
+										type="radio"
+										class="toggle-option"
+										[value]="false"
+										formControlName="restrictedcategories"
+										(change)="onChangeofQuestion('restrictedcategories', true)"
+									/>
+									<span class="checked-option">No</span>
+								</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="row no-margin">
+							<div class="col-md-4" *ngFor="let item of highRiskBusiness">
+								<p>{{ item.value }}</p>
+							</div>
+							<div class="col-md-12 modal-category-link">
+								For more information on these categories
+								<button type="button" (click)="openModal(openCategories)">CLICK HERE</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="question-row business-cate step-3" *ngIf="questionState > 2" [@slideDownUpAnimation]>
+					<div class="process-steps pull-left display-inline-block">
+						<ul class="list-unstyled">
+							<li>
+								<div class="step-count">3</div>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12 col-md-12 no-margin">
+							<label for="businessZipCode" class="text-inherit display-block">
+								Please provide the zip code for your business.
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-12 col-sm-6 col-md-4">
+							<input
+								type="text"
+								autocomplete="nope"
+								inputmode="numeric"
+								[pattern]="zipCodePattern"
+								[textMask]="zipcodeMask"
+								class="form-control"
+								placeholder="Enter Zip Code"
+								formControlName="zipcode"
+								id="businessZipCode"
+								aria-describedby="businessZipCodeError"
+							/>
+							<div class="error-div" id="businessZipCodeError">
+								<ng-container
+									*ngIf="
+										initialForm['controls'].zipcode.errors &&
+										(initialForm['controls'].zipcode.dirty || initialForm['controls'].zipcode.touched)
+									"
+								>
+									<div *ngIf="initialForm['controls'].zipcode.errors?.required">
+										Please enter your Zip Code.
+									</div>
+									<div *ngIf="initialForm['controls'].zipcode.errors?.minlength">
+										Please enter a valid 5 digit Zip Code.
+									</div>
+									<div *ngIf="initialForm['controls'].zipcode.errors?.maxlength">
+										Please note a maximum of 5 digits are allowed for Zip Code.
+									</div>
+									<div *ngIf="initialForm['controls'].zipcode.errors?.incorrect">
+										Please enter a valid Zip Code.
+									</div>
+								</ng-container>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div
+			class="question-row business_outside_us step-9"
+			id="contact_form"
+			*ngIf="eligibilityFail"
+			[@slideDownUpAnimation]
+		>
+			<!-- <div class="thank-you-header text-center">
+                <h3 class="heading">Thank you for your interest in opening an account online.</h3>
+                <h4>Please provide below details and our business representative will shortly get in touch with you.</h4>
+            </div> -->
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<p class="question-text">
+					Thank you for your interest in opening an account online. We do not currently offer online account
+					opening for this business type. If you would like to provide your contact information below, a
+					banking specialist will reach out to you shortly to review account opening options.
+				</p>
+			</div>
+			<form
+				class="contact-form"
+				[formGroup]="contactForm"
+				(ngSubmit)="submitContactForm()"
+				autocomplete="false"
+			>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="businessName" class="text-inherit"
+							>Name of the Business
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<input
+							type="text"
+							autocomplete="nope"
+							(blur)="trim('contactForm', 'businessname')"
+							class="form-control"
+							placeholder="Enter Business Name"
+							id="businessName"
+							attr.aria-labelledby="businessNameError"
+							formControlName="businessname"
+						/>
+						<div
+							class="error-div"
+							id="businessNameError"
+							*ngIf="
+								contactForm['controls'].businessname.errors &&
+								(contactForm['controls'].businessname.dirty || contactForm['controls'].businessname.touched)
+							"
+						>
+							<div *ngIf="contactForm['controls'].businessname.errors?.required">
+								Please enter name of the business.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].businessname.errors?.minlength &&
+									!contactForm['controls'].businessname.errors?.pattern
+								"
+							>
+								Please note a minimum of 2 characters are required for business name.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].businessname.errors?.maxlength &&
+									!contactForm['controls'].businessname.errors?.pattern
+								"
+							>
+								Please note a maximum of 80 characters (including spaces) are allowed for business name.
+							</div>
+							<div *ngIf="contactForm['controls'].businessname.errors?.pattern">
+								Please note text entered for first name cannot contain special characters or numbers.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="contactFirstName"
+							>First Name
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<input
+							type="text"
+							autocomplete="nope"
+							[autofocus]="autofocus"
+							(blur)="trim('contactForm', 'firstname')"
+							class="form-control"
+							placeholder="Enter First Name"
+							id="contactFirstName"
+							attr.aria-labelledby="contactFirstNameError"
+							formControlName="firstname"
+						/>
+						<div
+							class="error-div"
+							id="contactFirstNameError"
+							*ngIf="
+								contactForm['controls'].firstname.errors &&
+								(contactForm['controls'].firstname.dirty || contactForm['controls'].firstname.touched)
+							"
+						>
+							<div *ngIf="contactForm['controls'].firstname.errors?.required">
+								Please provide your first name.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].firstname.errors?.minlength &&
+									!contactForm['controls'].firstname.errors?.pattern
+								"
+							>
+								Please note a minimum of 2 characters are required for first name.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].firstname.errors?.maxlength &&
+									!contactForm['controls'].firstname.errors?.pattern
+								"
+							>
+								Please note a maximum of 20 characters (including spaces) are allowed for first name.
+							</div>
+							<div *ngIf="contactForm['controls'].firstname.errors?.pattern">
+								Please note text entered for first name cannot contain special characters or numbers.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="contactLastName"
+							>Last Name
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<input
+							type="text"
+							autocomplete="nope"
+							(blur)="trim('contactForm', 'lastname')"
+							class="form-control"
+							placeholder="Enter Last Name"
+							id="contactLastName"
+							attr.aria-labelledby="contactLastNameError"
+							[autofocus]="autofocus"
+							formControlName="lastname"
+						/>
+						<div
+							class="error-div"
+							id="contactLastNameError"
+							*ngIf="
+								contactForm['controls'].lastname.errors &&
+								(contactForm['controls'].lastname.dirty || contactForm['controls'].lastname.touched)
+							"
+						>
+							<div *ngIf="contactForm['controls'].lastname.errors?.required">
+								Please provide your last name.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].lastname.errors?.minlength &&
+									!contactForm['controls'].lastname.errors?.pattern
+								"
+							>
+								Please note a minimum of 2 characters are required for last name.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].lastname.errors?.maxlength &&
+									!contactForm['controls'].lastname.errors?.pattern
+								"
+							>
+								Please note a maximum of 40 characters (including spaces) are allowed for last name.
+							</div>
+							<div *ngIf="contactForm['controls'].lastname.errors?.pattern">
+								Please note text entered for last name cannot contain special characters or numbers.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="contactEmailID"
+							>Email Address
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<input
+							type="email"
+							(blur)="trim('contactForm', 'email')"
+							class="form-control"
+							placeholder="Enter Email Address"
+							id="contactEmailID"
+							attr.aria-labelledby="contactEmailIDError"
+							formControlName="email"
+						/>
+						<div
+							class="error-div"
+							id="contactEmailIDError"
+							*ngIf="
+								contactForm['controls'].email.errors &&
+								(contactForm['controls'].email.dirty || contactForm['controls'].email.touched)
+							"
+						>
+							<div *ngIf="contactForm['controls'].email.errors?.required">
+								Please enter your email address.
+							</div>
+							<div *ngIf="contactForm['controls'].email.errors?.pattern">
+								The email address you have entered contains invalid characters. Please make sure you have
+								entered a valid email address, e.g. johndoe@email.com
+							</div>
+							<div *ngIf="contactForm['controls'].email.errors?.maxlength">
+								Please note a maximum of 40 characters are allowed for email address.
+							</div>
+							<div
+								*ngIf="
+									contactForm['controls'].email.errors?.email &&
+									!contactForm['controls'].email.errors?.required
+								"
+							>
+								Please enter a valid email address.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-4">
+						<label for="contactPhoneNumber"
+							>Phone Number
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+					</div>
+					<div class="form-group col-xs-12 col-md-8">
+						<input
+							type="text"
+							autocomplete="nope"
+							inputmode="numeric"
+							[pattern]="phonePattern"
+							[textMask]="phoneMask"
+							class="form-control"
+							placeholder="Enter Phone Number"
+							id="contactPhoneNumber"
+							attr.aria-labelledby="contactPhoneNumberError"
+							formControlName="phone"
+						/>
+						<div
+							class="error-div"
+							id="contactphoneError"
+							*ngIf="
+								contactForm['controls'].phone.errors &&
+								(contactForm['controls'].phone.dirty || contactForm['controls'].phone.touched)
+							"
+						>
+							<div *ngIf="contactForm['controls'].phone.errors?.required">
+								Please enter your phone number.
+							</div>
+							<div *ngIf="contactForm['controls'].phone.errors?.minlength">
+								Please note 10 digits are required for phone number.
+							</div>
+							<div *ngIf="contactForm['controls'].phone.errors?.maxlength">
+								Please note a maximum of 10 digits are allowed for phone number.
+							</div>
+							<div *ngIf="contactForm['controls'].phone.errors?.pattern">
+								Please enter a valid phone number.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12 col-md-12 text-center" style="margin-top: 25px">
+						<input type="submit" class="btn next-step" value="submit" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="row" *ngIf="!eligibilityFail && questionState > 2">
+			<div class="col-md-12 getting-started-disclosure">
+				<div class="comunication-consent">
+					<h3 class="heading font-weight-bold">Communication Consent</h3>
+					<p role="definition">
+						By clicking CONTINUE you expressly consent to allow Newgen Bank to contact you at the telephone,
+						email, and/or address you have provided for the purpose of fulfilling your inquiry even if you
+						have registered such contact information on the Do Not Call Registry or requested Newgen Bank to
+						not contact you by telephone, email, or direct mail. You are expressly allowing Newgen Bank to
+						contact you by text message and/or telephone which may result in charges assessed from your
+						cellular/mobile carriers. Additionally, communication with you may include the use of automatic
+						telephone dialing systems and/or the use of artificial or prerecorded messages to the residential
+						or cellular number provided. You understand that you are not required to consent to receiving
+						autodialed calls/text messages as a condition for obtaining services from Newgen Bank.
+					</p>
+				</div>
+				<div class="d-flex justify-content-start align-items-start">
+					<div class="switch-radio-btn" for="edaDisclosure">
+						<label class="display-none" id="edaDisclosureLabel">Check Electronic Disclosure Agreement</label>
+						<input
+							type="checkbox"
+							id="edaDisclosure"
+							aria-labelledby="edaDisclosureLabel"
+							aria-describedby="disclosureDescription"
+							[(ngModel)]="disclosureSelected"
+						/>
+						<span class="back">
+							<span class="toggle"></span>
+							<span class="label on"></span>
+							<span class="label off"></span>
+						</span>
+					</div>
+					<span class="consent" id="disclosureDescription">
+						<i
+							class="sr-only"
+							aria-label="Electronic Disclosure Agreement link will be open in new window. please check disclosure to continue application."
+						></i>
+						I have read the
+						<button type="button" class="font-weight-bold" (click)="disclosureClick($event)">
+							Electronic Disclosure Agreement
+						</button>
+						and agree to conduct business in accordance with the terms and conditions contained therein
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<app-footer-action
+		*ngIf="questionState > 2"
+		[disableContinue]="!disclosureSelected"
+		[showBack]="false"
+		[showSaveExit]="false"
+		[showContinue]="true"
+		(clickContinue)="nextStep()"
+	></app-footer-action>
+	<app-footer-links></app-footer-links>
+</div>

@@ -1,0 +1,196 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        identity.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for identity page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.footer-link {
+    .service-box-inner {
+        background: $white-color;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid $border-color;
+        @include prefix(border-radius, 5px);
+        .heading {
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: $heading-color;
+        }
+    }
+}
+
+.modal-header {
+    padding: 10px 15px;
+    .modal-title {
+        font-size: 18px;
+        color: $heading-color;
+    }
+}
+
+.modal-footer {
+    .footer-action-btn {
+        margin: 0px;
+    }
+}
+
+.identity-modal {
+    .verification-list {
+        padding-left: 15px;
+        margin: 0px;
+        list-style-type: none;
+        li {
+            margin-bottom: -10px;
+            list-style-type: decimal;
+            p {
+                color: #000;
+            }
+            .selected-city {
+                background: $checkbox-bg;
+                color: $white-color;
+            }
+            label {
+                margin-bottom: 15px;
+                margin-right: 15px;
+                input[type="radio"],
+                input[type="checkbox"] {
+                    opacity: 0;
+                    position: absolute;
+                }
+                .identity-option {
+                    &:checked~.select-btn {
+                        color: $white-color;
+                        background: $checkbox-bg;
+                        @include prefix(box-shadow, 0 0 0 0.2rem rgba(0, 123, 255, 0.25));
+                    }
+                    &:focus {
+                        &~.select-btn {
+                            @include prefix(box-shadow, 0 0 0 0.2rem rgba(0, 123, 255, 0.25));
+                        }
+                    }
+                    &~.select-btn {
+                        border: 1px solid $checkbox-bg;
+                        color: $checkbox-bg;
+                        background: $white-color;
+                        padding: 2px 15px;
+                        margin-right: 0px;
+                        display: block;
+                        // transition: all .1s ease-in;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        &.mobile-view {
+            display: none;
+        }
+    }
+}
+
+.verification-btn {
+    .next-step {
+        display: none;
+    }
+    .continue-step {
+        display: none;
+    }
+}
+
+.identity-option~.select-btn:hover {
+    background-color: #eee;
+}
+
+.identity-option:checked~.select-btn:hover {
+    background: $checkbox-bg;
+}
+
+.hide-mobile {
+    display: block;
+}
+
+@media (max-width:567px) {
+    .verification_modal {
+        width: 95%;
+        margin: 80px auto;
+    }
+    .verification-list {
+        li {
+            margin-bottom: 0px;
+            list-style-type: none !important;
+            position: relative;
+        }
+        &.desktop-view {
+            display: none;
+        }
+        &.mobile-view {
+            display: block !important;
+            padding-left: 0px;
+        }
+    }
+    .verification-btn {
+        ul {
+            li {
+                button {
+                    width: 48%;
+                    display: inline-block;
+                    font-size: 16px;
+                    padding: 10px 5px;
+                    border: none;
+                }
+            }
+        }
+        .padding-left20 {
+            padding-left: 20px;
+            padding-right: 17px;
+        }
+        .next-step {
+            display: block;
+        }
+        .continue-step {
+            display: block;
+        }
+    }
+    .questionaire {
+        .list-number {
+            position: absolute;
+            left: -15px;
+            top: 3px;
+        }
+        label {
+            display: block;
+            .select-btn {
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+    .list-inline {
+        float: none !important;
+    }
+    .list-inline>li {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .img_preview {
+        width: 100%;
+    }
+    .list-inline>li button {
+        width: 100%;
+        padding: 10px 20px;
+    }
+    .hide-mobile {
+        display: none;
+    }
+}

@@ -1,0 +1,153 @@
+<!------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        : 		Newgen - OAO
+Application            : 		Newgen Portal
+Module                 :		Shared
+File Name              :        success.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for success page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="userNameHeader">Thank You, {{userName | uppercase}}</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="finish-section">
+        <div class="thank-you-block">
+            <div class="text-center account-number-section">
+                <p>
+                    <b>Congratulations!</b> Your account has been opened successfully with Newgen Bank.
+                </p>
+                <p>
+                    Please take note of your account number. You may print the acknowledgement page for your future
+                    reference.
+                </p>
+                <!-- <p class="font-weight-bold acc-num">Your Account Number(s):
+                    <span class="display-block" *ngFor="let product of products">{{accountNumber + ' - ' + 'S' + product.shareid }}</span>
+                </p> -->
+                <a class="text-center print-btn" id="printDetails" (click)="printData()">
+                    <span class="fa fa-print"></span> Print Details
+                </a>
+            </div>
+            <div class="row d-flex justify-content-center account-section">
+                <div class="col-xs-12 col-sm-6 col-md-4 text-center" *ngFor="let product of products">
+                    <div class="service-box-inner">
+                        <div class="accunt-details-box">
+                            <h4 class="heading ">{{product.productname}}</h4>
+                            <p class="acc-num">Account Number: {{product.accountnumber}}</p>
+                            <i class="sr-only" aria-label="Order Checks button will be open in new window"></i>
+                        </div>
+                        <button type="button" class="btn btn-select" (click)="orderChecks(product)"> Order Checks
+                        </button>
+                        <div class="product-overlay text-left" *ngIf="selectedProduct === product.productname"
+                            [@slideUpDownAnimation]>
+                            <ul class="feature-list list-unstyled">
+                                <li class="d-flex justify-content-between">
+                                    <div class="product-feature-title font-weight-bold">Select Applicants</div>
+                                    <div class="product-feature-value" (click)="closePopUp()"><span
+                                            class="fa fa-times-circle"></span></div>
+                                </li>
+                            </ul>
+                            <div class="applicant-list">
+                                <div class="col-xs-12 col-md-12 no-padding no-margin applicant-list">
+                                    <div class="radio">
+                                        <label class="custom-radio" [ngClass]="'disable-radio'">
+                                            <input type="radio" name="primaryApplicant.pid"
+                                                attr.id="{{applicantType}}Applicant-{{primaryApplicant.pid}}"
+                                                [value]="true"
+                                                [(ngModel)]="primaryApplicant.selected" />{{primaryApplicant.name |
+                                            uppercase}}
+                                            <span class="radio-check"></span>
+                                        </label>
+                                    </div>
+                                    <ng-container *ngIf="applicantList && applicantList.length">
+                                        <div class="radio" *ngFor="let applicant of applicantList">
+                                            <label class="custom-radio">
+                                                <input type="radio" name="{{applicantType}}Applicant-{{applicant.pid}}"
+                                                    attr.id="{{applicantType}}Applicant-{{applicant.pid}}"
+                                                    [value]="true" [(ngModel)]="applicant.selected" />{{applicant.name |
+                                                uppercase}}
+                                                <span class="radio-check"></span>
+                                            </label>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- <div class="error-div" *ngIf="authorizerRequiredError">
+                                <div>
+                                    Select 1 applicant to proceed.
+                                </div>
+                            </div> -->
+                            <div class="col-xs-12 col-md-12 text-center">
+                                <button type="button" class="btn btn-select proceed-service"
+                                    (click)="submitChoice(product)">CONFIRM</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <app-select-choice [checkOrder]="true" (clickSubmit)="submitChoice($event)"></app-select-choice> -->
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+                    <div class="service-box-inner enroll-now-box">
+                        <h4 class="heading ">You are now ready to enroll for Online Banking</h4>
+                        <i class="sr-only" aria-label="Enroll now button will be open in new window"></i>
+                        <button type="button" class="btn btn-select" (click)="enrollNow()">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 credit-card-section">
+                    <p class="congratulation-para">
+                        <b>Congratulations! You also qualify for a Newgen Bank Rewards Credit Card!</b>
+                        </p>
+                    <p class="bank-logo">
+                        <img src="../../../../ccf-oao-assets/images/logo-newgen.jpg" alt="" width="110px">
+                        <span class="bank-name">Newgen Bank</span>
+                    </p>
+                    <div class="credit-card-box">
+                        <div class="card-box">
+                            <img src="../../../../ccf-oao-assets/images/cc.jpg" alt="">
+                            <div class="credit-card-point">
+                                <span class="point">5,000 </span>
+                                <span>Online bonus points offer</span>
+                            </div>
+                        </div>
+                        <!-- <p class="newgen-reward">Newgen Bank Rewards Credit Card</p> -->
+                        <div class="card-feature">
+                            <p>Unlimited Points.</p>
+                            <p>No Annual Fee.*</p>
+                            <button class="btn btn-select">Apply Now</button>
+                        </div>
+                    </div>
+                    <h2 class="heading">Earn points on every purchase</h2>
+                    <p>
+                        <strong> Unlimited 1.5 points</strong> for every $1 spent on all purchases, every time –
+                        including essential and online purchases from home.
+                    </p>
+                    <p>
+                        <strong> Plus, earn 20,000 bonus point</strong> after making at least $1,000 in purchases in the
+                        first 90 days of account opening. That’s <strong>$200 statement credit</strong> toward future
+                        purchases!
+                    </p>
+                    <div class="referal">
+                        <p>Refer a friend! Enter an email addess to send an invite to open an account!</p>
+                        <div class="d-flex">
+                            <input type="text" placeholder="Enter email address here">
+                            <button class="btn btn-select">Refer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer-action [showExit]="true" (clickExit)="onFinishExit()"></app-footer-action>
+</div>

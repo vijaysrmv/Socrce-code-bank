@@ -1,0 +1,64 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business deposit
+File Name              :        upload-document.component.html
+Author                 :        Amir Masood 
+Date (DD/MM/YYYY)      :        11/10/2019
+Description            :        Template for upload document page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="upload-document">
+    <div class="banner-header banner-alignment">
+        <div class="container">
+            <h1 class="heading" id="main-header">Supporting Document (Optional)</h1>
+        </div>
+    </div>
+    <div class="container">
+        <p>Kindly upload following documents required to support your application.</p>
+        <div class="upload-document-form">
+            <form [formGroup]="uploadDocumentForm">
+                <div class="upload-docs">
+                    <div class="upload-docs-row">
+                        <div class="upload-docs-box" formArrayName="documents" *ngFor="let image of uploadDocumentArray; let i = index">
+                            <div class="images-list display-inline-block">
+                                <div class="upload-icon"><i class="fa fa-upload"></i></div>
+                                <div class="upload-img-prev">
+                                    <span class="close-img-pre fa fa-times-circle" (click)="removeImage(i)"></span>
+                                </div>
+                                <input #idUploadDocument id="uploadDocument_{{ i }}" (change)="onUploadImage($event, i)" type="file" title="Upload Document" accept=".jpeg,.jpg,.pdf,.png" aria-describedby="idscanError" attr.aria-labelledby="upload_{{ i }}" />
+                            </div>
+                            <p class="document-name" id="upload_{{ i }}">
+                                {{ image }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="error-div margin-top-15" id="idscanError">
+                <ng-container *ngIf="imgerror || validationError">
+                    <div *ngIf="imgerror">
+                        Only .jpg, .jpeg, .png or .pdf files with size less than or equal to 5MB are allowed.
+                    </div>
+                    <div *ngIf="validationError">Please upload the required documents before proceed further.</div>
+                </ng-container>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="docs-subtitle">
+                        Please note documents uploads must be in .jpg, .jpeg, .png or .pdf file formats 5MB or smaller.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <app-footer-action [showBack]="showBack" [showSaveExit]="true" [showContinue]="true" [showSkip]="true" [disableContinue]="
+				!uploadDocumentForm.valid && uploadDocumentForm.get('documents')['controls'].length > 0
+			" (clickBack)="prevStep()" (clickSaveExit)="saveAndExit()" (clickContinue)="nextStep()" (clickSkip)="skipStep()"></app-footer-action>
+    </div>
+</div>

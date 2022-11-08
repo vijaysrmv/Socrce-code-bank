@@ -1,0 +1,32 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        resume-popup.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for resume popup page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ng-template #resumeModal>
+    <div appModalFocus aria-modal="true" attr.aria-describedby="resumeDuplicate">
+        <div class="modal-body">
+            <p class="para" tabindex="0">
+                {{message}}
+            </p>
+            <!-- <p class="para">If you "Proceed", the link will open in a new window.</p> -->
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-cancel pull-right" attr.aria-label="Exit" (click)="exitHandler()">Exit</button> -->
+            <button type="button" class="btn btn-select pull-right" attr.aria-label="Continue" (click)="continueHandler()">
+                Continue
+            </button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,234 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        shared Module
+File Name              :        due-diligence-questionnaire.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        21/01/2020
+Description            :        style for due diligence questionnaire page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.multiselect-dropdown {
+    button {
+        width: 75px;
+        text-align: center;
+        padding: 7px 5px;
+        margin-left: 10px;
+    }
+}
+
+.questionnaire-info-row {
+    // margin-bottom: 20px;
+    .ans-row {
+        margin-top: 10px;
+    }
+    .question-list {
+        padding-left: 0px;
+        li {
+            list-style-type: none;
+            margin-bottom: 15px;
+            .custom-checkbox {
+                font-weight: bold;
+                input:checked~.checkmark.sub-check {
+                    background-color: $heading-color;
+                }
+            }
+            div {
+                padding-left: 35px;
+                margin-bottom: 10px;
+                p {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+    .form-group {
+        // margin-bottom: 2px;
+        .toggle-btn {
+            // margin-bottom: 10px;
+            &.account-purpose {
+                label {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+                .additional-option {
+                    &~.checked-option {
+                        margin-right: 0px;
+                        padding: 8px 12px;
+                        width: 100%;
+                    }
+                }
+            }
+            label {
+                margin: 0px 3px 0px 0px;
+                @media(max-width: 600px) {
+                    width: 49%;
+                }
+            }
+        }
+    }
+    // .margin {
+    //     margin-left: 5px;
+    // }
+    table {
+        tr th,
+        tr td {
+            border: 1px solid $border-color !important;
+            vertical-align: middle !important;
+            padding: 5px;
+            font-size: 14px;
+        }
+        thead {
+            tr {
+                th {
+                    background: #f5f6fa;
+                    text-align: center;
+                    text-transform: uppercase;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+.added-country {
+    margin: 10px 0px 5px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .country-name {
+        width: auto;
+        padding: 2px 5px;
+        background: $primary-color;
+        color: #fff;
+        display: inline-block;
+        border-radius: 2px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        button {
+            border: 0px;
+            background: transparent;
+            color: #fff;
+            padding: 0 5px;
+        }
+    }
+}
+
+@media(max-width:1024px) {
+    .questionnaire-info-row {
+        .row {
+            .form-group {
+                &.table100 {
+                    -webkit-box-flex: 0;
+                    -ms-flex: 0 0 75%;
+                    flex: 0 0 75% !important;
+                    max-width: 75% !important;
+                }
+            }
+        }
+        .toggle-btn {
+            .additional-option {
+                &~.checked-option {
+                    margin-right: 5px;
+                    padding: 5px 12px;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 1023px) {
+    .questionnaire-info-row {
+        .toggle-btn {
+            label {
+                .toggle-option {
+                    &~ {
+                        .checked-option {
+                            padding: 8px 15px 7px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:768px) {
+    .questionnaire-info-row {
+        .row {
+            .form-group {
+                &.table100 {
+                    -webkit-box-flex: 0;
+                    -ms-flex: 0 0 100%;
+                    flex: 0 0 100% !important;
+                    max-width: 100% !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:667px) {
+    table {
+        &.additional-business-table {
+            thead {
+                tr {
+                    &:first-child {
+                        th {
+                            &:first-child {
+                                width: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .questionnaire-info-row {
+        .toggle-btn {
+            &.account-purpose {
+                label {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+                .additional-option {
+                    &~.checked-option {
+                        margin-right: 0px;
+                        padding: 8px 12px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 476px) {
+    .questionnaire-info-row {
+        .toggle-btn {
+            label {
+                width: 100%;
+                margin: 0px 0px 10px;
+                .toggle-option {
+                    &~ {
+                        .checked-option {
+                            padding: 8px 15px 7px;
+                            width: 100%;
+                            &.margin {
+                                margin: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

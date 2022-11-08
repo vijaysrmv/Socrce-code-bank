@@ -1,0 +1,303 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        business-details.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for business details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="business-information">
+    <accordion [@slideDownUpAnimation]>
+        <accordion-group panelClass="company-group" [isOpen]="false">
+            <div (click)="checkingProduct = !checkingProduct" accordion-heading>
+                <div class="container">
+                    Company Details
+                    <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{ checkingProduct ? 'open' : 'close' }} checking product">
+						<i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+					</button>
+                </div>
+            </div>
+
+            <app-company-detail></app-company-detail>
+
+            <div class="container mt-5">
+                <form [formGroup]="businessForm" novalidate autocomplete="off">
+                    <div class="info-section">
+                        <div class="info-header-main">
+                            <div class="info-header">
+                                Contact & Address Details
+                                <div class="separator_div"></div>
+                            </div>
+                        </div>
+
+                        <div class="details-info">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="addressType">Address Type</label>
+                                    <select class="form-control" name="addressType" id="addressType" formControlName="addressType">
+										<option value="AddressType" selected="true">Registered Address</option>
+										<option>Buisness Address</option>
+									</select>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="buildingNumber">Building Number </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="buildingNumber" name="buildingNumber" placeholder="Building Number" attr.aria-describedby="buildingNumber" formControlName="buildingNumber" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="buildingName">Building Name </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="buildingName" placeholder="Building Name" name="buildingName" attr.aria-describedby="buildingName" formControlName="buildingName" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="streetName">Street Name </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="streetName" placeholder="Street Name" name="streetName" attr.aria-describedby="streetName" formControlName="streetName" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="nearestLandmark">Nearest LandMark</label>
+                                    <input type="text" class="form-control" name="nearestLandmark" id="nearestLandmark" placeholder="Nearest LandMark" formControlName="nearestLandmark" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="locationArea">Location/ Area </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="locationArea" name="locationArea" placeholder="Location /Area" attr.aria-describedby="lArea" formControlName="locationArea" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="townCity">Town / City </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="townCity" placeholder="Town / City" attr.aria-describedby="townCity" formControlName="townCity" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="zipcode">ZipCode </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="zipcode" placeholder="ZipCode" attr.aria-describedby="zipcode" formControlName="zipcode" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="pobox">PO Box </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="pobox" placeholder="PO Box" attr.aria-describedby="pobox" formControlName="pobox" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="pmNumber">Primary Mobile Nuber </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="pmNumber" placeholder="Primary Mobile Number" attr.aria-describedby="pmNumber" formControlName="pmNumber" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="smNumber">Secondary Mobile Nuber </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="smNumber" placeholder="Secondary Mobile Number" attr.aria-describedby="smNumber" formControlName="smNumber" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                    <label for="email">Email Id </label>
+                                    <input type="text" autocomplete="nope" class="form-control" id="emailId" placeholder="Email id" attr.aria-describedby="emailId" formControlName="emailId" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <button type="button" (click)="addDataToTable()" class="btn btn-next" aria-label="Add">
+										Add
+									</button>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Address Type</th>
+                                                <th>Building Number</th>
+                                                <th>Building Name</th>
+                                                <th>Street Name</th>
+                                                <th>Nearest LandMark</th>
+                                                <th>Location /Area</th>
+                                                <th>Town / City</th>
+                                                <th>ZipCode</th>
+                                                <th>PO Box</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let rowdata of paramterArray">
+                                                <td>{{ rowdata.addressType }}</td>
+                                                <td>{{ rowdata.buildingNumber }}</td>
+                                                <td>{{ rowdata.buildingName }}</td>
+                                                <td>{{ rowdata.streetName }}</td>
+                                                <td>{{ rowdata.nearestLandmark }}</td>
+                                                <td>{{ rowdata.locationArea }}</td>
+                                                <td>{{ rowdata.townCity }}</td>
+                                                <td>{{ rowdata.zipcode }}</td>
+                                                <td>{{ rowdata.pobox }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-header-main">
+                            <div class="info-header">
+                                Dedupe Check
+                                <div class="separator_div"></div>
+                            </div>
+                        </div>
+
+                        <div class="details-info mt-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-next" aria-label="Add">DEDUPE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section mt-3">
+                        <div class="info-header-main">
+                            <div class="info-header">
+                                Other Banking Details
+                                <div class="separator_div"></div>
+                            </div>
+                        </div>
+
+                        <div class="details-info">
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="bank_name">Bank Name </label>
+                                    <input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Bank Name" formControlName="bank_name" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                                    <label for="since_date">Since</label>
+                                    <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="since_date" id="since_date" placeholder="MM/DD/YYYY" attr.aria-describedby="since_date" formControlName="since_date" />
+                                </div>
+
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="deal_type">Deal Type </label>
+                                    <select class="form-control" name="deal_type" id="deal_type" formControlName="deal_type">
+										<option value="deal_type" selected="true">Trade</option>
+										<option>CC</option>
+										<option>WPS</option>
+										<option>Remmitance</option>
+										<option>PDC (Only Normal Transaction)</option>
+									</select>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="satisfied_type">Satisfied</label>
+                                    <select class="form-control" name="satisfied_type" id="satisfied_type" formControlName="satisfied_type">
+										<option value="satisfied_type" selected="true">Yes</option>
+										<option>No</option>
+										<option>NA</option>
+									</select>
+                                </div>
+
+                                <div class="form-group col-xs-12 col-md-4">
+                                    <label for="remark_Bank_Statement">Remarks</label>
+                                    <input type="text" class="form-control" name="remark_Bank_Statement" id="remark_Bank_Statement" placeholder="Remarks" formControlName="remark_Bank_Statement" />
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-md-4">
+                                    <button type="button" (click)="addDataToOtherBank()" class="btn btn-next" aria-label="Add">
+										ADD
+									</button>
+                                </div>
+
+                                <div class="col-md-12 mt-3">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Bank Name</th>
+                                                <th>Since</th>
+                                                <th>Deal Type</th>
+                                                <th>Satisfied</th>
+                                                <th>Remarks (Bank Statement Submitted /available )</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let rowdata of paramterArray1">
+                                                <td>{{ rowdata.bank_name }}</td>
+                                                <td>{{ rowdata.since_date }}</td>
+                                                <td>{{ rowdata.deal_type }}</td>
+                                                <td>{{ rowdata.satisfied_type }}</td>
+                                                <td>{{ rowdata.remark_Bank_Statement }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </accordion-group>
+    </accordion>
+
+    <accordion [@slideDownUpAnimation]>
+        <accordion-group panelClass="connected-parties" [isOpen]="false">
+            <div (click)="checkingProduct = !checkingProduct" accordion-heading>
+                <div class="container">
+                    Connected Parties
+                    <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{ checkingProduct ? 'open' : 'close' }} checking product">
+						<i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+					</button>
+                </div>
+            </div>
+            <app-connected-parties></app-connected-parties>
+        </accordion-group>
+    </accordion>
+
+    <accordion [@slideDownUpAnimation]>
+        <accordion-group panelClass="connected-parties" [isOpen]="false">
+            <div (click)="checkingProduct = !checkingProduct" accordion-heading>
+                <div class="container">
+                    Group Company Details
+                    <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{ checkingProduct ? 'open' : 'close' }} checking product">
+						<i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+					</button>
+                </div>
+            </div>
+            <app-group-company-details></app-group-company-details>
+        </accordion-group>
+    </accordion>
+
+    <accordion [@slideDownUpAnimation]>
+        <accordion-group panelClass="Major-customers-and-supplier" [isOpen]="false">
+            <div (click)="checkingProduct = !checkingProduct" accordion-heading>
+                <div class="container">
+                    Major customers and Supplier
+                    <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{ checkingProduct ? 'open' : 'close' }} checking product">
+						<i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+					</button>
+                </div>
+            </div>
+            <app-major-customers-and-supplier></app-major-customers-and-supplier>
+        </accordion-group>
+    </accordion>
+
+    <accordion [@slideDownUpAnimation]>
+        <accordion-group panelClass="declaration" [isOpen]="false">
+            <div (click)="checkingProduct = !checkingProduct" accordion-heading>
+                <div class="container">
+                    Declaration
+                    <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{ checkingProduct ? 'open' : 'close' }} checking product">
+						<i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+					</button>
+                </div>
+            </div>
+            <app-declaration></app-declaration>
+        </accordion-group>
+    </accordion>
+</div>

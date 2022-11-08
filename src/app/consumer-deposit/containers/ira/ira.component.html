@@ -1,0 +1,406 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        ira.component.html
+Author                 :        Deepak kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for ira page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Thank you for your interest</h1>
+    </div>
+</div>
+<div class="container ira-details">
+    <p class="para">
+        If you would like to discuss our retirement accounts in more detail or have a specific question that you would like for us to contact you about:
+    </p>
+    <p class="sub-title">Please note we do not share personal information via this channel</p>
+    <div class="details-info">
+        <form [formGroup]="consumerForm" autocomplete="off" (ngSubmit)="submitIRAForm()">
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label id="areYouExistingMember">Are you an existing customer of Newgen Bank?
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <div class="toggle-btn display-block" data-toggle="buttons">
+                        <label>
+                            <input type="radio" class="toggle-option" name="memberOfColarado" attr.aria-describedby="areYouExistingMember" [value]="true" formControlName="memberOfColarado" />
+                            <span class="checked-option">Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" class="toggle-option" name="memberOfColarado" attr.aria-describedby="areYouExistingMember" [value]="false" formControlName="memberOfColarado" />
+                            <span class="checked-option">No</span>
+                        </label>
+                    </div>
+                    <div class="error-div" id="memberOfColaradoError" *ngIf="consumerForm['controls'].memberOfColarado.errors && (consumerForm['controls'].memberOfColarado.dirty || consumerForm['controls'].memberOfColarado.touched)">
+                        <div *ngIf="consumerForm['controls'].memberOfColarado.errors?.required">
+                            Please provide your response.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                    <label for="firstName">First Name
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <input type="text" autocomplete="nope" class="form-control" attr.aria-labelledby="firstNameErr" formControlName="firstname" id="firstName" placeholder="Enter First Name" />
+                    <div class="error-div" id="firstNameError" *ngIf="consumerForm['controls'].firstname.errors && (consumerForm['controls'].firstname.dirty || consumerForm['controls'].firstname.touched)">
+                        <div *ngIf="consumerForm['controls'].firstname.errors?.required">
+                            Please provide your first name.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].firstname.errors?.pattern">
+                            Please note text entered for first name cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].firstname.errors?.minlength && !consumerForm['controls'].firstname.errors?.pattern">
+                            Please note a minimum of 2 characters are required for first name.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].firstname.errors?.maxlength && !consumerForm['controls'].firstname.errors?.pattern">
+                            Please note a maximum of 20 characters (including spaces) are allowed for first name.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                    <label for="middleName">Middle Name</label>
+                    <input autocomplete="nope" class="form-control" attr.aria-labelledby="middleNameErr" id="middleName" formControlName="middlename" placeholder="Enter Middle Name" />
+                    <div class="error-div" id="middleNameError" *ngIf="consumerForm['controls'].middlename.errors && (consumerForm['controls'].middlename.dirty || consumerForm['controls'].middlename.touched)">
+                        <div *ngIf="consumerForm['controls'].middlename.errors?.pattern">
+                            Please note text entered for middle name cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].middlename.errors?.minlength && !consumerForm['controls'].middlename.errors?.pattern">
+                            Please note a minimum of 1 characters are required for middle name.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].middlename.errors?.maxlength && !consumerForm['controls'].middlename.errors?.pattern">
+                            Please note a maximum of 10 characters (including spaces) are allowed for middle name.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                    <label for="lastName">Last Name
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <input type="text" class="form-control" attr.aria-labelledby="lastNameErr" id="lastName" formControlName="lastname" placeholder="Enter Last Name" />
+                    <div class="error-div" id="lastNameError" *ngIf="consumerForm['controls'].lastname.errors && (consumerForm['controls'].lastname.dirty || consumerForm['controls'].lastname.touched)">
+                        <div *ngIf="consumerForm['controls'].lastname.errors?.required">
+                            Please provide your last name.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].lastname.errors?.pattern">
+                            Please note text entered for last name cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].lastname.errors?.minlength && !consumerForm['controls'].lastname.errors?.pattern">
+                            Please note a minimum of 2 characters are required for last name.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].lastname.errors?.maxlength && !consumerForm['controls'].lastname.errors?.pattern">
+                            Please note a maximum of 40 characters (including spaces) are allowed for last name.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                    <label for="email">Email
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <input type="text" autocomplete="nope" class="form-control" attr.aria-labelledby="emailErr" id="email" formControlName="email" placeholder="Enter Email Address" />
+                    <div class="error-div" id="emailAddressError" *ngIf="consumerForm['controls'].email.errors && (consumerForm['controls'].email.dirty || consumerForm['controls'].email.touched)">
+                        <div *ngIf="consumerForm['controls'].email.errors?.required">
+                            Please enter your email address.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].email.errors?.pattern">
+                            The email address you have entered contains invalid characters. Please make sure you have entered a valid email address, e.g. johndoe@email.com
+                        </div>
+                        <div *ngIf="consumerForm['controls'].email.errors?.maxlength">
+                            Please note a maximum of 40 characters are allowed for email address.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                    <label for="phoneNumber">Phone Number
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="phonePattern" [textMask]="phoneMask" class="form-control" placeholder="Enter Phone Number" id="phoneNumber" attr.aria-labelledby="phoneNumberErr" formControlName="phonenumber" />
+                    <span customMask [maskType]="'phone'" [maskData]="consumerForm.value['phonenumber']"></span>
+                    <div class="error-div" id="phoneNumberError" *ngIf="consumerForm['controls'].phonenumber.errors && (consumerForm['controls'].phonenumber.dirty || consumerForm['controls'].phonenumber.touched)">
+                        <div *ngIf="consumerForm['controls'].phonenumber.errors?.required">
+                            Please enter your phone number.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].phonenumber.errors?.minlength">
+                            Please note 10 digits are required for phone number.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].phonenumber.errors?.maxlength">
+                            Please note a maximum of 10 digits are allowed for phone number.
+                        </div>
+                        <div *ngIf="consumerForm['controls'].phonenumber.errors?.pattern">
+                            Please enter a valid phone number.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 bordered-checkbox">
+                    <label class="display-block text-inherit" for="bestTimeToReach" id="bestTimeToReach">Best time to reach you
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <div class="toggle-btn display-block account-purpose">
+                        <label *ngFor="let val of bestDayToReach">
+                            <input type="checkbox" class="toggle-option additional-option" name="bestDayToReach" (click)="setbestDayToReach(val)" />
+                            <span class="checked-option">{{ val }}</span>
+                        </label>
+                    </div>
+                    <div class="toggle-btn display-block account-purpose">
+                        <label *ngFor="let val of bestTimeToReach">
+                            <input type="checkbox" class="toggle-option additional-option" name="bestTimeToReach" (click)="setbestTimeToReach(val)" />
+                            <span class="checked-option">{{ val }}</span>
+                        </label>
+                    </div>
+                    <div class="error-div" *ngIf="isDaySelected">
+                        Please choose best day to reach you.
+                    </div>
+                    <div class="error-div" *ngIf="isTimeSelected">
+                        Please choose best time to reach you.
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label id="retirementOptions">What is your age? Some retirement account options are dependent upon your age.
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <ul class="no-left-padding list-unstyled retirement-option-list">
+                        <li>
+                            <label class="custom-radio"> Under 59
+                                <input type="checkbox" [value]="'Under 59'" attr.aria-labelledby="retirementOptions" formControlName="retirementoptions" />
+                                <span class="radio-check"></span>            
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-radio"> 59 to 70 ½
+                                <input type="checkbox" [value]="'59 to 70 ½'" attr.aria-labelledby="retirementOptions" formControlName="retirementoptions" />
+                                <span class="radio-check"></span>            
+                            </label>
+                        </li>
+                        <li>
+                            <label class="custom-radio"> 70 ½ and over
+                                <input type="checkbox" [value]="'70 ½ and over'" attr.aria-labelledby="retirementOptions" formControlName="retirementoptions" />
+                                <span class="radio-check"></span>            
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="error-div" id="retirementoptions" *ngIf="consumerForm['controls'].retirementoptions.errors && (consumerForm['controls'].retirementoptions.dirty || consumerForm['controls'].retirementoptions.touched)">
+                        <div *ngIf="consumerForm['controls'].retirementoptions.errors?.required">
+                            Please provide your age.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label id="yourIntrest">What are you interested in (check all that apply)?
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <ul class="interested-option-list">
+                        <li> Open an account:
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> Traditional IRA(SEP)
+                                        <input type="checkbox" (click)="toggleInterests('openaccount','Traditional IRA(SEP)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> HSA
+                                        <input type="checkbox" (click)="toggleInterests('openaccount','HSA')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">ROTH
+                                        <input type="checkbox" (click)="toggleInterests('openaccount','ROTH')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Education Savings Account
+                                        <input type="checkbox" (click)="toggleInterests('openaccount','Education Savings Account')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> Inquiry about an existing IRA/HAS account:
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> Traditional IRA(SEP)
+                                        <input type="checkbox" (click)="toggleInterests('existingira','Traditional IRA(SEP)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> HSA
+                                        <input type="checkbox" (click)="toggleInterests('existingira','HSA')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">ROTH
+                                        <input type="checkbox" (click)="toggleInterests('existingira','ROTH')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Education Savings Account
+                                        <input type="checkbox" (click)="toggleInterests('existingira','Education Savings Account')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> Contributions (Deposit)
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> Current year or previous year?
+                                        <input type="checkbox" (click)="toggleInterests('contributions','Current year or previous year?')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Directly transfer funds from another institution(from an IRA)
+                                        <input type="checkbox" (click)="toggleInterests('contributions','Directly transfer funds from another institution(from an IRA)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">Directly transfer funds from a qualified Retirement Plan(401k)
+                                        <input type="checkbox" (click)="toggleInterests('contributions','Directly transfer funds from a qualified Retirement Plan(401k)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Rollover
+                                        <input type="checkbox" (click)="toggleInterests('contributions','Rollover')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Not Sure
+                                        <input type="checkbox" (click)="toggleInterests('contributions','Not Sure')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>          
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> Distribution(Withdrawl)
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> Normal Distribution
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Normal Distribution')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Early Distribution
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Early Distribution')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">Exception Distribution
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Exception Distribution')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Required Minimum Distribution(Age 70.5 or over)
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Required Minimum Distribution(Age 70.5 or over)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Withholding Elections
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Withholding Elections')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Not Sure
+                                        <input type="checkbox" (click)="toggleInterests('distribution','Not Sure')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>     
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> Investment Options
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> IRA Certificate(s)
+                                        <input type="checkbox" (click)="toggleInterests('investmentoptions','IRA Certificate(s)')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li> Miscellaneous
+                            <ul class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio"> Tax Forms/Documentation
+                                        <input type="checkbox" (click)="toggleInterests('miscellaneous','Tax Forms/Documentation')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">Need help correcting a transaction
+                                        <input type="checkbox" (click)="toggleInterests('miscellaneous','Need help correcting a transaction')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Beneficiary Designations/Questions
+                                        <input type="checkbox" (click)="toggleInterests('miscellaneous','Beneficiary Designations/Questions')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Conversion/Re-characterization
+                                        <input type="checkbox" (click)="toggleInterests('miscellaneous','Conversion/Re-characterization')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio"> Inherited/Deceased Account
+                                        <input type="checkbox" (click)="toggleInterests('miscellaneous','Inherited/Deceased Account')" attr.aria-labelledby="yourIntrest" />
+                                        <span class="radio-check"></span>            
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="error-div" *ngIf="interestsError">
+                        Please select atleast one service.
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-8">
+                    <label for="comments">Comments
+                        <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span>
+                    </label>
+                    <textarea class="form-control" formControlName="comments" attr.aria-labelledby="commentsErr" id="comments"></textarea>
+                    <div class="error-div" id="commentsErr" *ngIf="consumerForm['controls'].comments.errors && (consumerForm['controls'].comments.dirty || consumerForm['controls'].comments.touched)">
+                        <div *ngIf="consumerForm['controls'].comments.errors?.required">
+                            Please add your comments.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 text-right">
+                    <button type="button" class="btn btn-select yellow-bg">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

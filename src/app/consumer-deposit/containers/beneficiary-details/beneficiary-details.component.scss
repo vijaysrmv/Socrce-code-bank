@@ -1,0 +1,65 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        beneficiary-details.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for beneficiary details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.beneficiary-details {
+    label {
+        font-weight: inherit;
+    }
+    .btn {
+        &.remove-applicant-btn {
+            &.left-aligned {
+                top: 0px;
+                right: auto;
+                @media (max-width: 767px) {
+                    top: 27px;
+                }
+                @media(max-width: 450px) {
+                    position: relative;
+                }
+            }
+        }
+        &.btn-select {
+            @media (max-width: 767px) {
+                position: absolute;
+                top: -15px;
+                padding: 5px 10px;
+            }
+            @media (max-width: 567px) {
+                top: -5px;
+            }
+        }
+    }
+}
+
+.joint-account-sep {
+    border-left: 1px dashed $border-color;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    // I have chaned width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+    .beneficiary-form {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    z-index: 999;
+    // background: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    .modal-dialog {
+        width: 90%;
+        margin: 1.875rem;
+        .btn-input-group {
+            .btn-input {
+                padding: 10px 37px;
+            }
+            div {
+                background-color: $green-color;
+                color: $white-color;
+            }
+        }
+    }
+}

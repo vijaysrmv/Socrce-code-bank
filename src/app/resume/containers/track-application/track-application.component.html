@@ -1,0 +1,226 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        track-application.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for track application page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Resume your saved application</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="track-application">
+        <!-- <h1 class="heading">Track Status / Application Retrieval Login Page</h1> -->
+        <p class="project-title text-center">Please enter details below to retrieve your application</p>
+        <div class="track-application-form">
+            <div class="login-section">
+                <div class="login-form">
+                    <form [formGroup]="trackForm" autocomplete="off">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-12">
+                                <label class="display-block" for="lastName">Last Name
+                                    <span class="sr-only" title="required">Required</span>
+                                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                </label>
+                                <input type="text" autocomplete="off" (blur)="trim('lastname')" class="form-control display-inline-block" name="lastName" id="lastName" formControlName="lastname" attr.aria-labelledby="lastNameError" placeholder="Enter Last Name" />
+                                <div class="error-div" *ngIf="trackForm['controls'].lastname.errors && (trackForm['controls'].lastname.dirty || trackForm['controls'].lastname.touched)" id="lastNameError">
+                                    <div *ngIf="trackForm['controls'].lastname.errors?.required">
+                                        Please provide your last name.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].lastname.errors?.minlength && (!trackForm['controls'].lastname.errors?.pattern)">
+                                        Please note a minimum of 2 characters are required for last name.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].lastname.errors?.maxlength && (!trackForm['controls'].lastname.errors?.pattern)">
+                                        Please note a maximum of 40 characters (including spaces) are allowed for last name.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].lastname.errors?.pattern">
+                                        Please note text entered for last name cannot contain special characters or numbers.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-12">
+                                <label class="display-block" for="socialSecurityNumber">Social Security Number
+                                    <span class="sr-only" title="required">Required</span>
+                                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                </label>
+                                <input type="text" autocomplete="off" inputmode="numeric" [pattern]="ssnPattern" [textMask]="ssnMask" class="form-control display-inline-block" placeholder="Enter Social Security Number" name="socialSecurityNumber" id="socialSecurityNumber" attr.aria-labelledby="SSNError"
+                                    formControlName="ssn" />
+                                <span customMask [maskType]="'ssn'" [maskData]="trackForm.getRawValue()['ssn']"></span>
+                                <div class="error-div" *ngIf="trackForm['controls'].ssn.errors && (trackForm['controls'].ssn.dirty || trackForm['controls'].ssn.touched)" id="SSNError">
+                                    <div *ngIf="trackForm['controls'].ssn.errors?.required">
+                                        Please provide your social security number.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].ssn.errors?.pattern">
+                                        Please verify that the social security number you have entered is correct.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].ssn.errors?.minlength">
+                                        Please verify that the social security number you have entered is correct.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 datepicker col-md-12">
+                                <label class="display-block" for="DateOfBirth">Date of Birth
+                                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                    <span class="sr-only" title="required">Required</span>
+                                </label>
+                                <input type="text" autocomplete="off" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" [ngClass]="dobInvalid ? 'invalid': ''" placeholder="MM/DD/YYYY" name="DateOfBirth" id="DateOfBirth" attr.aria-label="Date Of Birth"
+                                    attr.aria-labelledby="DateOfBirthError" formControlName="dob" (blur)="onDateChanged(trackForm.value['dob'])" />
+                                <span customMask [maskType]="'dob'" [maskData]="trackForm.value['dob']"></span>
+
+                                <my-date-picker name="DateOfBirthPicker" id="DateOfBirthPicker" attr.aria-label="Date Of Birth Date Picker" formControlName="dobPicker" [options]="dobOptions" (inputFieldChanged)="dateValidation($event)" (dateChanged)="onDateChanged($event.formatted)"></my-date-picker>
+                                <div class="error-div" id="DateOfBirthError" *ngIf="(trackForm['controls'].dob.errors) && (trackForm['controls'].dob.dirty || trackForm['controls'].dob.touched)">
+                                    <div *ngIf="trackForm['controls'].dob.errors?.required">
+                                        Please enter your date of birth.
+                                    </div>
+                                    <div *ngIf="trackForm['controls'].dob.errors?.pattern">
+                                        Please verify that the date of birth you have entered is correct.
+                                    </div>
+                                    <div *ngIf="(dobError || trackForm['controls'].dob.errors?.invalid) && !dobInvalid && !trackForm['controls'].dob.errors?.pattern && !trackForm['controls'].dob.errors?.required">
+                                        Please enter a valid date for your date of birth.
+                                    </div>
+                                    <div *ngIf="dobInvalid && !trackForm['controls'].dob.errors?.invalid && !trackForm['controls'].dob.errors?.pattern && !trackForm['controls'].dob.errors?.required">
+                                        Applicants must be 18 years or older. If you are under 18 years of age, please visit one of our branch locations with a parent or guardian to review account opening options.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-12 text-center">
+                                <button type="button" class="btn btn-next" aria-label="Login" (click)="retrieve()" [disabled]="this.disableRetrieve">Login <i class="fa fa-long-arrow-right"></i></button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <app-select-choice [selectEmail]="true" (clickSubmit)="goForOtpValidation($event)"></app-select-choice>
+        </div>
+        <!-- <div class="track-application-form">
+            <div class="row">
+                <div class="col-xs-12 resume-section">
+                    <div class="text-center">
+                        <h2 class="heading">
+                            Did you sign in with online banking credentials to start your application?</h2>
+                        <p class="subheading">
+                            Currently this feature is only available for existing customers for Personal Accounts.
+                        </p>
+                        <div class="toggle-btn display-block" data-toggle="buttons">
+                            <label>
+                                <input type="radio" class="toggle-option" [value]="true" [(ngModel)]="onlineLogin">
+                                <span class="checked-option">Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" class="toggle-option" [value]="false"  [(ngModel)]="onlineLogin">
+                                <span class="checked-option">No</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="login-section" *ngIf="!onlineLogin">
+                        <div class="login-form">
+                            <form [formGroup]="trackForm" autocomplete="off">
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <label for="email">Email
+                                            <span class="sr-only" title="required">Required</span>
+                                            <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        </label>
+                                        <input type="email" (blur)="trim('email')" class="form-control" name="email" id="email" placeholder="Enter Email Address" attr.aria-describedby="trackEmailError" formControlName="email" />
+                                        <span customMask [maskType]="'email'" [maskData]="trackForm.value['email']"></span>
+                                        <div class="error-div" id="trackEmailError" *ngIf="trackForm['controls'].email.errors && (trackForm['controls'].email.dirty || trackForm['controls'].email.touched)">
+                                            <div *ngIf="trackForm['controls'].email.errors?.required">
+                                                Please enter your email address.
+                                            </div>
+                                            <div *ngIf="trackForm['controls'].email.errors?.pattern">
+                                                The email address you have entered contains invalid characters. Please make sure you have entered a valid email address, e.g. johndoe@email.com
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <label for="lastName">Last Name
+                                            <span class="sr-only" title="required">Required</span>
+                                            <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        </label>
+                                        <input type="text" (blur)="trim('lastname')" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name" attr.aria-describedby="lastNameError" formControlName="lastname" />
+                                        <div class="error-div" id="lastNameError" *ngIf="trackForm['controls'].lastname.errors && (trackForm['controls'].lastname.dirty || trackForm['controls'].lastname.touched)">
+                                            <div *ngIf="trackForm['controls'].lastname.errors?.required">
+                                                Please provide your last name.
+                                            </div>
+                                            <div *ngIf="trackForm['controls'].lastname.errors?.pattern">
+                                                Please note text entered for last name cannot contain special characters or numbers.
+                                            </div>
+                                            <div *ngIf="trackForm['controls'].lastname.errors?.pattern">
+                                                Please note text entered for last name cannot contain special characters or numbers.
+                                            </div>
+                                            <div *ngIf="trackForm['controls'].lastname.errors?.minlength && !trackForm['controls'].lastname.errors?.pattern">
+                                                Please note a minimum of 2 characters are required for last name.
+                                            </div>
+                                            <div *ngIf="trackForm['controls'].lastname.errors?.maxlength && !trackForm['controls'].lastname.errors?.pattern">
+                                                Please note a maximum of 20 characters (including spaces) are allowed for last name.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-12 datepicker">
+                                        <label for="DateOfBirth">Date of Birth
+                                            <span class="sr-only" title="required">Required</span>
+                                            <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                        </label>
+                                        <input type="text" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" placeholder="MM/DD/YYYY" name="DateOfBirth" id="DateOfBirth" attr.aria-label="Date Of Birth" attr.aria-describedby="DateOfBirthError" formControlName="dob" />
+                                        <span customMask [maskType]="'dob'" [maskData]="trackForm.value['dob']"></span>
+
+                                        <my-date-picker name="DateOfBirthPicker" id="DateOfBirthPicker" attr.aria-label="Date Of Birth Date Picker" formControlName="dob" [options]="dobOptions" (dateChanged)="onDateChanged($event.formatted)"></my-date-picker>
+                                        <div class="error-div" id="DateOfBirthError" *ngIf="trackForm['controls'].dob.errors && (trackForm['controls'].dob.dirty || trackForm['controls'].dob.touched)">
+                                            <div *ngIf="trackForm['controls'].dob.errors?.required">
+                                                Please enter your date of birth.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <label for="">Social Security Number or Tax Identification Number
+                                            <span class="required_label "><sup>*</sup></span>
+                                        </label>
+                                        <input type="text" class="form-control" name="firstName">
+                                        <p class="label-subtitle">
+                                            Personal and Doing Business As (DBA) Accounts will require a Social Security Number. All other Business Accounts will require a Tax Identification Number.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-12">
+                                        <button type="button" class="btn btn-select" attr.aria-label="Retrieve OTP" (click)="retrieve()" [disabled]="this.disableRetrieve">
+                                            Login <i class="fa fa-long-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div *ngIf="onlineLogin">
+                        <q2-login-form></q2-login-form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

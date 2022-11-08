@@ -1,0 +1,39 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :
+File Name              :
+Author                 :
+Date (DD/MM/YYYY)      :
+Description            :
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="container">
+    <div class="finish-section">
+        <div class="thank-you-block" *ngIf="errorType === 'technical-error'">
+            <div class="text-center">
+                <p>There seems to be some technical problem. Kindly try after some time.</p>
+                <p class="font-weight-bold">If you have any questions, please contact us at<br/>{{contactNumber}}</p>
+            </div>
+        </div>
+        <div class="thank-you-block" *ngIf="errorType === 'unauthorized'">
+            <div class="text-center">
+                <p>You are not authorized to use this application.</p>
+                <p class="font-weight-bold">If you have any questions, please contact us at<br/>{{contactNumber}}</p>
+            </div>
+        </div>
+        <div class="thank-you-block" *ngIf="errorType === 'timeout'">
+            <div class="text-center">
+                <p>Your session has expired. To resume your application please click the button below.</p>
+                <p><a href="/resume" class="btn btn-back">Resume here</a></p>
+                <p class="font-weight-bold">If you have any questions, please contact us at<br/>{{contactNumber}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        address.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for address page  
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+<div class="address-information">
+    <form [formGroup]="addressForm" autocomplete="off">
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-4" [ngClass]="selectedSingleAccount ? 'col-md-12' : 'col-md-4'">
+                <label for="{{addressType}}-street-{{addressFor}}">Number & Street
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                    <span class="sub-label" *ngIf="physicalAddress">(no P.O. boxes)</span>
+                </label>
+                <input type="text" autocomplete="nope" (blur)="trim('numberandstreet'); standardizeAddress(addressType)" class="form-control" placeholder="Enter Number and Street Address" name="numberStreet" id="{{addressType}}-street-{{addressFor}}" attr.aria-describedby="{{addressType}}-streetError-{{addressFor}}"
+                    formControlName="numberandstreet" [readonly]="!editContactInfo" />
+                <div class="error-div" id="{{addressType}}-streetError-{{addressFor}}">
+                    <ng-container *ngIf="addressForm['controls'].numberandstreet.errors && (addressForm['controls'].numberandstreet.dirty || addressForm['controls'].numberandstreet.touched)">
+                        <div *ngIf="addressForm['controls'].numberandstreet.errors?.required">
+                            Please enter the number and street of your address.
+                        </div>
+                        <div *ngIf="addressForm['controls'].numberandstreet.errors?.pattern">
+                            Please enter a valid street address in a format similar to 123 Main Street. Special characters are not allowed.
+                        </div>
+                        <div *ngIf="addressForm['controls'].numberandstreet.errors?.minlength && !addressForm['controls'].numberandstreet.errors?.pattern">
+                            Please enter your complete number and street address.
+                        </div>
+                        <div *ngIf="addressForm['controls'].numberandstreet.errors?.maxlength && !addressForm['controls'].numberandstreet.errors?.pattern">
+                            Please note a maximum of 40 characters (including spaces) are allowed for number and street address.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" [ngClass]="selectedSingleAccount ? 'col-md-12' : 'col-md-4'">
+                <label for="{{addressType}}-aptorsuite-{{addressFor}}">Apt or Suite</label>
+                <input type="text" autocomplete="nope" (blur)="trim('aptorsuite')" class="form-control" [placeholder]="(editContactInfo || addressForm.getRawValue().aptorsuite) ? 'Enter Apt or Suite': '---'" name="aptSuite" id="{{addressType}}-aptorsuite-{{addressFor}}"
+                    attr.aria-describedby="{{addressType}}-aptorsuiteError-{{addressFor}}" formControlName="aptorsuite" [readonly]="!editContactInfo" />
+                <div class="error-div" id="{{addressType}}-aptorsuiteError-{{addressFor}}">
+                    <ng-container *ngIf="addressForm['controls'].aptorsuite.errors && (addressForm['controls'].aptorsuite.dirty || addressForm['controls'].aptorsuite.touched)">
+                        <div *ngIf="addressForm['controls'].aptorsuite.errors?.maxlength && !addressForm['controls'].aptorsuite.errors?.pattern">
+                            Please note a maximum of 40 characters (including spaces) are allowed for apt or suite.
+                        </div>
+                        <div *ngIf="addressForm['controls'].aptorsuite.errors?.pattern">
+                            Please make sure you have entered valid characters for apt or suite.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" [ngClass]="selectedSingleAccount ? 'col-md-12' : 'col-md-4'">
+                <label for="{{addressType}}-zipCode-{{addressFor}}">Zip Code
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <input type="text" autocomplete="nope" autocomplete="nope" inputmode="numeric" [pattern]="zipCodePattern" [textMask]="zipcodeMask" class="form-control" placeholder="Enter Zip Code" name="zipCode" id="{{addressType}}-zipCode-{{addressFor}}" attr.aria-describedby="{{addressType}}-zipCodeError-{{addressFor}}"
+                    formControlName="zipcode" (blur)="zipLookUp()" [readonly]="!editContactInfo" *ngIf="!disableAddressFields" />
+                <input type="text" class="form-control" name="zipCode-disabled" id="{{addressType}}-zipCode-{{addressFor}}" readonly [value]="addressForm.getRawValue()['zipcode']" *ngIf="disableAddressFields" />
+                <div class="error-div" id="{{addressType}}-zipCodeError-{{addressFor}}">
+                    <ng-container *ngIf="addressForm['controls'].zipcode.errors && (addressForm['controls'].zipcode.dirty || addressForm['controls'].zipcode.touched)">
+                        <div *ngIf="addressForm['controls'].zipcode.errors?.required">
+                            Please enter your Zip Code.
+                        </div>
+                        <div *ngIf="addressForm['controls'].zipcode.errors?.minlength">
+                            Please enter a valid 5 digit Zip Code.
+                        </div>
+                        <div *ngIf="addressForm['controls'].zipcode.errors?.maxlength">
+                            Please note a maximum of 5 digits are allowed for Zip Code.
+                        </div>
+                        <div *ngIf="addressForm['controls'].zipcode.errors?.incorrect">
+                            Please enter a valid Zip Code.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" [ngClass]="selectedSingleAccount ? 'col-md-12' : 'col-md-4'">
+                <label for="{{addressType}}-city-{{addressFor}}">City
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <input type="text" autocomplete="nope" (blur)="trim('city'); updateCity();" class="form-control" placeholder="Enter City" name="city" id="{{addressType}}-city-{{addressFor}}" attr.aria-describedby="{{addressType}}-cityError-{{addressFor}}" formControlName="city"
+                    [readonly]="!editContactInfo" *ngIf="!disableAddressFields" />
+                <input type="text" class="form-control" name="city-disabled" id="{{addressType}}-city-{{addressFor}}" readonly [value]="addressForm.getRawValue()['city']" *ngIf="disableAddressFields" />
+                <div class="error-div" id="{{addressType}}-cityError-{{addressFor}}">
+                    <ng-container *ngIf="addressForm['controls'].city.errors && (addressForm['controls'].city.dirty || addressForm['controls'].city.touched)">
+                        <div *ngIf="addressForm['controls'].city.errors?.required">
+                            Please enter your city.
+                        </div>
+                        <div *ngIf="addressForm['controls'].city.errors?.pattern">
+                            Please note the text entered for city cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="addressForm['controls'].city.errors?.minlength && !addressForm['controls'].city.errors?.pattern">
+                            Please note a minimum of 2 characters are required for city.
+                        </div>
+                        <div *ngIf="addressForm['controls'].city.errors?.maxlength && !addressForm['controls'].city.errors?.pattern">
+                            Please note a maximum of 26 characters (including spaces) are allowed for city.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" [ngClass]="selectedSingleAccount ? 'col-md-12' : 'col-md-4'">
+                <label for="{{addressType}}-state-{{addressFor}}">State
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <select class="form-control" name="state" id="{{addressType}}-state-{{addressFor}}" attr.aria-describedby="{{addressType}}-stateError-{{addressFor}}" formControlName="state" *ngIf="editContactInfo && !disableAddressFields">
+                    <option value='' disabled="true" [selected]="!addressForm.getRawValue().state">Select State</option>
+                    <option *ngFor="let item of allStates" [attr.aria-label]="item.statename"
+                        [ngValue]="item.statecode">{{item.statename}}</option>
+                </select>
+                <!-- <input type="text" class="form-control" name="state-disabled" id="{{addressType}}-state-{{addressFor}}-disabled" readonly [value]="addressForm.getRawValue()['state']" *ngIf="disableAddressFields" /> -->
+                <input type="text" class="form-control" placeholder="Select State" name="stateLabel" id="{{addressType}}-state-{{addressFor}}" [value]="getStateText(addressForm.getRawValue().state) || ''" *ngIf="(!editContactInfo || disableAddressFields)" readonly />
+                <div class="error-div" id="{{addressType}}-stateError-{{addressFor}}">
+                    <ng-container *ngIf="addressForm['controls'].state.errors && (addressForm['controls'].state.dirty || addressForm['controls'].state.touched)">
+                        <div *ngIf="addressForm['controls'].state.errors?.required">
+                            Please select your state.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

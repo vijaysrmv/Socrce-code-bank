@@ -1,0 +1,322 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        getting-started.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for getting started page.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import "../../../../ccf-oao-assets/scss/variables.scss";
+@import "../../../../ccf-oao-assets/scss/mixins.scss";
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0px;
+	right: 0px;
+	text-align: center;
+	z-index: 9999;
+	// background: #fff;
+	background: rgba(0, 0, 0, 0.4);
+	.modal-body {
+		&.business-category-modal {
+			text-align: left;
+			margin: 50px auto;
+			width: 70%;
+			background: #fff;
+			padding: 0px !important;
+			.business-header {
+				background: $primary-color;
+				color: $white-color;
+				padding: 10px 15px;
+				text-transform: capitalize;
+				/* font-weight: bold; */
+				font-size: 16px;
+			}
+			.overflow-y-auto {
+				overflow-y: auto;
+				max-height: 80vh;
+				padding: 15px;
+			}
+			.close-modal-icon {
+				border: 0px;
+				position: absolute;
+				top: -13px;
+				right: -10px;
+				height: 25px;
+				width: 25px;
+				text-align: center;
+				background: $secondary-color;
+				border-radius: 50%;
+				color: $white-color;
+				font-size: 14px;
+				cursor: pointer;
+				font-weight: bold;
+			}
+			.business-category-list {
+				padding-left: 0px;
+				margin: 0px;
+				list-style-type: none;
+				li {
+					.category-name {
+						font-weight: 600;
+						font-size: 15px;
+						margin-bottom: -2px;
+					}
+					.category-desc {
+						font-weight: normal;
+						font-size: 14px;
+						margin-bottom: 15px;
+						line-height: 24px;
+					}
+				}
+			}
+		}
+	}
+}
+
+button {
+	&.transparent-btn {
+		font-size: 16px;
+		border: 0px;
+		background: transparent;
+		padding: 0px;
+		text-transform: capitalize;
+	}
+}
+
+.help-us-heading {
+	font-size: 14px;
+	padding: 15px 0px 20px;
+	margin: 0px;
+}
+
+.getting-started-disclosure {
+	margin: 0px 0px 35px;
+}
+
+.link-button {
+	background: $light-blue-color;
+	padding: 4px;
+	border: none;
+	cursor: pointer;
+	text-decoration: underline;
+	border-radius: 1px;
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+	.question-row {
+		&.step-6 {
+			.row {
+				.col-md-3 {
+					-webkit-box-flex: 0;
+					-ms-flex: 0 0 50%;
+					flex: 50%;
+					max-width: 50%;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1024px) {
+	.contact-form {
+		width: 100% !important;
+	}
+}
+
+@media (max-width: 1023px) {
+	.questions-section {
+		.question-row {
+			.contact-form {
+				.row {
+					.form-group {
+						margin-bottom: 0px;
+						label {
+							margin-bottom: 5px;
+						}
+						&:last-child {
+							margin-bottom: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.question-row {
+		.product-box-inner {
+			.product-box-header {
+				h3 {
+					font-size: 18px !important;
+					padding: 0px 5px;
+				}
+			}
+			.product-feature {
+				padding: 10px !important;
+				.feature-list {
+					li {
+						padding: 2px 0px !important;
+					}
+				}
+			}
+		}
+		.row {
+			.btn-zip {
+				padding: 8px 28px 7px !important;
+			}
+		}
+		&.step-6 {
+			.row {
+				.col-md-2 {
+					-webkit-box-flex: 0;
+					-ms-flex: 0 0 33.33%;
+					flex: 0 0 33.33%;
+					max-width: 33.33%;
+					.btn-select {
+						padding: 8px 30px;
+					}
+				}
+			}
+		}
+	}
+	.need-to-apply-section {
+		.documents-section {
+			margin: 15px 0px;
+			div {
+				padding: 20px 15px;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.need-to-apply-section {
+		.documents-section {
+			div {
+				padding: 20px !important;
+			}
+		}
+	}
+	// I have changed width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+	.question-row {
+		.row {
+			.row {
+				.col-md-4 {
+					-webkit-box-flex: 0;
+					-ms-flex: 0 0 50%;
+					flex: 50%;
+					max-width: 50%;
+				}
+			}
+			.col-md-5 {
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 58.33333333%;
+				flex: 0 0 58.33333333%;
+				max-width: 58.33333333%;
+			}
+		}
+	}
+	.contact-form {
+		width: 100% !important;
+		.row {
+			.col-md-4 {
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 50%;
+				flex: 50%;
+				max-width: 50%;
+			}
+		}
+	}
+}
+
+@media (max-width: 567px) {
+	.questions-section {
+		.question-row {
+			padding-bottom: 20px;
+			&.step-6 {
+				.row {
+					.col-md-3 {
+						-webkit-box-flex: 0;
+						-ms-flex: 0 0 100%;
+						flex: 0 0 100%;
+						max-width: 100%;
+					}
+					.col-md-2 {
+						-webkit-box-flex: 0;
+						-ms-flex: 0 0 100%;
+						flex: 0 0 100%;
+						max-width: 100%;
+						.btn-select {
+							padding: 8px 30px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.thank-you-header {
+		padding: 0px 0px 10px !important;
+	}
+	.contact-form {
+		width: 100% !important;
+		.row {
+			padding-left: 0px;
+		}
+	}
+	.product-box-inner {
+		.product-box-header {
+			h3 {
+				font-size: 16px !important;
+			}
+		}
+		.product-feature {
+			display: none;
+			min-height: auto !important;
+			&.show-feature {
+				display: block;
+			}
+		}
+		.product-footer {
+			margin-top: 25px;
+			.more-learn {
+				display: block !important;
+			}
+		}
+	}
+	.selected-product-row {
+		.product-header-heading {
+			.heading {
+				font-size: 18px !important;
+				padding: 0px 0px !important;
+			}
+		}
+	}
+	.row {
+		.btn-zip {
+			margin-top: 10px;
+		}
+	}
+}
+
+@media (max-width: 420px) {
+	.questions-section {
+		.question-row {
+			.row {
+				.btn-zip {
+					margin-top: 10px !important;
+				}
+			}
+		}
+	}
+}

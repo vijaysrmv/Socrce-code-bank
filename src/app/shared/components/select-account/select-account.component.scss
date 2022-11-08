@@ -1,0 +1,32 @@
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+.select-account-options {
+    ul {
+        margin: 20px 0px 0px;
+        li {
+            margin: 0px 0px;
+            .custom-radio {
+                padding-left: 25px;
+                cursor: pointer;
+                &.disable-radio {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+                input[type=radio] {
+                    opacity: 0;
+                    position: absolute;
+                    left: 2px;
+                    top: 3px;
+                }
+            }
+        }
+    }
+}
+
+.option-btn-grp {
+    padding: 15px;
+    .btn {
+        &:first-child {
+            margin-right: 15px;
+        }
+    }
+}

@@ -1,0 +1,189 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        getting-started.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        template for getting started page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.online-customer {
+    width: 450px;
+    margin: 0px auto;
+    text-align: center;
+    @media(max-width: 500px){
+        width:95%;
+    }
+    .check-user {
+        margin: 15px 0px;
+        .heading {
+            margin: 15px 0px;
+        }
+    }
+    .login-form {
+        margin: 30px 0px 0px;
+        text-align: left;
+    }
+    .existing-customer {
+        width: 100%;
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 0px;
+        &.credit-union-options {
+            padding: 0px;
+            margin-top: 15px;
+            .option-header {
+                padding: 10px;
+                background-color: $primary-color;
+                .heading {
+                    margin: 0px;
+                    font-size: 14px;
+                    color: #fff;
+                }
+            }
+            .option-list {
+                padding: 15px;
+                ul {
+                    margin: 0px;
+                    padding: 0px;
+                    li {
+                        list-style: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.new-customer {
+    width: 450px;
+    margin: 15px auto;
+    float: none;
+    .zip-code-section {
+        width: 248px;
+        margin: 0px auto;
+    }
+    .q2-login {
+        width: 100% !important;
+    }
+}
+
+// .getting-started-question {
+//     margin: 25px 0px 0px;
+//     ul {
+//         li {
+//             list-style-type: none;
+//             margin-bottom: 5px;
+//             ul {
+//                 padding-left: 25px;
+//                 font-size: 14px;
+//             }
+//             label {
+//                 text-transform: inherit;
+//                 font-weight: normal;
+//             }
+//             .row {
+//                 padding: 0px 25px;
+//             }
+//             .disable-radio {
+//                 opacity: 0.5
+//             }
+//         }
+//     }
+// }
+// .getting-started-dis {
+//     li {
+//         list-style-type: none;
+//     }
+//     a {
+//         color: $heading-color !important;
+//     }
+// }
+// .more-ref {
+//     color: $heading-color !important;
+//     font-weight: bold;
+//     background: none;
+//     border: none;
+//     padding: 0px 2px;
+//     cursor: pointer;
+//     &:hover,
+//     &:active {
+//         color: $heading-color !important;
+//         font-weight: bold;
+//     }
+// }
+// .list-inline {
+//     &>li {
+//         width: 100%;
+//         margin-bottom: 10px;
+//     }
+// }
+// @media (max-width:1023px) and (min-width:768px) {
+//     .getting-started-question {
+//         ul {
+//             li {
+//                 .row {
+//                     .col-md-4 {
+//                         -webkit-box-flex: 0;
+//                         -ms-flex: 0 0 50% !important;
+//                         flex: 50% !important;
+//                         max-width: 50% !important;
+//                     }
+//                 }
+//                 .form-control-half {
+//                     width: 47%;
+//                     &:last-child {
+//                         float: right;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+@media (max-width: 991px) {
+    .need-to-apply-section {
+        .documents-section {
+            div {
+                padding: 20px 30px !important;
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .need-to-apply-section {
+        .documents-section {
+            div {
+                padding: 20px !important;
+            }
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .documents-section {
+        div {
+            p {
+                margin-bottom: 0px !important;
+            }
+        }
+    }
+    .new-customer {
+        width: 100%;
+        margin: 15px auto;
+        float: none;
+        .zip-code-section {
+            width: 100%;
+        }
+    }
+}

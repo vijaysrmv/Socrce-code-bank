@@ -1,0 +1,51 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        address.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for address page    
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+// @import '../../../../ccf-oao-assets/scss/mixins.scss';
+.address-information {
+    .form-control-half {
+        width: 48%;
+        // float: left;
+    }
+    .form-control-short {
+        width: 21%;
+        padding-right: 0 !important;
+    }
+    // .margin-left-14 {
+    //     margin-left: 14px;
+    // }
+    label {
+        font-weight: inherit;
+    }
+    .sub-label {
+        color: $body-color;
+        font-size: 13px;
+    }
+}
+
+@media (max-width:1023px) and (min-width:768px) {
+    .address-information {
+        .row {
+            .col-md-4 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 50% !important;
+                flex: 50% !important;
+                max-width: 50% !important;
+            }
+        }
+    }
+}

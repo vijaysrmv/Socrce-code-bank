@@ -1,0 +1,1987 @@
+{
+    "application": [{
+            "arn": "979cd359-20e7-8052-2b07-fec6f1704b78",
+            "personaldetails": {
+                "firstname": "Rajneesh",
+                "middlename": null,
+                "lastname": "Mishra",
+                "title": "mr",
+                "suffix": "i",
+                "dob": "08/07/1995",
+                "dobPicker": {
+                    "date": {
+                        "year": 1995,
+                        "month": 8,
+                        "day": 7
+                    }
+                },
+                "ssn": "234----2-3-",
+                "restrictedcustomer": false,
+                "gender": "male",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": null,
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "34543",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "34534",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "060",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.2,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierChecking",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "uistate": "personalInfo",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "7640b8ca-a079-51ce-4ca0-cc3a8abec346",
+            "personaldetails": {
+                "firstname": "sdfsd",
+                "middlename": "sdfsd",
+                "lastname": "sdfsdf",
+                "title": "",
+                "suffix": "",
+                "dob": "12/12/1222",
+                "dobPicker": {
+                    "date": {
+                        "year": 1222,
+                        "month": 12,
+                        "day": 12
+                    }
+                },
+                "ssn": "123-12-3123",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "uistate": "personalInfo",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false,
+            "jointdetails": [{
+                    "firstname": "sdfsdf",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "sdfsdfsdf",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ]
+        },
+        {
+            "personaldetails": {
+                "lastname": "sdfsd",
+                "dob": "11/11/1111",
+                "ssn": ""
+            },
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "accounttype": "personal-deposit",
+            "uistate": "personalInfo",
+            "arn": "989d26a9-e9a2-7680-1694-d680dcf97353"
+        },
+        {
+            "arn": "21aab938-2a78-7225-069e-08f617d27b81",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "sfsdf",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "323-45-3453",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "products": null,
+            "uistate": "personalInfo",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "945ccdfe-4448-84fc-ac74-600356bb14c0",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "Testing",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "234-23-4223",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "test@gmail.com",
+                "confirmEmail": "test@gmail.com",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "uistate": "personalInfo",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false,
+            "jointdetails": [{
+                    "firstname": "",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ]
+        },
+        {
+            "arn": "72501f2f-36d7-3c6f-966f-ce4527e3146b",
+            "personaldetails": {
+                "firstname": "Rajneesh",
+                "middlename": "Kumar",
+                "lastname": "Mishra",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "234----4-2-",
+                "restrictedcustomer": false,
+                "gender": "male",
+                "primaryphonenumber": "",
+                "email": "raj@gmail.com",
+                "confirmEmail": "raj@gmail.com",
+                "mothermaiden": null,
+                "phonetype": "",
+                "uscitizen": "",
+                "country": null,
+                "identification": {
+                    "type": "MC/OT",
+                    "number": "234234",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": {
+                        "date": {
+                            "year": 0,
+                            "month": 0,
+                            "day": 0
+                        }
+                    }
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "jointdetails": [{
+                "firstname": "sdfsdf",
+                "middlename": "asdf",
+                "lastname": "asdfasdfsdfasdf",
+                "title": "dr",
+                "suffix": "i",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "123-12-3123",
+                "restrictedcustomer": false,
+                "email": null,
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "gender": "",
+                "primaryphonenumber": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": ""
+                },
+                "idscantype": null
+            }],
+            "beneficiarydetails": [{
+                    "firstname": "abcdefgh",
+                    "middlename": "werwer",
+                    "lastname": "xvxcv12345",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "ijklmn",
+                    "middlename": "aaaaaaaaa",
+                    "lastname": "aaaaaaa",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "zipcode": "00000",
+                    "streetname": "",
+                    "aptorsuite": "sdfs",
+                    "city": "sfsdf",
+                    "state": "",
+                    "phone": "(234) 234-2342"
+                },
+                {
+                    "firstname": "opqrst",
+                    "middlename": "bbbbbbbbbb",
+                    "lastname": "bbbbbbbb",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "zipcode": "54321",
+                    "streetname": "",
+                    "aptorsuite": "xcv",
+                    "city": "xzvxc",
+                    "state": "xcvxcv",
+                    "phone": "(235) 252-3523"
+                }
+            ],
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "uistate": "review",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "383057f3-5197-5e38-23cd-f6c5cbf33a3a",
+            "personaldetails": {
+                "firstname": "Save",
+                "middlename": "Details",
+                "lastname": "Testing",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "234-23-4234",
+                "restrictedcustomer": false,
+                "gender": "male",
+                "primaryphonenumber": "(234) 234-2342",
+                "email": "savetesting@gmail.com",
+                "confirmEmail": "savetesting@gmail.com",
+                "mothermaiden": "test",
+                "phonetype": "mobile",
+                "uscitizen": "yes",
+                "country": null,
+                "identification": {
+                    "type": "PS",
+                    "number": "234234",
+                    "issuestate": "ID",
+                    "issuedate": "01/16/2019",
+                    "issuedatePicker": {
+                        "date": {
+                            "year": 2019,
+                            "month": 1,
+                            "day": 16
+                        },
+                        "jsdate": "2019-01-15T18:30:00.000Z",
+                        "formatted": "01/16/2019",
+                        "epoc": 1547577000
+                    },
+                    "expirydate": "02/06/2019",
+                    "expirydatePicker": {
+                        "date": {
+                            "year": 2019,
+                            "month": 2,
+                            "day": 6
+                        },
+                        "jsdate": "2019-02-05T18:30:00.000Z",
+                        "formatted": "02/06/2019",
+                        "epoc": 1549391400
+                    }
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "retired",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "rentalincome",
+                    "grossmonthlyincome": "234",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "mobile",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "234",
+                    "zipcode": "21342",
+                    "city": "asdf",
+                    "state": "ID"
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "234",
+                    "zipcode": "21342",
+                    "city": "asdf",
+                    "state": "ID"
+                }
+            },
+            "jointdetails": [{
+                    "firstname": "Rajneesh",
+                    "middlename": "Kumar",
+                    "lastname": "Mishra",
+                    "title": "mr",
+                    "suffix": "jr",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "ssn": "234-23-4234",
+                    "restrictedcustomer": false,
+                    "email": "raj@gmail.com",
+                    "confirmEmail": "raj@gmail.com",
+                    "mothermaiden": "test",
+                    "gender": "male",
+                    "primaryphonenumber": "(234) 234-2342",
+                    "phonetype": "home",
+                    "uscitizen": "yes",
+                    "country": null,
+                    "identification": {
+                        "type": "MC/OT",
+                        "number": "234324",
+                        "issuestate": "ID",
+                        "issuedate": "01/16/2019",
+                        "issuedatePicker": {
+                            "date": {
+                                "year": 2019,
+                                "month": 1,
+                                "day": 16
+                            },
+                            "jsdate": "2019-01-15T18:30:00.000Z",
+                            "formatted": "01/16/2019",
+                            "epoc": 1547577000
+                        },
+                        "expirydate": "02/06/2019",
+                        "expirydatePicker": {
+                            "date": {
+                                "year": 2019,
+                                "month": 2,
+                                "day": 6
+                            },
+                            "jsdate": "2019-02-05T18:30:00.000Z",
+                            "formatted": "02/06/2019",
+                            "epoc": 1549391400
+                        }
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "234",
+                        "zipcode": "21342",
+                        "city": "asdf",
+                        "state": "ID"
+                    },
+                    "employment": {
+                        "employmentstatus": "retired",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "ssi",
+                        "grossmonthlyincome": "2342",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "Puneet",
+                    "middlename": "Kumar",
+                    "lastname": "Mishra",
+                    "title": "mr",
+                    "suffix": "sr",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "ssn": "234-23-4232",
+                    "restrictedcustomer": false,
+                    "email": "puneet@gmail.com",
+                    "confirmEmail": "puneet@gmail.com",
+                    "mothermaiden": "",
+                    "gender": "male",
+                    "primaryphonenumber": "(234) 234-2342",
+                    "phonetype": "mobile",
+                    "uscitizen": "no",
+                    "country": "Country_2",
+                    "identification": {
+                        "type": "DL",
+                        "number": "23423",
+                        "issuestate": "HI",
+                        "issuedate": "01/15/2019",
+                        "issuedatePicker": {
+                            "date": {
+                                "year": 2019,
+                                "month": 1,
+                                "day": 15
+                            },
+                            "jsdate": "2019-01-14T18:30:00.000Z",
+                            "formatted": "01/15/2019",
+                            "epoc": 1547490600
+                        },
+                        "expirydate": "02/20/2019",
+                        "expirydatePicker": {
+                            "date": {
+                                "year": 2019,
+                                "month": 2,
+                                "day": 20
+                            },
+                            "jsdate": "2019-02-19T18:30:00.000Z",
+                            "formatted": "02/20/2019",
+                            "epoc": 1550601000
+                        }
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": null,
+                        "aptorsuite": "2343",
+                        "zipcode": "23423",
+                        "city": "sfds",
+                        "state": "MA"
+                    },
+                    "employment": {
+                        "employmentstatus": "unemployed",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "ssi",
+                        "grossmonthlyincome": "234",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ],
+            "beneficiarydetails": [{
+                    "firstname": "Rajneesh",
+                    "middlename": "Kumar",
+                    "lastname": "Mishra",
+                    "dob": "08/07/1995",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1995,
+                            "month": 8,
+                            "day": 7
+                        }
+                    },
+                    "zipcode": "23434",
+                    "streetname": "23 sdf",
+                    "aptorsuite": "234",
+                    "city": "asdf",
+                    "state": "asdf",
+                    "phone": "(234) 234-2343"
+                },
+                {
+                    "firstname": "Kewal",
+                    "middlename": "Kumar",
+                    "lastname": "Sharma",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "Punnet",
+                    "middlename": "Kumar",
+                    "lastname": "Mishra",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "sadf",
+                    "middlename": "asdf",
+                    "lastname": "asdf",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                }
+            ],
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "8f8e387f-fbd1-c53b-ac3e-2547abced756",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "test",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "111-11-1111",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "jointdetails": [{
+                    "firstname": "asdfsd",
+                    "middlename": "asdfasdf",
+                    "lastname": "asdfasdf",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "asdfasdf",
+                    "middlename": "asdfsad",
+                    "lastname": "asdfasdf",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ],
+            "beneficiarydetails": [{
+                    "firstname": "asdfsadf",
+                    "middlename": "asdfsadf",
+                    "lastname": "asdfasdf",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "asdf",
+                    "city": "asdf",
+                    "state": "asdf",
+                    "phone": ""
+                },
+                {
+                    "firstname": "asdfasdfzxcv",
+                    "middlename": "asdf",
+                    "lastname": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "zxcv",
+                    "state": "xcv",
+                    "phone": ""
+                }
+            ],
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "0f8b6d76-3bf9-edef-54fd-153efdf55145",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "test",
+                "title": "mr",
+                "suffix": "sr",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "234-23-4236",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "mobile",
+                "uscitizen": "yes",
+                "country": null,
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "jointdetails": [{
+                "firstname": "asdfsd",
+                "middlename": "asdfasdf",
+                "lastname": "asdfsadf",
+                "title": "",
+                "suffix": "",
+                "dob": "",
+                "dobPicker": null,
+                "ssn": "",
+                "restrictedcustomer": false,
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "gender": "",
+                "primaryphonenumber": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": ""
+                },
+                "idscantype": null
+            }],
+            "beneficiarydetails": [{
+                    "firstname": "aaaaa",
+                    "middlename": "aaaaaa",
+                    "lastname": "aaaaaaa",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "dddddd",
+                    "middlename": "ddddddddd",
+                    "lastname": "dddddddddddd",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "dsssssssss",
+                    "middlename": "fddddddddd",
+                    "lastname": "sdfffffffff",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                }
+            ],
+            "accounttype": "consumerDeposit",
+            "updateuistate": false
+        },
+        {
+            "arn": "1776f531-c8ad-5f66-44f2-752784b974c9",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "sadfsdf",
+                "title": "",
+                "suffix": "",
+                "dob": "11/11/1111",
+                "dobPicker": {
+                    "date": {
+                        "year": 1111,
+                        "month": 11,
+                        "day": 11
+                    }
+                },
+                "ssn": "111-11-1111",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": "",
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "jointdetails": [{
+                    "firstname": "asdfsadf",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "asdfsf",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ],
+            "beneficiarydetails": [{
+                    "firstname": "asdf",
+                    "middlename": "asdf",
+                    "lastname": "asdf",
+                    "dob": "11/11/1111",
+                    "dobPicker": {
+                        "date": {
+                            "year": 1111,
+                            "month": 11,
+                            "day": 11
+                        }
+                    },
+                    "zipcode": "12342",
+                    "streetname": "20 sdf",
+                    "aptorsuite": "asdf",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                },
+                {
+                    "firstname": "",
+                    "middlename": "",
+                    "lastname": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "zipcode": "",
+                    "streetname": "",
+                    "aptorsuite": "",
+                    "city": "",
+                    "state": "",
+                    "phone": ""
+                }
+            ],
+            "accounttype": "consumerDeposit",
+            "updateuistate": true
+        },
+        {
+            "personaldetails": {
+                "lastname": "mishra",
+                "dob": "11/11/1111",
+                "ssn": "234-24-2342"
+            },
+            "products": [{
+                    "productid": "031"
+                },
+                {
+                    "productid": "060"
+                }
+            ],
+            "accounttype": "personal-deposit",
+            "uistate": "personalInfo",
+            "arn": "9086f98e-d2a2-2205-5cf8-8b34bb54003f"
+        },
+        {
+            "arn": "227e8e52-6d5b-bff3-0866-9c193a6ce1e5",
+            "personaldetails": {
+                "firstname": "",
+                "middlename": "",
+                "lastname": "masood",
+                "title": "",
+                "suffix": "",
+                "dob": "01/04/1996",
+                "dobPicker": {
+                    "date": {
+                        "year": 1996,
+                        "month": 1,
+                        "day": 4
+                    },
+                    "jsdate": "1996-01-03T18:30:00.000Z",
+                    "formatted": "01/04/1996",
+                    "epoc": 820693800
+                },
+                "ssn": "234--2-3-43",
+                "restrictedcustomer": false,
+                "gender": "",
+                "primaryphonenumber": "",
+                "email": "",
+                "confirmEmail": "",
+                "mothermaiden": "",
+                "phonetype": "",
+                "uscitizen": "",
+                "country": null,
+                "identification": {
+                    "type": "",
+                    "number": "",
+                    "issuestate": "",
+                    "issuedate": "",
+                    "issuedatePicker": null,
+                    "expirydate": "",
+                    "expirydatePicker": null
+                },
+                "physicaladdressdetails": {
+                    "occupancystatus": "",
+                    "rentpayment": "",
+                    "staydurationyear": "",
+                    "staydurationmonth": ""
+                },
+                "employment": {
+                    "employmentstatus": "",
+                    "employername": "",
+                    "occupation": "",
+                    "incomesource": "",
+                    "grossmonthlyincome": "",
+                    "workphonenumber": "",
+                    "extension": "",
+                    "empdurationyear": "",
+                    "empdurationmonth": "",
+                    "previousemployername": "",
+                    "previousoccupation": "",
+                    "management": ""
+                },
+                "preferredcontact": "",
+                "learnaboutus": "",
+                "promocode": "",
+                "idscantype": null,
+                "physicaladdress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                },
+                "mailingaddress": {
+                    "numberandstreet": "",
+                    "aptorsuite": "",
+                    "zipcode": "",
+                    "city": "",
+                    "state": ""
+                }
+            },
+            "products": [{
+                    "productid": "031",
+                    "accounttypeid": "SV",
+                    "accounttypedescription": "savings",
+                    "atmcard": true,
+                    "debitcard": false,
+                    "oktopay": false,
+                    "olb": true,
+                    "billpay": false,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 1.8,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 30,
+                    "productname": "PrimarySaving",
+                    "onlinewire": false
+                },
+                {
+                    "productid": "272",
+                    "accounttypeid": "DD",
+                    "accounttypedescription": "demanddraft",
+                    "atmcard": false,
+                    "debitcard": true,
+                    "oktopay": true,
+                    "olb": true,
+                    "billpay": true,
+                    "estatements": true,
+                    "isbusinesscustomer": false,
+                    "interestrate": 3.5,
+                    "ach": false,
+                    "active_flag": true,
+                    "minimumamount": 25,
+                    "productname": "PremierPlusChecking",
+                    "onlinewire": false
+                }
+            ],
+            "uistate": "personalInfo",
+            "accounttype": "consumerDeposit",
+            "updateuistate": false,
+            "jointdetails": [{
+                    "firstname": "",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                },
+                {
+                    "firstname": "",
+                    "middlename": "",
+                    "lastname": "",
+                    "title": "",
+                    "suffix": "",
+                    "dob": "",
+                    "dobPicker": null,
+                    "ssn": "",
+                    "restrictedcustomer": false,
+                    "email": "",
+                    "confirmEmail": "",
+                    "mothermaiden": "",
+                    "gender": "",
+                    "primaryphonenumber": "",
+                    "phonetype": "",
+                    "uscitizen": "",
+                    "country": "",
+                    "identification": {
+                        "type": "",
+                        "number": "",
+                        "issuestate": "",
+                        "issuedate": "",
+                        "issuedatePicker": null,
+                        "expirydate": "",
+                        "expirydatePicker": null
+                    },
+                    "physicaladdress": {
+                        "numberandstreet": "",
+                        "aptorsuite": "",
+                        "zipcode": "",
+                        "city": "",
+                        "state": ""
+                    },
+                    "employment": {
+                        "employmentstatus": "",
+                        "employername": "",
+                        "occupation": "",
+                        "incomesource": "",
+                        "grossmonthlyincome": "",
+                        "workphonenumber": "",
+                        "extension": ""
+                    },
+                    "idscantype": null
+                }
+            ]
+        }
+    ]
+}

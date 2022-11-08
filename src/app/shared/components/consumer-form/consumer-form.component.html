@@ -1,0 +1,1695 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        consumer-form.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for consumer form page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="account-information">
+    <button type="button" class="btn remove-applicant-btn" aria-label="Click to Remove Additional Applicant" title="Remove Applicant" (click)="deleteApplicant()" *ngIf="
+			(pid !== 1 && accountType === 'businessDeposit') ||
+			(applicantType === 'JOINT' && !reviewPage) ||
+			(reviewPage && showRemoveButton)
+		">
+		<i class="fa fa-trash"></i>Remove
+	</button>
+    <div class="clearfix"></div>
+    <div class="row d-flex justify-content-start" *ngIf="accountType === 'businessDeposit'">
+        <div class="col-xs-12 col-sm-10 col-md-10">
+            <h2 class="heading business-heading">
+                First we’ll collect some information about the owners and signers on the account
+            </h2>
+        </div>
+    </div>
+    <div class="upload-main" *ngIf="!reviewPage || page === 'additionalResponsibleInfo' || page === 'authorizerInfo'">
+        <app-id-scan (getDetails)="updateDataFromIdScan($event)" [holderType]="applicantType" [pid]="pid"></app-id-scan>
+    </div>
+    <form [formGroup]="consumerForm" autocomplete="off">
+        <div class="row">
+            <div class="user-details col-md-12">
+                <!-- <div class="d-flex justify-content-center" *ngIf="!reviewPage">
+                    <div class="text-center col-md-12">
+                        <p>Please review the pre-filled fields for accuracy and complete any required fields.</p>
+                    </div>
+                </div> -->
+                <div class="info-section" [ngClass]="editPersonalDetails ? '' : 'non-editable-view'">
+                    <!-- <div class="remove-applicant-row" *ngIf="pid !== 1 && accountType ==='businessDeposit'">
+                        <button type="button" class="btn remove-applicant-btn" attr.aria-label="Click to Remove Additional Applicant" (click)="deleteApplicant()" title="Remove Applicant">
+                            <i class="fa fa-trash"></i>Remove
+                        </button>
+                    </div> -->
+                    <div class="info-header-main">
+                        <div class="info-header">
+                            Personal Details
+                            <div class="separator_div"></div>
+                        </div>
+                        <div class="info-buttons">
+                            <ng-container *ngIf="reviewPage">
+                                <button type="button" class="btn icon-btn" aria-label="Click to save Personal Details" *ngIf="editPersonalDetails" (click)="saveData('personal_details')">
+									<i class="fa fa-save"></i>Save
+								</button>
+                                <button type="button" class="btn icon-btn" attr.aria-label="{{ editPersonalDetails ? 'Cancel' : 'Edit personal details' }}" (click)="toggleSectionEdit('personal_details')">
+									<i class="fa" [ngClass]="editPersonalDetails ? 'fa-close' : 'fa-edit'"></i
+									>{{ editPersonalDetails ? "Cancel" : "Edit" }}
+								</button>
+                            </ng-container>
+                            <!-- <button type="button" class="btn remove-applicant-btn" aria-label="Click to Remove Additional Applicant" title="Remove Applicant" (click)="deleteApplicant()" *ngIf="(pid !== 1 && accountType ==='businessDeposit') || (applicantType ==='JOINT' && !reviewPage) || (reviewPage && showRemoveButton)">
+                                <i class="fa fa-trash"></i>Remove 
+                            </button> -->
+                        </div>
+                    </div>
+                    <div class="details_form personal_form">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-title">Title</label>
+                                <select class="form-control" name="title" id="{{ applicantId }}-title" formControlName="title" [hidden]="!editPersonalDetails" *ngIf="editPersonalDetails">
+									<option value="" [selected]="!consumerForm.value.title">Select Title</option>
+									<option *ngFor="let item of titleOfApplicant" [attr.aria-label]="item" [value]="item">
+										{{ item }}
+									</option>
+								</select>
+                                <input type="text" class="form-control" [placeholder]="
+										editPersonalDetails || consumerForm.getRawValue().title ? 'Select Title' : '---'
+									" name="titleLabel" id="{{ applicantId }}-title" [value]="consumerForm.getRawValue().title ? consumerForm.getRawValue().title : ''" readonly *ngIf="!editPersonalDetails" />
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-firstName">First Name
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" (blur)="trim('firstname')" class="form-control" placeholder="Enter First Name" name="firstName" id="{{ applicantId }}-firstName" attr.aria-describedby="{{ applicantId }}-FirstNameError" formControlName="firstname"
+                                    [readonly]="!editPersonalDetails" />
+                                <div class="error-div" id="{{ applicantId }}-FirstNameError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].firstname.errors &&
+											(consumerForm['controls'].firstname.dirty || consumerForm['controls'].firstname.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].firstname.errors?.required">
+                                            Please provide your first name.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].firstname.errors?.pattern">
+                                            Please note text entered for first name cannot contain special characters or numbers.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].firstname.errors?.minlength &&
+												!consumerForm['controls'].firstname.errors?.pattern
+											">
+                                            Please note a minimum of 2 characters are required for first name.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].firstname.errors?.maxlength &&
+												!consumerForm['controls'].firstname.errors?.pattern
+											">
+                                            Please note a maximum of 20 characters (including spaces) are allowed for first name.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group col-xs-12 col-md-4">
+								<label for="{{ applicantId }}-middleName">Middle Name</label>
+								<input
+									type="text"
+									autocomplete="nope"
+									(blur)="trim('middlename')"
+									class="form-control"
+									[placeholder]="
+										editPersonalDetails || consumerForm.getRawValue().middlename ? 'Enter Middle Name' : '---'
+									"
+									name="middleName"
+									id="{{ applicantId }}-middleName"
+									attr.aria-describedby="{{ applicantId }}-middleNameError"
+									formControlName="middlename"
+									[readonly]="!editPersonalDetails"
+								/>
+								<div class="error-div" id="{{ applicantId }}-middleNameError">
+									<ng-container
+										*ngIf="
+											consumerForm['controls'].middlename.errors &&
+											(consumerForm['controls'].middlename.dirty ||
+												consumerForm['controls'].middlename.touched)
+										"
+									>
+										<div *ngIf="consumerForm['controls'].middlename.errors?.pattern">
+											Please note text entered for middle name cannot contain special characters or numbers.
+										</div>
+										<div
+											*ngIf="
+												consumerForm['controls'].middlename.errors?.minlength &&
+												!consumerForm['controls'].middlename.errors?.pattern
+											"
+										>
+											Please note a minimum of 1 characters are required for middle name.
+										</div>
+										<div
+											*ngIf="
+												consumerForm['controls'].middlename.errors?.maxlength &&
+												!consumerForm['controls'].middlename.errors?.pattern
+											"
+										>
+											Please note a maximum of 10 characters (including spaces) are allowed for middle name.
+										</div>
+									</ng-container>
+								</div>
+							</div> -->
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-lastName">Last Name
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" (blur)="trim('lastname')" class="form-control" placeholder="Enter Last Name" name="lastName" id="{{ applicantId }}-lastName" attr.aria-describedby="{{ applicantId }}-lastNameError" formControlName="lastname" (change)="checkFields()"
+                                    [readonly]="!editPersonalDetails" />
+                                <div class="error-div" id="{{ applicantId }}-lastNameError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].lastname.errors &&
+											(consumerForm['controls'].lastname.dirty || consumerForm['controls'].lastname.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].lastname.errors?.required">
+                                            Please provide your last name.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].lastname.errors?.pattern">
+                                            Please note text entered for last name cannot contain special characters or numbers.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].lastname.errors?.minlength &&
+												!consumerForm['controls'].lastname.errors?.pattern
+											">
+                                            Please note a minimum of 2 characters are required for last name.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].lastname.errors?.maxlength &&
+												!consumerForm['controls'].lastname.errors?.pattern
+											">
+                                            Please note a maximum of 40 characters (including spaces) are allowed for last name.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" name="gender" id="gender" formControlName="gender">
+									<option *ngFor="let id of gender" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="maritalStatus">Marital Status</label>
+                                <select class="form-control" name="maritalStatus" id="maritalStatus" formControlName="maritalStatus">
+									<option *ngFor="let id of maritalStatus" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 datepicker col-md-4">
+                                <label class="display-block" for="{{ applicantId }}-DateOfBirth">Date of Birth
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" [ngClass]="dobInvalid ? 'invalid' : ''" placeholder="MM/DD/YYYY" name="DateOfBirth" id="{{ applicantId }}-DateOfBirth"
+                                    attr.aria-describedby="{{ applicantId }}-DateOfBirthError" formControlName="dob" (blur)="checkFields(); onDateChanged(consumerForm.getRawValue()['dob'], 'dob')" [readonly]="!editPersonalDetails || isOLB || dobDisable" />
+                                <span customMask [maskType]="'dob'" [maskData]="consumerForm.getRawValue()['dob']" [ngClass]="editPersonalDetails ? '' : 'non-edit-state'"></span>
+
+                                <my-date-picker #dobPicker name="DateOfBirthPicker" id="DateOfBirthPicker" attr.aria-label="Date Of Birth Date Picker" formControlName="dobPicker" [options]="dobOptions" (inputFieldChanged)="dateValidation($event, 'dob')" [hidden]="!editPersonalDetails"
+                                    (change)="checkFields()" (dateChanged)="onDateChanged($event.formatted, 'dob')" ngDefaultControl>
+                                </my-date-picker>
+                                <div class="error-div" id="{{ applicantId }}-DateOfBirthError">
+                                    <ng-container *ngIf="
+											(dobInvalid || dobError || consumerForm['controls'].dob.errors) &&
+											(consumerForm['controls'].dob.dirty || consumerForm['controls'].dob.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].dob.errors?.required">
+                                            Please enter your date of birth.
+                                        </div>
+                                        <div *ngIf="
+												(dobError || consumerForm['controls'].dob.errors?.invalid) &&
+												!dobInvalid &&
+												!consumerForm['controls'].dob.errors?.required
+											">
+                                            Please enter a valid date of birth.
+                                        </div>
+                                        <div *ngIf="
+												dobInvalid &&
+												!dobError &&
+												consumerForm['controls'].dob.errors?.invalid &&
+												!consumerForm['controls'].dob.errors?.required
+											">
+                                            Applicants must be 18 years or older.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="maiden">Mother's Maiden Name</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="maiden" name="maiden" placeholder="Mother's Maiden Name" attr.aria-describedby="maiden" formControlName="maiden" />
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="countryOfBirth">Country of Birth</label>
+                                <select class="form-control" name="countryOfBirth" id="countryOfBirth" formControlName="countryOfBirth">
+									<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="place">Place of Birth</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="place" placeholder="Place of Birth" name="place" attr.aria-describedby="place" formControlName="place" />
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="nationality">Nationality/Citizenship</label>
+                                <select class="form-control" name="nationality" id="nationality" formControlName="nationality">
+									<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="countryResidence">Country of Residence</label>
+                                <select class="form-control" name="countryResidence" id="countryResidence" formControlName="countryResidence">
+									<option *ngFor="let id of country" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="residentStatus">Resident Status</label>
+                                <select class="form-control" name="residentStatus" id="residentStatus" formControlName="residentStatus">
+									<option *ngFor="let id of residentStatus" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="yearsOfResidence">Years of Residence in UAE</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="yearsOfResidence" name="yearsOfResidence" placeholder="Years of Residence in UAE" attr.aria-describedby="yearsOfResidence" formControlName="yearsOfResidence" />
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="yearsInBusiness">Years in Business</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="yearsInBusiness" name="yearsInBusiness" placeholder="Years in Business" attr.aria-describedby="yearsInBusiness" formControlName="yearsInBusiness" />
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="legalEntityType">Legal Entity Type</label>
+                                <select class="form-control" name="legalEntityType" id="legalEntityType" formControlName="legalEntityType">
+									<option *ngFor="let id of legalEntityType" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="dependants">Number of Dependants</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="dependants" name="dependants" placeholder="Number of Dependants" attr.aria-describedby="dependants" formControlName="dependants" />
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="designation">Designation</label>
+                                <select class="form-control" name="designation" id="designation" formControlName="designation">
+									<option *ngFor="let id of designation" [attr.aria-label]="id" [value]="id">
+										{{ id }}
+									</option>
+								</select>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4 input-prefix align-prefix-review">
+                                <label for="{{ applicantId }}-mobilePhoneNumber">Mobile Phone Number
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <span class="input-prefix-box" [ngClass]="editPersonalDetails ? '' : 'non-editable'">+1</span>
+                                <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="phonePattern" [textMask]="phoneMask" class="form-control" placeholder="Enter Phone Number" name="mobilePhoneNumber" id="{{ applicantId }}-mobilePhoneNumber" attr.aria-describedby="{{ applicantId }}-mobilePhoneNumberError"
+                                    formControlName="mobilephonenumber" [readonly]="!editPersonalDetails" />
+                                <span customMask [maskType]="'phone'" [maskData]="consumerForm.value['mobilephonenumber']" [ngClass]="editPersonalDetails ? '' : 'non-edit-state'"></span>
+                                <div class="error-div" id="{{ applicantId }}-mobilePhoneNumberError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].mobilephonenumber.errors &&
+											(consumerForm['controls'].mobilephonenumber.dirty ||
+												consumerForm['controls'].mobilephonenumber.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].mobilephonenumber.errors?.required">
+                                            Please enter your mobile phone number.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].mobilephonenumber.errors?.minlength">
+                                            Please note 10 digits are required for mobile phone number.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].mobilephonenumber.errors?.maxlength">
+                                            Please note a maximum of 10 digits are allowed for mobile phone number.
+                                        </div>
+                                        <div *ngIf="
+												!consumerForm['controls'].mobilephonenumber.errors?.minlength &&
+												!consumerForm['controls'].mobilephonenumber.errors?.maxlength &&
+												consumerForm['controls'].mobilephonenumber.errors?.pattern
+											">
+                                            Please enter a valid mobile phone number.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-emailAddress">Email Address
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="email" (blur)="trim('email')" class="form-control" placeholder="Enter Email Address" name="email" id="{{ applicantId }}-emailAddress" attr.aria-describedby="{{ applicantId }}-emailAddressError" formControlName="email" (change)="checkFields()"
+                                    (keydown)="checkEmail($event)" [readonly]="!editPersonalDetails" />
+                                <!-- (keydown.tab)="checkEmail($event)" -->
+                                <span customMask [maskType]="'email'" [maskData]="consumerForm.value['email']" [ngClass]="editPersonalDetails ? '' : 'non-edit-state'"></span>
+                                <div class="error-div" id="{{ applicantId }}-emailAddressError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].email.errors &&
+											(consumerForm['controls'].email.dirty || consumerForm['controls'].email.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].email.errors?.required">
+                                            Please enter your email address.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].email.errors?.pattern">
+                                            The email address you have entered contains invalid characters. Please make sure you have entered a valid email address, e.g. johndoe@email.com
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].email.errors?.maxlength">
+                                            Please note a maximum of 40 characters are allowed for email address.
+                                        </div>
+                                        <div *ngIf="
+												!consumerForm['controls'].email.errors?.required &&
+												!consumerForm['controls'].email.errors?.pattern &&
+												!consumerForm['controls'].email.errors?.maxlength &&
+												consumerForm['controls'].email.errors?.duplicateEmail
+											">
+                                            Email cannot be same as any other applicant.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group col-xs-12 col-md-4">
+								<label for="{{ applicantId }}-suffix">Suffix</label>
+								<select
+									class="form-control"
+									name="suffix"
+									id="{{ applicantId }}-suffix"
+									formControlName="suffix"
+									[hidden]="!editPersonalDetails"
+									*ngIf="editPersonalDetails"
+								>
+									<option value="" [selected]="!consumerForm.value.suffix">Select Suffix</option>
+									<option *ngFor="let item of suffix" [attr.aria-label]="item.description" [value]="item.id">
+										{{ item.id }}
+									</option>
+								</select>
+								<input
+									type="text"
+									class="form-control"
+									[placeholder]="
+										editPersonalDetails || consumerForm.getRawValue().suffix ? 'Select Suffix' : '---'
+									"
+									name="suffixLabel"
+									id="{{ applicantId }}-suffix"
+									[value]="consumerForm.getRawValue().suffix ? consumerForm.getRawValue().suffix : ''"
+									readonly
+									*ngIf="!editPersonalDetails"
+								/>
+							</div>
+							
+							<div class="form-group col-xs-12 col-md-4">
+								<label for="{{ applicantId }}-socialSecurityNumber"
+									>Social Security Number
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+								<input
+									appBlockCopyPaste
+									autocomplete="off"
+									type="text"
+									inputmode="numeric"
+									[pattern]="ssnPattern"
+									[textMask]="ssnMask"
+									class="form-control"
+									placeholder="Enter Social Security Number"
+									name="SSN"
+									id="{{ applicantId }}-socialSecurityNumber"
+									attr.aria-describedby="{{ applicantId }}-socialSecurityNumberError"
+									formControlName="ssn"
+									(change)="checkFields()"
+									(focus)="onFocusSsn()"
+									(focusout)="onFocusOutSsn()"
+									*ngIf="editPersonalDetails"
+								/>
+								<input
+									autocomplete="off"
+									type="text"
+									class="form-control display-inline-block"
+									placeholder="Enter Social Security Number"
+									name="SSN-disabled"
+									id="{{ applicantId }}-socialSecurityNumber"
+									attr.aria-describedby="{{ applicantId }}-socialSecurityNumberError"
+									[value]="consumerForm.getRawValue().ssn"
+									*ngIf="!editPersonalDetails"
+									readonly
+								/>
+								<span
+									customMask
+									[maskType]="'ssn'"
+									[maskData]="consumerForm.getRawValue()['ssn']"
+									[ngClass]="editPersonalDetails ? '' : 'non-edit-state'"
+								></span>
+								<div class="error-div" id="{{ applicantId }}-socialSecurityNumberError">
+									<ng-container
+										*ngIf="
+											consumerForm['controls'].ssn.errors &&
+											(consumerForm['controls'].ssn.dirty || consumerForm['controls'].ssn.touched)
+										"
+									>
+										<div *ngIf="consumerForm['controls'].ssn.errors?.required">
+											Please provide your social security number.
+										</div>
+										<div *ngIf="consumerForm['controls'].ssn.errors?.pattern">
+											Please verify that the social security number you have entered is correct.
+										</div>
+										<div *ngIf="consumerForm['controls'].ssn.errors?.minlength">
+											Please verify that the social security number you have entered is correct.
+										</div>
+										<div
+											*ngIf="
+												!consumerForm['controls'].ssn.errors?.required &&
+												!consumerForm['controls'].ssn.errors?.pattern &&
+												consumerForm['controls'].ssn.errors?.duplicateSsn
+											"
+										>
+											SSN cannot be same as any other applicant.
+										</div>
+									</ng-container>
+								</div>
+							</div>
+							
+							<div class="form-group col-xs-12 col-md-4" [hidden]="!editPersonalDetails">
+								<label for="{{ applicantId }}-confirmEmailAddress"
+									>Confirm Email Address
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+								<input
+									type="email"
+									appBlockCopyPaste
+									(blur)="trim('confirmEmail')"
+									class="form-control"
+									[ngClass]="consumerForm.errors ? 'invalid' : ''"
+									placeholder="Confirm Email Address"
+									name="confirmEmail"
+									id="{{ applicantId }}-confirmEmailAddress"
+									attr.aria-describedby="{{ applicantId }}-confirmEmailAddressError"
+									formControlName="confirmEmail"
+									(change)="checkFields()"
+								/>
+								<span
+									customMask
+									[maskType]="'email'"
+									[maskData]="consumerForm.value['confirmEmail']"
+									[ngClass]="editPersonalDetails ? '' : 'non-edit-state'"
+								></span>
+								<div class="error-div" id="{{ applicantId }}-confirmEmailAddressError">
+									<ng-container
+										*ngIf="
+											(consumerForm.errors || consumerForm['controls'].confirmEmail.errors) &&
+											(consumerForm['controls'].confirmEmail.dirty ||
+												consumerForm['controls'].confirmEmail.touched)
+										"
+									>
+										<div *ngIf="consumerForm['controls'].confirmEmail.errors?.required">
+											Please enter your email address to confirm.
+										</div>
+										<div
+											*ngIf="
+												!consumerForm['controls'].confirmEmail.errors?.required &&
+												consumerForm.errors?.mismatch
+											"
+										>
+											The email addresses do not match. Please verify.
+										</div>
+									</ng-container>
+								</div>
+							</div> -->
+                        </div>
+                        <div class="row">
+                            <!-- <div class="form-group col-xs-12 col-md-4">
+								<label for="{{ applicantId }}-securityPassphrase"
+									>Security Passphrase
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+								<input
+									type="text"
+									autocomplete="nope"
+									(blur)="trim('passphrase')"
+									class="form-control"
+									placeholder="Enter Security Passphrase"
+									name="securityPassphrase"
+									id="{{ applicantId }}-securityPassphrase"
+									attr.aria-describedby="{{ applicantId }}-securityPassphraseError"
+									formControlName="passphrase"
+									[readonly]="!editPersonalDetails"
+								/>
+								<div class="error-div" id="{{ applicantId }}-securityPassphraseError">
+									<ng-container
+										*ngIf="
+											consumerForm['controls'].passphrase.errors &&
+											(consumerForm['controls'].passphrase.dirty ||
+												consumerForm['controls'].passphrase.touched)
+										"
+									>
+										<div *ngIf="consumerForm['controls'].passphrase.errors?.required">
+											Please enter your security passphrase.
+										</div>
+										<div *ngIf="consumerForm['controls'].passphrase.errors?.pattern">
+											Please note text entered for security passphrase cannot contain special characters or
+											numbers.
+										</div>
+										<div
+											*ngIf="
+												consumerForm['controls'].passphrase.errors?.minlength &&
+												!consumerForm['controls'].passphrase.errors?.pattern
+											"
+										>
+											Please note a minimum of 2 characters are required for security passphrase.
+										</div>
+										<div
+											*ngIf="
+												consumerForm['controls'].passphrase.errors?.maxlength &&
+												!consumerForm['controls'].passphrase.errors?.pattern
+											"
+										>
+											Please note a maximum of 20 letters (including spaces) are allowed for security
+											passphrase.
+										</div>
+									</ng-container>
+								</div>
+							</div>
+							
+							<div class="form-group col-xs-12 col-md-4 input-prefix align-prefix-review">
+								<label for="{{ applicantId }}-homePhoneNumber">Home Phone Number </label>
+								<span
+									[hidden]="!consumerForm.getRawValue().homephonenumber && reviewPage && !editPersonalDetails"
+									class="input-prefix-box"
+									[ngClass]="editPersonalDetails ? '' : 'non-editable'"
+									>+1</span
+								>
+								<input
+									type="text"
+									autocomplete="nope"
+									inputmode="numeric"
+									[pattern]="phonePattern"
+									[textMask]="phoneMask"
+									class="form-control"
+									[placeholder]="
+										editPersonalDetails || consumerForm.getRawValue().homephonenumber
+											? 'Enter Phone Number'
+											: '---'
+									"
+									name="homePhoneNumber"
+									id="{{ applicantId }}-homePhoneNumber"
+									attr.aria-describedby="{{ applicantId }}-homePhoneNumberError"
+									formControlName="homephonenumber"
+									[readonly]="!editPersonalDetails"
+								/>
+								<span
+									customMask
+									[maskType]="'phone'"
+									[maskData]="consumerForm.value['homephonenumber']"
+									[ngClass]="editPersonalDetails ? '' : 'non-edit-state'"
+								></span>
+								<div class="error-div" id="{{ applicantId }}-homePhoneNumberError">
+									<ng-container
+										*ngIf="
+											consumerForm['controls'].homephonenumber.errors &&
+											(consumerForm['controls'].homephonenumber.dirty ||
+												consumerForm['controls'].homephonenumber.touched)
+										"
+									>
+										<div *ngIf="consumerForm['controls'].homephonenumber.errors?.required">
+                                            Please enter your phone number.
+                                        </div>
+										<div *ngIf="consumerForm['controls'].homephonenumber.errors?.minlength">
+											Please note 10 digits are required for phone number.
+										</div>
+										<div *ngIf="consumerForm['controls'].homephonenumber.errors?.maxlength">
+											Please note a maximum of 10 digits are allowed for phone number.
+										</div>
+										<div
+											*ngIf="
+												!consumerForm['controls'].homephonenumber.errors?.minlength &&
+												!consumerForm['controls'].homephonenumber.errors?.maxlength &&
+												consumerForm['controls'].homephonenumber.errors?.pattern
+											"
+										>
+											Please enter a valid phone number.
+										</div>
+									</ng-container>
+								</div>
+							</div> -->
+                            <!-- <div class="form-group col-xs-12 col-md-4">
+                                <label class="display-block" for="{{applicantId}}-phonenumbertype" id="{{applicantId}}-phonetype">Phone Number Type
+                                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                    <span class="sr-only" title="required">Required</span>
+                                </label>
+                                <input type="text" class="form-control" name="phonenumbertype" id="{{applicantId}}-phonenumbertype" attr.aria-describedby="{{applicantId}}-phoneTypeError" [value]="consumerForm.getRawValue().phonetype" readonly *ngIf="!editPersonalDetails" />
+                                <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{applicantId}}-phonetype" [hidden]="!editPersonalDetails">
+                                    <label>
+                                        <input type="radio" class="toggle-option" name="phonetype" attr.aria-describedby="{{applicantId}}-phoneTypeError" value="mobile" formControlName="phonetype" (click)="togglePhoneType('mobile')" />
+                                        <span class="checked-option">Mobile</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" class="toggle-option" name="phonetype" attr.aria-describedby="{{applicantId}}-phoneTypeError" value="home" formControlName="phonetype" (click)="togglePhoneType('home')" />
+                                        <span class="checked-option">Home</span>
+                                    </label>
+                                </div>
+                                <div class="error-div" id="{{applicantId}}-phoneTypeError">
+                                    <ng-container *ngIf="consumerForm['controls'].phonetype.errors && (consumerForm['controls'].phonetype.dirty || consumerForm['controls'].phonetype.touched)">
+                                        <div *ngIf="consumerForm['controls'].phonetype.errors?.required">
+                                            Please select a phone number type.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div> -->
+                            <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                                <label for="accNumber">If yes, enter account number.</label>
+                                <input type="text" autocomplete="nope" class="form-control" id="accNumber" placeholder="Enter account number." attr.aria-describedby="accNumber" formControlName="accNumber" />
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label class="display-block" for="{{ applicantId }}-uscitizen" id="{{ applicantId }}-us_citizen">Are you a UAE Citizen?
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" class="form-control" name="olbUSCitizen" id="{{ applicantId }}-uscitizen" attr.aria-describedby="{{ applicantId }}-isaUSCitizenError" [value]="consumerForm.getRawValue().uscitizen ? 'Yes' : 'No'" readonly *ngIf="!editPersonalDetails"
+                                />
+                                <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-us_citizen" [hidden]="!editPersonalDetails">
+                                    <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="uscitizen"
+											attr.aria-describedby="{{ applicantId }}-isaUSCitizenError"
+											[value]="true"
+											formControlName="uscitizen"
+											(click)="toggleUSCitizen(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                                    <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="uscitizen"
+											attr.aria-describedby="{{ applicantId }}-isaUSCitizenError"
+											[value]="false"
+											formControlName="uscitizen"
+											(click)="toggleUSCitizen(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                                </div>
+                                <div class="error-div" id="{{ applicantId }}-isaUSCitizenError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].uscitizen.errors &&
+											(consumerForm['controls'].uscitizen.dirty || consumerForm['controls'].uscitizen.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].uscitizen.errors?.required">
+                                            Please provide your response.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-4" *ngIf="!isUSCitizen">
+                                <label for="{{ applicantId }}-country">Country of Citizenship
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <select class="form-control text-capitalize" name="country" id="{{ applicantId }}-country" attr.aria-describedby="{{ applicantId }}-countryError" formControlName="country" [hidden]="!editPersonalDetails" *ngIf="editPersonalDetails">
+									<option value="" disabled="true" [selected]="!consumerForm.getRawValue().country">
+										Select Country
+									</option>
+									<option *ngFor="let c of country" [attr.aria-label]="c" [value]="c">
+										{{ c }}
+									</option>
+								</select>
+
+                                <input type="text" class="form-control" placeholder="Select Country" name="countryLabel" id="countryLabel" [value]="getCountryText(consumerForm.getRawValue().country) || ''" readonly *ngIf="!editPersonalDetails" />
+                                <div class="error-div" id="{{ applicantId }}-countryError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].country.errors &&
+											(consumerForm['controls'].country.dirty || consumerForm['controls'].country.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].country.errors?.required">
+                                            Please select your country.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label class="display-block" for="{{ applicantId }}-keycitizen" id="{{ applicantId }}-key_citizen">Is this a Key Contact Person?
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" class="form-control" name="olbUSCitizen" id="{{ applicantId }}-keycitizen" attr.aria-describedby="{{ applicantId }}-isaKeyCitizenError" [value]="consumerForm.getRawValue().keycitizen ? 'Yes' : 'No'" readonly *ngIf="!editPersonalDetails"
+                                />
+                                <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-key_citizen" [hidden]="!editPersonalDetails">
+                                    <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="keycitizen"
+											attr.aria-describedby="{{ applicantId }}-isaKEYitizenError"
+											[value]="true"
+											formControlName="keycitizen"
+											(click)="togglekeycitizen(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                                    <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="keycitizen"
+											attr.aria-describedby="{{ applicantId }}-isaKEYitizenError"
+											[value]="false"
+											formControlName="keycitizen"
+											(click)="togglekeycitizen(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                                </div>
+                                <div class="error-div" id="{{ applicantId }}-isaKEYitizenError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].keycitizen.errors &&
+											(consumerForm['controls'].keycitizen.dirty ||
+												consumerForm['controls'].keycitizen.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].uscitizen.errors?.required">
+                                            Please provide your response.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section" [ngClass]="editIdDetails ? '' : 'non-editable-view'">
+                    <div class="info-header-main">
+                        <div class="info-header">
+                            Identification Details
+                            <div class="separator_div"></div>
+                        </div>
+                        <div class="info-buttons" *ngIf="reviewPage">
+                            <button type="button" class="btn icon-btn" aria-label="Save Identification Details" *ngIf="editIdDetails" (click)="saveData('id_details')">
+								<i class="fa fa-save"></i>Save
+							</button>
+                            <button type="button" class="btn icon-btn" attr.aria-label="{{ editIdDetails ? 'Cancel' : 'Edit Identification Details' }}" (click)="toggleSectionEdit('id_details')">
+								<i class="fa" [ngClass]="editIdDetails ? 'fa-close' : 'fa-edit'"></i
+								>{{ editIdDetails ? "Cancel" : "Edit" }}
+							</button>
+                        </div>
+                    </div>
+                    <div class="details_form personal_form" formGroupName="identification">
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-identificationType">Identification Type
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+                                <select class="form-control" name="IDType" id="{{ applicantId }}-identificationType" attr.aria-describedby="{{ applicantId }}-identificationTypeError" formControlName="type" *ngIf="editIdDetails">
+									<option
+										value=""
+										disabled="true"
+										[selected]="!consumerForm.getRawValue().identification.type"
+									>
+										Select Identification Type
+									</option>
+									<option *ngFor="let id of idTypes" [attr.aria-label]="id.description" [value]="id.idtype">
+										{{ id.description }}
+									</option>
+								</select>
+                                <input type="text" class="form-control" placeholder="Select Identification Type" name="IDTypeLabel" id="{{ applicantId }}-identificationType" [value]="getIdentificationTypeText(consumerForm.getRawValue().identification.type) || ''" readonly *ngIf="!editIdDetails"
+                                />
+                                <div class="error-div" id="{{ applicantId }}-identificationTypeError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].identification['controls'].type.errors &&
+											(consumerForm['controls'].identification['controls'].type.dirty ||
+												consumerForm['controls'].identification['controls'].type.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].identification['controls'].type.errors?.required">
+                                            Please select identification type.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4">
+                                <label for="{{ applicantId }}-identificationNumber">Identification Number
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" (blur)="trim('identification', 'number')" class="form-control" placeholder="Enter Identification Number" name="IDNumber" id="{{ applicantId }}-identificationNumber" attr.aria-describedby="{{ applicantId }}-identificationNumberError"
+                                    formControlName="number" [readonly]="!editIdDetails" />
+                                <div class="error-div" id="{{ applicantId }}-identificationNumberError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].identification['controls'].number.errors &&
+											(consumerForm['controls'].identification['controls'].number.dirty ||
+												consumerForm['controls'].identification['controls'].number.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].identification['controls'].number.errors?.required">
+                                            Please enter your identification number.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].identification['controls'].number.errors?.pattern">
+                                            Please note text entered for identification number cannot contain special characters or spaces.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].identification['controls'].number.errors?.minlength &&
+												!consumerForm['controls'].identification['controls'].number.errors?.pattern
+											">
+                                            Please enter a valid identification number.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].identification['controls'].number.errors?.maxlength &&
+												!consumerForm['controls'].identification['controls'].number.errors?.pattern
+											">
+                                            Please note a maximum of {{ passportSelected ? "9" : "20" }} characters are allowed for identification number.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group col-xs-12 col-md-4" [hidden]="hideIssuingState">
+								<label for="{{ applicantId }}-issuingState"
+									>Issuing State
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+								<select
+									class="form-control"
+									name="IssueState"
+									id="{{ applicantId }}-issuingState"
+									attr.aria-describedby="{{ applicantId }}-issuingStateError"
+									formControlName="issuestate"
+									*ngIf="editIdDetails"
+								>
+									<option
+										value=""
+										disabled="true"
+										[selected]="!consumerForm.getRawValue().identification.issuestate"
+									>
+										Select Issuing State
+									</option>
+									<option
+										*ngFor="let item of allStates"
+										[attr.aria-label]="item.statename"
+										[ngValue]="item.statecode"
+									>
+										{{ item.statename }}
+									</option>
+								</select>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Select Issuing State"
+									name="IssueStateLabel"
+									id="{{ applicantId }}-issuingState"
+									[value]="getIssueStateText(consumerForm.getRawValue().identification.issuestate) || ''"
+									readonly
+									*ngIf="!editIdDetails"
+								/>
+								<div class="error-div" id="{{ applicantId }}-issuingStateError">
+									<ng-container
+										*ngIf="
+											consumerForm['controls'].identification['controls'].issuestate.errors &&
+											(consumerForm['controls'].identification['controls'].issuestate.dirty ||
+												consumerForm['controls'].identification['controls'].issuestate.touched)
+										"
+									>
+										<div
+											*ngIf="consumerForm['controls'].identification['controls'].issuestate.errors?.required"
+										>
+											Please select issuing state.
+										</div>
+									</ng-container>
+								</div>
+							</div> -->
+                            <div class="form-group col-xs-12 col-md-4" [hidden]="hideIssuingCountry">
+                                <label for="{{ applicantId }}-issuingCountry">Issuing Country
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+                                <!-- (change)="onIdIssueCountryChange()" -->
+                                <select class="form-control" name="IssueCountry" id="{{ applicantId }}-issuingCountry" attr.aria-describedby="{{ applicantId }}-issuingCountryError" formControlName="issuecountry" *ngIf="editIdDetails">
+									<option
+										value=""
+										disabled="true"
+										[selected]="!consumerForm.getRawValue().identification.issuecountry"
+									>
+										Select Issuing Country
+									</option>
+									<option
+										*ngFor="let country of allCountries"
+										[attr.aria-label]="country.description"
+										[value]="country.country_code"
+									>
+										{{ country.description }}
+									</option>
+								</select>
+                                <input type="text" class="form-control" placeholder="Select Issuing Country" name="IssueCountryLabel" id="{{ applicantId }}-issuingCountry" [value]="getCountryText(consumerForm.getRawValue().identification.issuecountry) || ''" readonly *ngIf="!editIdDetails"
+                                />
+                                <div class="error-div" id="{{ applicantId }}-issuingCountryError">
+                                    <ng-container *ngIf="
+											consumerForm['controls'].identification['controls'].issuecountry.errors &&
+											(consumerForm['controls'].identification['controls'].issuecountry.dirty ||
+												consumerForm['controls'].identification['controls'].issuecountry.touched)
+										">
+                                        <div *ngIf="
+												consumerForm['controls'].identification['controls'].issuecountry.errors?.required
+											">
+                                            Please select issuing country.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 datepicker col-md-4">
+                                <label class="display-block" for="{{ applicantId }}-IdIssueDate">ID Issue Date
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" [ngClass]="issueDateInvalid ? 'invalid' : ''" placeholder="MM/DD/YYYY" name="IDIssueDate" id="{{ applicantId }}-IdIssueDate"
+                                    attr.aria-label="ID Issue Date" attr.aria-describedby="{{ applicantId }}-IdIssueDateError" formControlName="issuedate" (blur)="onDateChanged(consumerForm.value['identification']['issuedate'], 'issueDate')" [readonly]="!editIdDetails"
+                                />
+
+                                <my-date-picker #issueDatePicker name="IDIssueDatePicker" id="IDIssueDatePicker" attr.aria-label="ID Issue Date Picker" formControlName="issuedatePicker" [options]="idIssueOptions" (inputFieldChanged)="dateValidation($event, 'issueDate')" [hidden]="!editIdDetails"
+                                    (dateChanged)="onDateChanged($event.formatted, 'issueDate')" ngDefaultControl>
+                                </my-date-picker>
+
+                                <div class="error-div" id="{{ applicantId }}-IdIssueDateError">
+                                    <ng-container *ngIf="
+											(issueDateInvalid ||
+												issueDateandDobValidity ||
+												consumerForm['controls'].identification['controls'].issuedate.errors) &&
+											(consumerForm['controls'].identification['controls'].issuedate.dirty ||
+												consumerForm['controls'].identification['controls'].issuedate.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].identification['controls'].issuedate.errors?.required">
+                                            Please enter the issue date for your identification.
+                                        </div>
+                                        <div *ngIf="
+												issueDateandDobValidity &&
+												!consumerForm['controls'].identification['controls'].issuedate.errors?.required
+											">
+                                            ID issue date should be greater than your date of birth.
+                                        </div>
+                                        <div *ngIf="
+												(issueDateInvalid &&
+													!issueDateandDobValidity &&
+													!consumerForm['controls'].identification['controls'].issuedate.errors?.required) ||
+												(consumerForm['controls'].identification['controls'].issuedate.errors?.invalid &&
+													!issueDateInvalid &&
+													!issueDateandDobValidity)
+											">
+                                            Please enter a valid issue date for your identification.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 datepicker col-md-4">
+                                <label class="display-block" for="{{ applicantId }}-IdExpirationDate">ID Expiration Date
+									<span *ngIf="!isMinor" class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span *ngIf="!isMinor" class="sr-only" title="required">Required</span>
+								</label>
+                                <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="datePattern" [textMask]="dateMask" class="form-control display-inline-block" [ngClass]="expiryDateInvalid ? 'invalid' : ''" placeholder="MM/DD/YYYY" name="IDExpireDate" id="{{ applicantId }}-IdExpirationDate"
+                                    attr.aria-describedby="{{ applicantId }}-IdExpirationDateError" formControlName="expirydate" (blur)="onDateChanged(consumerForm.value['identification']['expirydate'], 'expiryDate')" [readonly]="!editIdDetails" />
+                                <my-date-picker #expiryDatePicker name="IDExpireDate" id="IDExpireDate" attr.aria-label="ID Expiration Date Picker" formControlName="expirydatePicker" [options]="idExpiryOptions" (inputFieldChanged)="dateValidation($event, 'expiryDate')" [hidden]="!editIdDetails"
+                                    (dateChanged)="onDateChanged($event.formatted, 'expiryDate')" ngDefaultControl>
+                                </my-date-picker>
+
+                                <div class="error-div" id="{{ applicantId }}-IdExpirationDateError">
+                                    <ng-container *ngIf="
+											(expiryDateInvalid ||
+												consumerForm['controls'].identification['controls'].expirydate.errors) &&
+											(consumerForm['controls'].identification['controls'].expirydate.dirty ||
+												consumerForm['controls'].identification['controls'].expirydate.touched)
+										">
+                                        <div *ngIf="consumerForm['controls'].identification['controls'].expirydate.errors?.required">
+                                            Please enter the expiration date for your identification.
+                                        </div>
+                                        <div *ngIf="
+												expiryDateInvalid &&
+												!consumerForm['controls'].identification['controls'].expirydate.errors
+											">
+                                            Please enter a valid expiration date for your identification.
+                                        </div>
+                                        <div *ngIf="
+												consumerForm['controls'].identification['controls'].expirydate.errors?.invalid ||
+												consumerForm['controls'].identification['controls'].expirydate.errors?.incorrect
+											">
+                                            Please enter a valid expiration date for your identification.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-section" [ngClass]="editContactInfo ? '' : 'non-editable-view'">
+                    <div class="info-header-main">
+                        <div class="info-header">
+                            Current Physical Address
+                            <div class="separator_div"></div>
+                        </div>
+                        <div class="info-buttons" *ngIf="reviewPage">
+                            <button type="button" class="btn icon-btn" aria-label="Save Current Physical Address" *ngIf="editContactInfo" (click)="saveData('physical_address')">
+								<i class="fa fa-save"></i>Save
+							</button>
+                            <button type="button" class="btn icon-btn" attr.aria-label="{{ editContactInfo ? 'Cancel' : 'Edit Current Physical Address' }}" (click)="toggleSectionEdit('physical_address')">
+								<i class="fa" [ngClass]="editContactInfo ? 'fa-close' : 'fa-edit'"></i
+								>{{ editContactInfo ? "Cancel" : "Edit" }}
+							</button>
+                        </div>
+                    </div>
+                    <div class="details_form personal_form">
+                        <div class="row" *ngIf="!reviewPage && showPhyAddressButtons">
+                            <div class="form-group col-xs-12 col-md-12">
+                                <label class="display-inline-block" id="sameasprimary">Is your address the same as primary applicant?</label
+								>
+								<div
+									class="toggle-btn toggle-radio-button display-inline-block margin-side25"
+									role="radiogroup"
+									aria-labelledby="sameasprimary"
+								>
+									<!-- <button type="button" class="btn btn-gray" [ngClass]="samePhysicalAsPrimary ? 'btn-select': ''" attr.aria-describedby="sameasprimary" (click)="togglePhysicalAddress(true)" [disabled]="!editContactInfo">
+                                        Yes
+                                    </button>
+                                    <button type="button" class="btn btn-gray" [ngClass]="samePhysicalAsPrimary ? '': 'btn-select'" attr.aria-describedby="sameasprimary" (click)="togglePhysicalAddress(false)" [disabled]="!editContactInfo">
+                                        No
+                                    </button> -->
+									<fieldset [disabled]="!editContactInfo">
+										<label>
+											<input
+												type="radio"
+												class="toggle-option"
+												[value]="true"
+												formControlName="addresssameasprimary"
+												name="addresssameasprimary"
+												(click)="togglePhysicalAddress(true)"
+											/>
+											<span class="checked-option">Yes</span>
+										</label>
+                                <label>
+											<input
+												type="radio"
+												class="toggle-option"
+												[value]="false"
+												name="addresssameasprimary"
+												formControlName="addresssameasprimary"
+												(click)="togglePhysicalAddress(false)"
+											/>
+											<span class="checked-option">No</span>
+										</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="showPhysicalAddress">
+                        <!-- <app-address [addressFor]="addressFor" [editContactInfo]="editContactInfo" [showLengthOfStayInOLB]="showLengthOfStay" [showPreviousAddress]="showPreviousAddress" [addressType]="'physical'" (displayPreviousAddress)="showOrHidePreviousAddress($event)" #physicalAddress></app-address> -->
+                        <app-address [addressFor]="addressFor" [editContactInfo]="editContactInfo" [addressType]="'physical'" #physicalAddress></app-address>
+                    </div>
+                </div>
+            </div>
+            <div class="info-section" [ngClass]="editMailingAddress ? '' : 'non-editable-view'">
+                <!-- <div class="info-section" [ngClass]="editMailingAddress ? '': 'non-editable-view'" *ngIf="showMailingAddress"> -->
+                <div class="info-header-main">
+                    <div class="info-header">
+                        Mailing Address
+                        <div class="separator_div"></div>
+                    </div>
+                    <div class="info-buttons" *ngIf="reviewPage">
+                        <button type="button" class="btn icon-btn" aria-label="Save Mailing Address" *ngIf="editMailingAddress" (click)="saveData('mailing_address')">
+								<i class="fa fa-save"></i>Save
+							</button>
+                        <button type="button" class="btn icon-btn" attr.aria-label="{{ editMailingAddress ? 'Cancel' : 'Edit Mailing Address' }}" (click)="toggleSectionEdit('mailing_address')">
+								<i class="fa" [ngClass]="editMailingAddress ? 'fa-close' : 'fa-edit'"></i
+								>{{ editMailingAddress ? "Cancel" : "Edit" }}
+							</button>
+                    </div>
+                </div>
+                <div class="details_form personal_form">
+                    <div class="row" *ngIf="!reviewPage">
+                        <div class="form-group col-xs-12 col-md-12">
+                            <label class="display-inline-block" id="mailingSameAsCurrent">Is your mailing address the same as the current address?</label
+								>
+								<div
+									class="toggle-btn toggle-radio-button display-inline-block margin-side25"
+									role="radiogroup"
+									aria-labelledby="mailingSameAsCurrent"
+								>
+									<!-- <button type="button" class="btn btn-gray" [ngClass]="sameMailingAddress ? 'btn-select': ''" attr.aria-label="Is your mailing address the same as the current address yes" (click)="toggleMailingAddress(true)" [disabled]="!editMailingAddress">
+                                        Yes
+                                    </button>
+                                    <button type="button" class="btn btn-gray" [ngClass]="sameMailingAddress ? '': 'btn-select'" attr.aria-label="Is your mailing address the same as the current address no" (click)="toggleMailingAddress(false)" [disabled]="!editMailingAddress">
+                                        No
+                                    </button> -->
+									<fieldset [disabled]="!editMailingAddress">
+										<label>
+											<input
+												type="radio"
+												class="toggle-option"
+												[value]="true"
+												name="mailingsameasphysical"
+												formControlName="mailingsameasphysical"
+												(click)="toggleMailingAddress(true)"
+											/>
+											<span class="checked-option">Yes</span>
+										</label>
+                            <label>
+											<input
+												type="radio"
+												class="toggle-option"
+												[value]="false"
+												name="mailingsameasphysical"
+												formControlName="mailingsameasphysical"
+												(click)="toggleMailingAddress(false)"
+											/>
+											<span class="checked-option">No</span>
+										</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="reviewPage || !sameMailingAddress">
+                    <app-address [addressFor]="addressFor" [editContactInfo]="editMailingAddress" [addressType]="'mailing'" #mailingAddress></app-address>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="info-section" [ngClass]="editContactInfo ? '': 'non-editable-view'" *ngIf="showPreviousAddress">
+                    <div class="info-header-main">
+                        <div class="info-header">Previous Address
+                            <div class="separator_div"></div>
+                        </div>
+                    </div>
+                    <div class="details_form personal_form">
+                        <div id="switchMailingAddress" *ngIf="reviewPage || !sameMailingAddress || showPreviousAddress">
+                            <app-address [addressFor]="addressFor" [addressType]="previous" [editContactInfo]="editContactInfo" [showAdditionalAddressDetials]="showPreviousAddress" [addressFor]="addressFor" #previousAddress></app-address>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <div class="info-section" *ngIf="!isMinor" [ngClass]="editEmpDetails ? '' : 'non-editable-view'">
+					<div class="info-header-main">
+						<div class="info-header">
+							Employment Details
+							<div class="separator_div"></div>
+						</div>
+						<div class="info-buttons" *ngIf="reviewPage">
+							<button
+								type="button"
+								class="btn icon-btn"
+								aria-label="Save Employment Details"
+								*ngIf="editEmpDetails"
+								(click)="saveData('employment_details')"
+							>
+								<i class="fa fa-save"></i>Save
+							</button>
+							<button
+								type="button"
+								class="btn icon-btn"
+								attr.aria-label="{{ editEmpDetails ? 'Cancel' : 'Edit Employment Details' }}"
+								(click)="toggleSectionEdit('employment_details')"
+							>
+								<i class="fa" [ngClass]="editEmpDetails ? 'fa-close' : 'fa-edit'"></i
+								>{{ editEmpDetails ? "Cancel" : "Edit" }}
+							</button>
+						</div>
+					</div>
+					<app-employment
+						[applicantType]="applicantType"
+						[pid]="pid"
+						[isSoleProprietorship]="isSoleProprietorship"
+						[editEmpDetails]="editEmpDetails"
+						(changeInEmploymentStatus)="changeInEmploymentStatus($event)"
+						(changeInWorkPhoneNumber)="updatePreferredContact()"
+						(removeWorkPhoneNumber)="removeWorkPhoneNumber($event)"
+					></app-employment>
+				</div> -->
+        <div class="info-section" [ngClass]="editRelationshipDetails ? '' : 'non-editable-view'" *ngIf="accountType === 'businessDeposit'" #relationship>
+            <div class="info-header-main">
+                <div class="info-header">
+                    Relationship with Business / Account
+                    <div class="separator_div"></div>
+                </div>
+                <div class="info-buttons" *ngIf="reviewPage">
+                    <button type="button" class="btn icon-btn" attr.aria-label="Save Relationship Details" *ngIf="editRelationshipDetails" (click)="saveData('relationship_details')">
+								<i class="fa fa-save"></i>Save
+							</button>
+                    <button type="button" class="btn icon-btn" attr.aria-label="{{ editRelationshipDetails ? 'Cancel' : 'Edit Relationship Details' }}" (click)="toggleSectionEdit('relationship_details')">
+								<i class="fa" [ngClass]="editRelationshipDetails ? 'fa-close' : 'fa-edit'"></i
+								>{{ editRelationshipDetails ? "Cancel" : "Edit" }}
+							</button>
+                </div>
+                <!-- <div>
+							<span class="sub-label"
+								>(Applicant will only be authorized signer and significant controller when the employment
+								status is 'Employed'{{ isSoleProprietorship ? " or 'Self Employed'" : "" }})</span
+							>
+						</div> -->
+            </div>
+            <div formGroupName="relationship">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label class="display-block" for="{{ applicantId }}-authorized-signer" id="{{ applicantId }}-authorized-signerRadio">
+									Would this party be an authorized signer on the account(s)?
+									<span class="mandatory-field" *ngIf="pid === 1"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                        <input type="text" class="form-control text-capitalize" name="reviewAuthorizedSigner" id="{{ applicantId }}-authorized-signer" attr.aria-describedby="{{ applicantId }}-authorizedSignerError" [value]="consumerForm.getRawValue().relationship.isauthorized ? 'Yes' : 'No'"
+                            readonly *ngIf="!editRelationshipDetails" />
+                        <div role="radiogroup" attr.aria-labelledby="{{ applicantId }}-authorized-signerRadio" class="toggle-btn display-block" [ngClass]="[pid === 1 || isDisabledForEmploymentStatus ? 'disable-radio' : '']" [hidden]="!editRelationshipDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="isauthorized"
+											[attr.disabled]="pid === 1 || isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-authorizedSignerError"
+											[value]="true"
+											formControlName="isauthorized"
+											(click)="toggleAuthorizedSigner(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="isauthorized"
+											[attr.disabled]="pid === 1 || isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-authorizedSignerError"
+											[value]="false"
+											formControlName="isauthorized"
+											(click)="toggleAuthorizedSigner(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-authorizedSignerError">
+                            <ng-container *ngIf="authorizedSignerError">
+                                <div>Authorized Signer cannot be more than 6.</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label class="display-block" for="{{ applicantId }}-beneficial-owner" id="{{ applicantId }}-beneficial-ownerRadio">
+									Is this party a shareholder/owner in the business?
+								</label>
+                        <input type="text" class="form-control text-capitalize" id="{{ applicantId }}-beneficial-owner" name="reviewBeneficialOwner" attr.aria-describedby="{{ applicantId }}-beneficialOwnerError" [value]="consumerForm.getRawValue().relationship.isbeneficialowner ? 'Yes' : 'No'"
+                            readonly *ngIf="!editRelationshipDetails" />
+                        <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-beneficial-ownerRadio" [hidden]="!editRelationshipDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="isbeneficialowner"
+											attr.aria-describedby="{{ applicantId }}-beneficialOwnerError"
+											[value]="true"
+											formControlName="isbeneficialowner"
+											(click)="toggleBeneficialOwner(true)"
+										/>
+										<span class="checked-option" attr.aria-label="yes">Yes</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											name="isbeneficialowner"
+											attr.aria-describedby="{{ applicantId }}-beneficialOwnerError"
+											[value]="false"
+											formControlName="isbeneficialowner"
+											(click)="toggleBeneficialOwner(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-beneficialOwnerError">
+                            <div *ngIf="beneficialOwnerError">
+                                Beneficial Owner cannot be more than {{ modalBoxService.ownerMax }}.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <!-- <label class="custom-checkbox">
+                                    <input type="checkbox" name="significant-controller" attr.aria-label="click to select individual as significant controller" 
+                                    [checked]="" (change)="changeSignificantController()" formControlName="issignificantcontroller">
+                                    Significant Controller
+                                    <span class="checkmark"></span>
+                                </label> -->
+                        <label class="display-block" for="First-significant-controller" id="Firt-significant-controllerRadio">
+									Is this party a board of director in the business?
+									<!-- <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                    <span class="sr-only" title="required">Required</span> -->
+								</label>
+                        <input type="text" class="form-control text-capitalize" id="First-significant-controller" name="reviewSignificantController" attr.aria-describedby="{{ applicantId }}-significantControllerError" [value]="consumerForm.getRawValue().relationship.issignificantcontroller ? 'Yes' : 'No'"
+                            readonly *ngIf="!editRelationshipDetails" />
+                        <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="Firt-significant-controllerRadio" [ngClass]="[isDisabledForEmploymentStatus ? 'disable-radio' : '']" [hidden]="!editRelationshipDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-significantControllerError"
+											[value]="true"
+											name="issignificantcontroller"
+											formControlName="issignificantcontroller"
+											(click)="toggleSignificantController(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-significantControllerError"
+											[value]="false"
+											name="issignificantcontroller"
+											formControlName="issignificantcontroller"
+											(click)="toggleSignificantController(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-significantControllerError">
+                            <ng-container *ngIf="significantControllerError || significantRequiredError">
+                                <div *ngIf="significantRequiredError">Atleast 1 Significant Controller is required.</div>
+                                <div *ngIf="significantControllerError">
+                                    Significant Controller cannot be more than 1.
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <!-- <label class="custom-checkbox">
+                                    <input type="checkbox" name="significant-controller" attr.aria-label="click to select individual as significant controller" 
+                                    [checked]="" (change)="changeSignificantController()" formControlName="issignificantcontroller">
+                                    Significant Controller
+                                    <span class="checkmark"></span>
+                                </label> -->
+                        <label class="display-block" for="{{ applicantId }}-beneficial-ownerBuisness" id="{{ applicantId }}-beneficial-ownerBuisnessRadio">
+									Is this party a Ultimate Beneficiary Owner in the business?
+									<!-- <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                    <span class="sr-only" title="required">Required</span> -->
+								</label>
+                        <input type="text" class="form-control text-capitalize" id="{{ applicantId }}-beneficial-ownerBuisness" name="reviewSignificantController" attr.aria-describedby="{{ applicantId }}-significantControllerError" [value]="consumerForm.getRawValue().relationship.isbeneficialcontroller ? 'Yes' : 'No'"
+                            readonly *ngIf="!editRelationshipDetails" />
+                        <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-beneficial-ownerBuisnessRadio" [ngClass]="[isDisabledForEmploymentStatus ? 'disable-radio' : '']" [hidden]="!editRelationshipDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-beneficialControllerError"
+											[value]="true"
+											name="isbeneficialcontroller"
+											formControlName="isbeneficialController"
+											(click)="toggleOwnerController(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-significantControllerError"
+											[value]="false"
+											name="isbeneficialcontroller"
+											formControlName="isbeneficialcontroller"
+											(click)="toggleOwnerController(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-significantControllerError">
+                            <ng-container *ngIf="significantControllerError || significantRequiredError">
+                                <div *ngIf="significantRequiredError">Atleast 1 Significant Controller is required.</div>
+                                <div *ngIf="significantControllerError">
+                                    Significant Controller cannot be more than 1.
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <!-- <label class="custom-checkbox">
+                                    <input type="checkbox" name="significant-controller" attr.aria-label="click to select individual as significant controller" 
+                                    [checked]="" (change)="changeSignificantController()" formControlName="issignificantcontroller">
+                                    Significant Controller
+                                    <span class="checkmark"></span>
+                                </label> -->
+                        <label class="display-block" for="{{ applicantId }}-power-controller" id="{{ applicantId }}-power-controllerRadio">
+									Is this party a Power of Attorney Holder?
+									<!-- <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                    <span class="sr-only" title="required">Required</span> -->
+								</label>
+                        <input type="text" class="form-control text-capitalize" id="{{ applicantId }}-power-controller" name="powerController" attr.aria-describedby="{{ applicantId }}-powerControllerError" [value]="consumerForm.getRawValue().relationship.ispowercontroller ? 'Yes' : 'No'"
+                            readonly *ngIf="!editRelationshipDetails" />
+                        <div class="toggle-btn display-block" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-power-controllerRadio" [ngClass]="[isDisabledForEmploymentStatus ? 'disable-radio' : '']" [hidden]="!editRelationshipDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-powerControllerError"
+											[value]="true"
+											name="ispowercontroller"
+											formControlName="ispowercontroller"
+											(click)="togglePowerController(true)"
+										/>
+										<span class="checked-option">Yes</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											[attr.disabled]="isDisabledForEmploymentStatus || null"
+											attr.aria-describedby="{{ applicantId }}-significantControllerError"
+											[value]="false"
+											name="ispowercontroller"
+											formControlName="ispowercontroller"
+											(click)="togglePowerController(false)"
+										/>
+										<span class="checked-option">No</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-powerControllerError">
+                            <ng-container *ngIf="significantControllerError || significantRequiredError">
+                                <div *ngIf="significantRequiredError">Atleast 1 Significant Controller is required.</div>
+                                <div *ngIf="significantControllerError">Power of Autornity cannot be more than 1.</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                        <button type="button" class="btn btn-next" (click)="AddRelationShipData()" aria-label="Add">
+									ADD
+								</button>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 mt-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Nationality/Citizenship</th>
+                                    <th>Owner/Shareholder</th>
+                                    <th>Board of Director</th>
+                                    <th>UBO</th>
+                                    <th>Athorized Signatories</th>
+                                    <th>PoA</th>
+                                    <th>Key Contact Person</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let rowdata of paramterArray">
+                                    <td>{{ rowdata.fullName }}</td>
+                                    <td>{{ rowdata.nationalityNumber }}</td>
+                                    <td>{{ rowdata.owner }}</td>
+                                    <td>{{ rowdata.boardofdirector }}</td>
+                                    <td>{{ rowdata.ubo }}</td>
+                                    <td>{{ rowdata.authroizedSignatory }}</td>
+                                    <td>{{ rowdata.PoA }}</td>
+                                    <td>{{ rowdata.keycitizen }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="error-div" id="{{ applicantId }}-relationshipError">
+                    <div *ngIf="relationshipError">Please select your relationship with business/account.</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section display-none" [ngClass]="editAdditionalDetails ? '' : 'non-editable-view'" *ngIf="isPrimaryApplicant || pid === 1">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Additional Details
+                    <div class="separator_div"></div>
+                </div>
+                <div class="info-buttons" *ngIf="reviewPage">
+                    <button type="button" class="btn icon-btn" aria-label="Save Additional Details" *ngIf="editAdditionalDetails" (click)="saveData('additional_details')">
+								<i class="fa fa-save"></i>Save
+							</button>
+                    <button type="button" class="btn icon-btn" attr.aria-label="{{ editAdditionalDetails ? 'Cancel' : 'Edit Additional Details' }}" (click)="toggleSectionEdit('additional_details')">
+								<i class="fa" [ngClass]="editAdditionalDetails ? 'fa-close' : 'fa-edit'"></i
+								>{{ editAdditionalDetails ? "Cancel" : "Edit" }}
+							</button>
+                </div>
+            </div>
+            <div class="details_form personal_form">
+                <div class="row">
+                    <!-- <div class="form-group col-xs-12 col-md-4" *ngIf="isPrimaryApplicant || pid === 1">
+                                <label for="{{applicantId}}-learnAboutUs" id="{{applicantId}}-learnAboutUsLabel">Where did you learn about us?</label>
+                                <select class="form-control" name="learnAboutUs" id="{{applicantId}}-learnAboutUs" formControlName="learnaboutus" (change)="changeLearnAboutUs()" [hidden]="!editAdditionalDetails">
+                                    <option value="0" [selected]="!consumerForm.getRawValue().learnaboutus">Select option</option>
+                                    <option *ngFor="let item of learnAboutUs" [attr.aria-label]="item.value" [ngValue]="item.id">{{item.value}}</option>
+                                </select>
+                                <input type="text" class="form-control" attr.aria-labelledby="{{applicantId}}-learnAboutUsLabel" [placeholder]="(editAdditionalDetails || consumerForm['controls'].learnaboutus.value) ? 'Select option' : '---'" name="learnAboutUsLabel" [value]="consumerForm['controls'].learnaboutus.value ? getLearnAboutUsText(consumerForm['controls'].learnaboutus.value) : ''"
+                                    *ngIf="(!editAdditionalDetails && reviewPage)" readonly/>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-4" *ngIf="showReferredEmployee">
+                                <label for="{{applicantId}}-referredEmployee">Employee Name</label>
+                                <input type="text" autocomplete="nope" (blur)="trim('referredemployeename')" class="form-control" placeholder="Enter Employee Name" name="referredEmployeeName" id="{{applicantId}}-referredEmployee" attr.aria-describedby="{{applicantId}}-referredEmployeeError" formControlName="referredemployeename"
+                                    [readonly]="!editAdditionalDetails" />
+                                <div class="error-div" id="{{applicantId}}-referredEmployeeError">
+                                    <ng-container *ngIf="consumerForm['controls'].referredemployeename.errors && (consumerForm['controls'].referredemployeename.dirty || consumerForm['controls'].referredemployeename.touched)">
+                                        <div *ngIf="consumerForm['controls'].referredemployeename.errors?.required">
+                                            Please provide employee name.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].referredemployeename.errors?.pattern">
+                                            Please note text entered for employee name cannot contain special characters or numbers.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].referredemployeename.errors?.minlength && !consumerForm['controls'].referredemployeename.errors?.pattern">
+                                            Please note a minimum of 2 characters are required for employee name.
+                                        </div>
+                                        <div *ngIf="consumerForm['controls'].referredemployeename.errors?.maxlength && !consumerForm['controls'].referredemployeename.errors?.pattern">
+                                            Please note a maximum of 60 characters (including spaces) are allowed for employee name.
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div> -->
+                    <div class="form-group col-xs-12 col-md-4" [ngClass]="editAdditionalDetails ? '' : 'non-editable-view'">
+                        <label class="display-block" for="{{ applicantId }}-prefferedContact" id="{{ applicantId }}-prefferedContactLabel">Preferred Contact Method
+									<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+									<span class="sr-only" title="required">Required</span>
+								</label>
+                        <input type="text" class="form-control text-capitalize" attr.aria-labelledby="{{ applicantId }}-prefferedContactLabel" id="{{ applicantId }}-prefferedcontact" name="prefferedcontact" [value]="consumerForm.getRawValue().preferredcontact" readonly *ngIf="!editAdditionalDetails"
+                        />
+                        <!-- <input type="text" class="form-control" name="phonenumbertype" id="{{applicantId}}-phonenumbertype" attr.aria-describedby="{{applicantId}}-phoneTypeError" [value]="consumerForm.getRawValue().phonetype" readonly *ngIf="!editPersonalDetails" /> -->
+
+                        <div class="toggle-btn display-block" [ngClass]="showWork ? 'all-contact-true' : ''" role="radiogroup" attr.aria-labelledby="{{ applicantId }}-prefferedContactLabel" [hidden]="!editAdditionalDetails">
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											attr.aria-describedby="{{ applicantId }}-preferredContactError"
+											value="email"
+											name="preferredcontact"
+											formControlName="preferredcontact"
+											(click)="togglePreferredContact('email')"
+										/>
+										<span class="checked-option preferred-email">Email</span>
+									</label>
+                            <label>
+										<input
+											type="radio"
+											class="toggle-option"
+											attr.aria-describedby="{{ applicantId }}-preferredContactError"
+											value="mobile"
+											name="preferredcontact"
+											formControlName="preferredcontact"
+											(click)="togglePreferredContact('mobile')"
+										/>
+										<span class="checked-option">Mobile</span>
+									</label>
+                            <label *ngIf="showHome">
+										<input
+											type="radio"
+											class="toggle-option"
+											attr.aria-describedby="{{ applicantId }}-preferredContactError"
+											value="home"
+											name="preferredcontact"
+											formControlName="preferredcontact"
+											(click)="togglePreferredContact('home')"
+										/>
+										<span class="checked-option">Home</span>
+									</label>
+                            <label *ngIf="showWork">
+										<input
+											type="radio"
+											class="toggle-option"
+											attr.aria-describedby="{{ applicantId }}-preferredContactError"
+											value="work"
+											name="preferredcontact"
+											formControlName="preferredcontact"
+											(click)="togglePreferredContact('work')"
+										/>
+										<span class="checked-option">Work</span>
+									</label>
+                        </div>
+                        <div class="error-div" id="{{ applicantId }}-preferredContactError">
+                            <ng-container *ngIf="
+											consumerForm['controls'].preferredcontact.errors &&
+											(consumerForm['controls'].preferredcontact.dirty ||
+												consumerForm['controls'].preferredcontact.touched)
+										">
+                                <div *ngIf="consumerForm['controls'].preferredcontact.errors?.required">
+                                    Please provide preferred contact method.
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="{{ applicantId }}-promoCode">Promo Code</label>
+                        <input type="text" autocomplete="nope" (blur)="trim('promocode')" class="form-control" [placeholder]="
+										editAdditionalDetails || consumerForm.getRawValue().promocode ? 'Enter Promo Code' : '---'
+									" name="promoCode" id="{{ applicantId }}-promoCode" formControlName="promocode" [readonly]="!editAdditionalDetails" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section" *ngIf="accountType === 'businessDeposit'">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Dedupe Check
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+            <div class="details_form personal_form">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <button class="btn btn-next ml-0" (click)="onDedupeClick()">Dedupe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+</div>
+</div>
+</form>
+<app-modal-box *ngIf="showConfirmationModal" [showConfirmationModal]="showConfirmationModal" (deleteForm)="removeForm($event)"></app-modal-box>
+</div>

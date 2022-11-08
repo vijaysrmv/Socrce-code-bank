@@ -1,0 +1,1357 @@
+<!------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        select-product.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        06/09/2019
+Description            :        Template for select product page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading" id="main-header">Select your account(s)</h1>
+    </div>
+</div>
+<div class="select-product">
+    <div class="container position-relative">
+        <div class="select-product-header d-flex justify-content-between">
+            <p class="sub-title-accounts">You may choose to open multiple accounts with this application.</p>
+            <p *ngIf="!(showDateOfBirthModal)">
+                <button class="btn btn-select change-dob" (click)="showDateOfBirthModal = true;">
+                    Edit Date of Birth
+                </button>
+            </p>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <div class="accordion-product">
+        <div class="selected-product-row">
+            <div class="product-header-heading">
+                <div class="container">
+                    <h2 class="heading">Selected Account ({{selectedProductList.length}})</h2>
+                </div>
+                <div class="select-product-msg text-center" *ngIf="selectedProductList.length === 0">
+                    Please select all account products that you would like to open.
+                </div>
+            </div>
+            <div class="container" id="selectedProduct" *ngIf="selectedProductList.length > 0">
+                <div class="row product-display-row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let selProduct of selectedProductList">
+                        <div class="product-box-inner">
+                            <div class="product-box-header d-flex justify-content-center align-items-center">
+                                <h3 class="no-margin">{{getProduct(selProduct.productid)?.productname}}</h3>
+                                <div class="checked-product-mark">
+                                    <span class="fa fa-check"></span>
+                                </div>
+                            </div>
+                            <div class="product-footer">
+                                <button type="button" class="btn btn-select remove" attr.aria-label="Remove {{getProduct(selProduct.productid)?.productname}}" (click)="selectProduct(selProduct.productid)">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 exceeds-amount-warning" *ngIf="showMaximumAmountError">
+                        <p>
+                            The total minimum funding amount for your selected accounts exceeds one time transaction limit.
+                            <br> Please adjust your account selections.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-product-container">
+            <accordion [@slideDownUpAnimation]>
+                <accordion-group panelClass="product-group" [isOpen]="true">
+                    <div (click)="checkingProduct=!checkingProduct" accordion-heading>
+                        <div class="container">
+                            CONSUMER CHECKING
+                            <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{checkingProduct ? 'open' : 'close'}} checking product">
+                                <i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row product-display-row">
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-DD-100'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}} </h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <span class="sr-only">Feature list of this product</span>
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)">
+                                                <i class="sr-only">click to close {{ product.highlighter }} overlay</i>
+                                            </button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="toggleOverlay(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                    <div class="product-overlay" [@slideProductPopupAnimation] *ngIf="product.showoverlay">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title font-weight-bold">Please Note</div>
+                                            </li>
+                                        </ul>
+                                        <div class="row">
+                                            <div class="form-group col-xs-12 col-md-12 no_padding">
+                                                <p class="both-para">You must also apply for
+                                                    <span class="display-block"><strong>Freedom Rewards
+                                                            Savings</strong></span>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-md-12 no_padding">
+                                                <button class="btn btn-select select-both-btn" (click)="selectProduct(product.productid);product.showoverlay = false">Select
+                                                    Both
+                                                    Products</button>
+                                            </div>
+                                            <button class="btn icon-btn">
+                                                <span class="fa fa-times-circle"
+                                                    (click)="product.showoverlay = false"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-DD-130'">
+                                <!-- <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="ageRange === 'adult'"> -->
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-DD-101'">
+                                <!-- <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="ageRange === 'teen'"> -->
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Simple, straightforward checking with all the essentials</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card
+                                                </div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-DD-160'">
+                                <!-- <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="ageRange === 'teen'"> -->
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Surcharge Free ATMs available</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="font-italic">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-DD-200'">
+                                <!-- <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="ageRange === 'teen'"> -->
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Surcharge Free ATMs available</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="font-italic">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="see-more-icon more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group>
+                    <div (click)="savingProduct=!savingProduct" accordion-heading>
+                        <div class="container">
+                            CONSUMER SAVINGS
+                            <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{savingProduct ? 'open' : 'close'}} savings product">
+                                <i [ngClass]="savingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row product-display-row d-flex">
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-SV-100'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free withdrawals/covered transfers per monthly cycle</div>
+                                                <div class="product-feature-value">Up to 6</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="toggleOverlay(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                    <div class="product-overlay" [@slideProductPopupAnimation] *ngIf="product.showoverlay">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title font-weight-bold">Please Note</div>
+                                            </li>
+                                        </ul>
+                                        <div class="row">
+                                            <div class="form-group col-xs-12 col-md-12 no_padding">
+                                                <p class="both-para">You must also apply for
+                                                    <span class="display-block"><strong>Freedom Rewards
+                                                            Checking</strong></span>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-md-12 no_padding">
+                                                <button class="btn btn-select select-both-btn" (click)="selectProduct(product.productid);product.showoverlay = false">Select
+                                                    Both
+                                                    Products</button>
+                                            </div>
+                                            <button class="btn icon-btn">
+                                                <span class="fa fa-times-circle"
+                                                    (click)="product.showoverlay = false"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-SV-102'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free withdrawals/covered transfers per monthly cycle</div>
+                                                <div class="product-feature-value">Up to 6</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="see-more-icon more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-SV-103'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free withdrawals/covered transfers per monthly cycle</div>
+                                                <div class="product-feature-value">Up to 6</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="see-more-icon more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-SV-104'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free withdrawals/covered transfers per monthly cycle</div>
+                                                <div class="product-feature-value">Up to 6</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="see-more-icon more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'62-SV-105'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum balance to earn rewards</div>
+                                                <div class="product-feature-value">None</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free withdrawals/covered transfers per monthly cycle</div>
+                                                <div class="product-feature-value">Up to 6</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}" (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="see-more-icon more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'HSA'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize" for="HSAplan">Plan Type</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="HSAplan" id="HSAplan" [(ngModel)]="HSAplan">
+                                                        <option [ngValue]="null" [selected]="!HSAplan" disabled>Select plan</option>
+                                                        <option [value]="item.plan_type" [attr.aria-label]="item.plan_type"
+                                                            *ngFor="let item of planList">{{item.plan_type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize" for="HSAcontributiontype">Contribution Type</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="HSAcontributiontype" [(ngModel)]="HSAcontributiontype" id="HSAcontributiontype">
+                                                        <option [ngValue]="null" [selected]="!HSAcontributiontype" disabled>Select type</option>
+                                                        <option [value]="item.contribution_type" [attr.aria-label]="item.description"
+                                                            *ngFor="let item of contributionTypes">{{item.contribution_type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" [disabled]="checkProductDisability('HSA')" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}"
+                                            (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4" *ngFor="let product of activeProducts | filterProducts:'IRA'">
+                                <div class="product-box-inner" [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature" [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title" *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button" attr.aria-label="click to learn more about {{product.displayname}} ">Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize" for="IRAplan">Select Plan</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="IRAplan" id="IRAplan" [(ngModel)]="IRAplan">
+                                                        <option [ngValue]="null" [selected]="!IRAplan" disabled>Select plan</option>
+                                                        <option [value]="item.plan_type" [attr.aria-label]="item.plan_type"
+                                                            *ngFor="let item of planList">{{item.plan_type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize" for="IRAcontributiontype">Contribution Type</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="IRAcontributiontype" id="IRAcontributiontype" [(ngModel)]="IRAcontributiontype">
+                                                        <option [ngValue]="null" [selected]="!IRAcontributiontype" disabled>Select type</option>
+                                                        <option [value]="item.contribution_type"  [attr.aria-label]="item.contribution_type"
+                                                            *ngFor="let item of contributionTypes">{{item.contribution_type}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close" (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled" [ngClass]="selectedProduct(product.productid) ? 'remove' : ''" [disabled]="checkProductDisability('IRA')" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}"
+                                            (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group>
+                    <div (click)="certificateDepositProduct=!certificateDepositProduct" accordion-heading>
+                        <div class="container">
+                            CERTIFICATE OF DEPOSITS
+                            <button type="button" class="dropdown-circle float-right pull-right" attr.aria-label="Click to {{certificateDepositProduct ? 'open' : 'close'}}  CERTIFICATE OF DEPOSITS product">
+                                <i [ngClass]="certificateDepositProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <!-- <div class="row">
+                            <div class="col-md-12 offer-info">
+                                <p>All Newgen Certificate of Deposits dividends are paid out monthly and by check</p>
+                            </div>
+                        </div> -->
+                        <div [formGroup]="CODProductGroup" class="row product-display-row">
+                            <div formArrayName="CODProductFormArray" *ngFor="let product of CODProductGroup.get('CODProductFormArray')['controls'];let i = index;" class="col-xs-12 col-sm-12 col-md-4">
+                                <div [formGroupName]="i">
+                                    <div class="product-box-inner" [ngClass]="selectedProduct(product.controls.productid.value) ? 'selected-product' : ''">
+                                        <div class="product-box-header d-flex justify-content-center align-items-center">
+                                            <h3 class="no-margin">{{product.controls.description.value}}</h3>
+                                            <div class="checked-product-mark">
+                                                <span class="fa fa-check"></span>
+                                            </div>
+                                        </div>
+                                        <div class="product-feature saving-product-feature" [ngClass]="visibleFeature(product.controls.productid.value) ? 'show-feature': ''">
+                                            <ul class="feature-list list-unstyled">
+                                                <li class="d-flex justify-content-between">
+                                                    <div class="product-feature-title">Minimum deposit amount</div>
+                                                    <div class="product-feature-value">
+                                                        {{product.controls.minimumdeposit.value | currency}}</div>
+                                                </li>
+                                                <li class="d-flex justify-content-between">
+                                                    <div class="product-feature-title">Earns Interest</div>
+                                                    <div class="product-feature-value">
+                                                        <button class="btn view-rates" attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                            Rates</button>
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    <div class="product-feature-title min-width-128">
+                                                        <span id="dividendAmountField-{{i}}">Amount</span>
+                                                    </div>
+                                                    <!-- <div class="view-rates-box" *ngIf="product.controls.viewcdinterest.value">
+                                                        <div class="view-rates-table">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Amount</th>
+                                                                        <th>Interest Rate</th>
+                                                                        <th>
+                                                                            <span attr.aria-label="A P Y *" class="sr-only">A P Y *</span>
+                                                                            <span aria-hidden="true">APY</span><sup aria-hidden="true">*</sup>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let interest of interestRates[product.controls.productid.value]">
+                                                                        <td>{{interest.minamount | currency:'USD' : 'symbol' : '1.0'}}{{interest.maxamount ? (' - ' + (interest.maxamount | currency:'USD' : 'symbol' : '1.0')) : ' and above'}}</td>
+                                                                        <td>{{interest.interestrate ? interest.interestrate + ' % ' : '-'}}</td>
+                                                                        <td>{{interest.apy ? interest.apy + ' % ' : '-'}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <button type="button" class="btn icon-btn no-margin close-table" aria-label="Click to close interest rates" (click)="product.controls.viewcdinterest.value = false">
+                                                                    <span class="fa fa-times-circle"></span>
+                                                                </button>
+                                                        </div>
+                                                        <p class="apy-text">*Annual Percentage Yield</p>
+                                                    </div> -->
+                                                    <div class="product-feature-value">
+                                                        <div class="dividend-amount input-prefix dollar-prefix-review position-relative">
+                                                            <span class="input-prefix-box">$</span>
+                                                            <input numbersOnly [allowDecimal]="true" type="number" autocomplete="nope" class="form-control" name="dividendAmount-{{i}}" id="dividendamount-{{i}}" attr.aria-labelledby="dividendAmountField-{{i}}" attr.aria-describedby="dividendAmountError-{{i}}" formatAmount
+                                                                [formControl]="CODProductGroup.get('CODProductFormArray')['controls'][i]['controls'].dividendamount" (input)="onChangeOfCdAmount($event, i, product.controls.productid.value, product.controls.dividendamount.value)"
+                                                            />
+                                                            <span customMask [maskType]="'amount'" [maskData]="product.controls.dividendamount.value"></span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="error-div text-right" id="dividendAmountError-{{i}}">
+                                                    <ng-container *ngIf="CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors && (CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.dirty || CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.touched)">
+                                                        <span *ngIf="CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors?.min">Entered
+                                                            amount should be equal to or more than
+                                                            {{product.controls.minimumdeposit.value | currency}}</span>
+                                                        <span *ngIf="CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors?.max">Entered
+                                                            amount should be less than
+                                                            {{maxAmount | currency}}</span>
+                                                        <span *ngIf="!CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors?.min && !CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors?.max && CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].dividendamount.errors?.pattern">Please
+                                                            enter a valid amount</span>
+                                                    </ng-container>
+                                                </li>
+                                                <!-- <li class="d-flex justify-content-between">
+                                                    <div class="product-feature-title">Annual Percentage Yield *</div>
+                                                    <div class="product-feature-value">
+                                                        <span attr.aria-label="{{product.controls.apy.value ? product.controls.apy.value + ' %' : 'Enter amount to view interest rate'}}">{{product.controls.apy.value ? (product.controls.apy.value + '%') : '-'}}</span>
+                                                    </div>
+                                                </li> -->
+                                                <!-- <li class="d-flex justify-content-between align-items-center">
+                                                    <div class="product-feature-title text-capitalize" id="depositTermField-{{i}}">Deposit Term <span class="sub-label">({{product.controls.termunit.value}})</span></div>
+                                                    <div class="product-feature-value">
+                                                        <input numbersOnly autocomplete="nope" type="number" class="form-control deposit-term" placeholder="Enter Term" name="depositTerm-{{i}}" id="depositterm-{{i}}" attr.aria-describedby="depositTermError-{{i}}" attr.aria-labelledby="depositTermField-{{i}}"
+                                                            formControlName="cdterm" />
+                                                    </div>
+                                                </li>
+                                                <li class="error-div text-right" id="depositTermError-{{i}}">
+                                                    <ng-container *ngIf="CODProductGroup.controls.CODProductFormArray['controls'][i]['controls'].cdterm.errors">
+                                                        Please enter a valid term
+                                                    </ng-container>
+                                                </li>
+                                                <li class="d-flex justify-content-between">
+                                                    <div class="product-feature-title">Includes Online Banking and Mobile Banking App</div>
+                                                    <div class="product-feature-value"><span class="fa fa-check-circle access-granted"></span></div>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                        <div class="product-footer">
+                                            <div class="tooltip-div" *ngIf="product.controls.showhighlighter.value">
+                                                <div class="triangle"></div>
+                                                <p>{{product.controls.highlighter.value}}</p>
+                                                <button class="pull-right fa fa-close" (click)="hideHighlighter(product.controls.productid.value,'CD',i)"><i
+                                                        class="sr-only">click to close
+                                                        {{product.controls.highlighter.value}} overlay</i></button>
+                                            </div>
+                                            <button type="button" class="btn btn-select" [ngClass]="selectedProduct(product.controls.productid.value) ? 'remove' : ''" attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.controls.description.value}}" (click)="selectProduct(product.controls.productid.value)"
+                                                [disabled]="getProductDisability(i, product.controls.productid.value)">
+                                                {{selectedProduct(product.controls.productid.value) ? 'Remove' : 'Select'}}
+                                            </button>
+                                            <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                                {{product.controls.highlighter.value}}</p>
+                                            <p class="see-more-icon more-learn" (click)="toggleFeature(product.controls.productid.value)">
+                                                {{visibleFeature(product.controls.productid.value) ? 'Hide': 'Show'}} Features
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row cd-disclaimer-row">
+                            <div class="col-md-12 d-flex">
+                                <ul>
+                                    <li>Early withdrawal penalty may apply; fees could reduce earnings on account</li>
+                                    <li>Rates and APY are accurate as of today</li>
+                                    <li>The minimum opening deposit and balance to obtain the APY is $10,000</li>
+                                    <li>Your maturity date and APY will be determined once you fund your account</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+                <!-- <accordion-group panelClass="product-group" [isOpen]="true">
+                    <div (click)="checkingProduct=!checkingProduct" accordion-heading>
+                        <div class="container">
+                            Family Plans
+                            <button type="button" class="dropdown-circle float-right pull-right"
+                                attr.aria-label="Click to {{checkingProduct ? 'open' : 'close'}} checking product">
+                                <i [ngClass]="checkingProduct ? 'fa fa-sort-down' : 'fa fa-sort-up'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row product-display-row">
+                            <div class="col-xs-12 col-sm-12 col-md-4"
+                                *ngFor="let product of activeProducts | filterProducts:'HSA'">
+                                <div class="product-box-inner"
+                                    [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature"
+                                        [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title"
+                                                        *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button"
+                                                            attr.aria-label="click to learn more about {{product.displayname}} "
+                                                             >Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" 
+                                                        attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span
+                                                        class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize"
+                                                    for="HSAplan">Select Plan</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="HSAplan" id="HSAplan">
+                                                        <option [value]="item.id" [attr.aria-label]="item.description"
+                                                            *ngFor="let item of planList">{{item.description}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize"
+                                                    for="HSAcontributiontype">Contribution Type</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="HSAcontributiontype"
+                                                        id="HSAcontributiontype">
+                                                        <option [value]="item.id" [attr.aria-label]="item.description"
+                                                            *ngFor="let item of contributionTypes">{{item.description}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close"
+                                                (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled"
+                                            [ngClass]="selectedProduct(product.productid) ? 'remove' : ''"
+                                            attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}"
+                                            (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4"
+                                *ngFor="let product of activeProducts | filterProducts:'IRA'">
+                                <div class="product-box-inner"
+                                    [ngClass]="selectedProduct(product.productid) ? 'selected-product' : ''">
+                                    <div class="product-box-header d-flex justify-content-center align-items-center">
+                                        <h3 class="no-margin">{{product.displayname}}</h3>
+                                        <div class="checked-product-mark">
+                                            <span class="fa fa-check"></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-feature"
+                                        [ngClass]="visibleFeature(product.productid) ? 'show-feature': ''">
+                                        <ul class="feature-list list-unstyled">
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Minimum Opening Deposit</div>
+                                                <div class="product-feature-value">
+                                                    {{product.minopeningdeposit | currency}}</div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">
+                                                    Monthly Maintenance Fee
+                                                    <div class="sub-title"
+                                                        *ngIf="product.monthlymaintenancefee !== 'None'">
+                                                        <span>Easily waive the monthly service fee</span>
+                                                        <button type="button"
+                                                            attr.aria-label="click to learn more about {{product.displayname}} "
+                                                             >Learn More</button>
+                                                    </div>
+                                                </div>
+                                                <div class="product-feature-value">{{product.monthlymaintenancefee}}
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Earns Interest</div>
+                                                <div class="product-feature-value">
+                                                    <button class="btn view-rates" 
+                                                        attr.aria-label="Click to view rates for {{product.displayname}}">View
+                                                        Rates</button>
+                                                </div>
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <div class="product-feature-title">Free Visa® debit card</div>
+                                                <div class="product-feature-value"><span
+                                                        class="fa fa-check-circle access-granted"></span></div>
+                                            </li>
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize"
+                                                    for="IRAplan">Select Plan</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="IRAplan" id="IRAplan">
+                                                        <option [value]="item.id" [attr.aria-label]="item.description"
+                                                            *ngFor="let item of planList">{{item.description}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between align-items-center">
+                                                <label class="product-feature-title text-capitalize"
+                                                    for="IRAcontributiontype">Contribution Type</label>
+                                                <div class="product-feature-value">
+                                                    <select class="form-control" name="IRAcontributiontype"
+                                                        id="IRAcontributiontype">
+                                                        <option [value]="item.id" [attr.aria-label]="item.description"
+                                                            *ngFor="let item of contributionTypes">{{item.description}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-footer">
+                                        <div class="tooltip-div" *ngIf="product.showhighlighter">
+                                            <div class="triangle"></div>
+                                            <p>{{product.highlighter}}</p>
+                                            <button class="pull-right fa fa-close"
+                                                (click)="hideHighlighter(product.productid)"><i class="sr-only">click to
+                                                    close {{ product.highlighter }} overlay</i></button>
+                                        </div>
+                                        <button type="button" class="btn btn-select" [disabled]="product.disabled"
+                                            [ngClass]="selectedProduct(product.productid) ? 'remove' : ''"
+                                            attr.aria-label="{{selectedProduct(product.productid) ? 'Remove' : 'Select'}} {{product.displayname}}"
+                                            (click)="selectProduct(product.productid)">
+                                            {{selectedProduct(product.productid) ? 'Remove' : 'Select'}}
+                                        </button>
+                                        <p class="more-learn mobile-heighlighter" *ngIf="product.showhighlighter">
+                                            {{ product.highlighter }}</p>
+                                        <p class="more-learn" (click)="toggleFeature(product.productid)">
+                                            {{visibleFeature(product.productid) ? 'Hide': 'Show'}} Features
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group> -->
+            </accordion>
+        </div>
+    </div>
+    <div class="container">
+        <div class="normal-label">
+            <label>
+                <span>
+                    To help the government fight the funding of terrorism and money laundering activities, Federal law
+                    requires all financial institutions to obtain, verify, and record information that identifies each
+                    person who opens an account.
+                </span>
+                <!-- <span>
+                    <button type="button" class="btn icon-btn more-ref" attr.aria-label="{{showMoreTerms ? 'show less' : 'show more'}}" (click)="showMoreTerms=!showMoreTerms">
+                        {{showMoreTerms ? 'Less <<' : 'More >>'}}
+                    </button>
+                </span> -->
+            </label>
+            <!-- <div class="" id="terms" *ngIf="showMoreTerms" [@slideProductPopupAnimation]> -->
+            <div class="" id="terms">
+                <!--<label class="terms-italics">
+                    Federal regulation requires certain financial institutions to obtain, verify, and record information about the beneficial owners of legal entity customers. Legal entities can be abused to disguise involvement in terrorist financing, money laundering, tax evasion, corruption, fraud, and other financial crimes. Requiring the disclosure of key individuals who own or control a legal entity (i.e. beneficial owners) helps law enforcement investigate and prosecute these crimes.
+                </label>-->
+                <h4 class="sub-heading"> What this means for you:</h4>
+                <label>
+                    When you open an account, we will ask your name, address, date of birth, and other information, such
+                    as your social security number, employer identification number or other government issued
+                    identification number, which will allow us to identify you. We may also ask to see your driver's
+                    license or other identifying documents.
+                </label>
+            </div>
+        </div>
+        <app-footer-action [disableContinue]="selectedProductList.length <= 0 || showMaximumAmountError" [showBack]="true" [showContinue]="true" (clickBack)="prevStep()" (clickContinue)="nextStep()">
+        </app-footer-action>
+        <app-footer-links></app-footer-links>
+    </div>
+</div>
+
+
+<div class="overlay d-flex align-items-center justify-content-center date-modal" appModalFocus aria-modal="true" aria-describedby="dobModalBody" *ngIf="showDateOfBirthModal">
+    <div class="modal-dialog product-filter-dob modal-sm">
+        <div class="modal-content">
+            <div class="modal-header text-left" tabindex="0">Please enter Date of Birth of the Primary Account Holder to help us identify the best suited accounts for you!</div>
+            <div class="modal-body product-filter-modal" id="dobModalBody">
+
+                <form [formGroup]="dateOfBirthForm">
+                    <div class="row width90">
+                        <div class="form-group col-md-12 datepicker">
+                            <label class="display-block" for="DateOfBirth">Date of Birth (<em>of Primary Account
+                                    Holder</em>)
+                                <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                                <span class="sr-only" title="required">Required</span>
+                            </label>
+                            <input type="text" autocomplete="off" class="form-control display-inline-block" placeholder="MM/DD/YYYY" name="DateOfBirth" (blur)="onDateChanged(dateOfBirthForm.getRawValue()['dob']);" (keypress)="callSubmit($event,dateOfBirthForm.getRawValue()['dob'])"
+                                aria-describedby="DateOfBirthError" id="DateOfBirth" formControlName="dob" [ngClass]="dobError ? 'invalid': ''" [textMask]="dateMask" />
+
+                            <my-date-picker name="DateOfBirthPicker" id="DateOfBirthPicker" aria-label="Date Of Birth Date Picker" formControlName="dobPicker" [options]="dobOptions" (inputFieldChanged)="dateValidation($event)" (dateChanged)="onDateChanged($event.formatted, 'dob')"
+                                ngDefaultControl>
+                            </my-date-picker>
+                            <div class="error-div text-left" id="DateOfBirthError">
+                                <ng-container *ngIf="(dobError || dateOfBirthForm['controls'].dob.errors) && (dateOfBirthForm['controls'].dob.dirty || dateOfBirthForm['controls'].dob.touched)">
+                                    <div *ngIf="dateOfBirthForm['controls'].dob.errors?.required">
+                                        Please enter your date of birth.
+                                    </div>
+                                    <div *ngIf="(dobError || dateOfBirthForm['controls'].dob.errors?.invalid) && !dateOfBirthForm['controls'].dob.errors?.required">
+                                        Please enter a valid date of birth.
+                                    </div>
+                                    <div *ngIf="(dobIncorrect || dateOfBirthForm['controls'].dob.errors?.incorrect) && !dateOfBirthForm['controls'].dob.errors?.required">
+                                        Applicant age must be less than 99.
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="showdobEditAlert">
+                        <div class="form-group col-md-12">
+                            <p class="para"><em>Please note that the selected account(s) will be reset.</em></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12 text-right no-margin">
+                            <button type="button" class="btn btn-cancel" style="margin-right: 10px;" *ngIf="showdobEditAlert" (click)="showDateOfBirthModal = false;">Cancel</button>
+                            <button type="button" class="btn btn-select yellow-bg" (click)="getAge(dateOfBirthForm.getRawValue()['dob'])">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

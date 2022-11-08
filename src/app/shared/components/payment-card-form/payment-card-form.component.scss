@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        payment-card-form.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for payment card form page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+.box-separator {
+    // float: left;
+    width: 24px;
+    padding: 4px 8px 3px;
+    font-size: 21px;
+}
+
+.expiry-date-box {
+    width: 50%;
+}
+
+.payment-section {
+    p {
+        margin-bottom: 0px;
+    }
+    .credit-card {
+        input {
+            &+span[customMask] {
+                top: 35px !important;
+            }
+        }
+    }
+}

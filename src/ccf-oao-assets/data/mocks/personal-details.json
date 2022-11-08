@@ -1,0 +1,70 @@
+{
+    "arn": "",
+    "personaldetails": {
+        "firstname": "",
+        "middlename": "",
+        "lastname": "",
+        "suffix": "",
+        "dob": "",
+        "ssn": null,
+        "restrictedcustomer": false,
+        "phonenumber": null,
+        "extension": null,
+        "phonetype": "",
+        "email": "",
+        "mothermaiden": "",
+        "identification": {
+            "type": "",
+            "number": "",
+            "issuestate": "",
+            "issuedate": "",
+            "expirydate": ""
+        },
+        "physicaladdress": {
+            "numberandstreet": "",
+            "aptorsuite": "",
+            "zipcode": null,
+            "city": "",
+            "state": ""
+        },
+        "mailingaddress": {
+            "numberandstreet": "",
+            "aptorsuite": "",
+            "zipcode": null,
+            "city": "",
+            "state": ""
+        },
+        "occupation": "",
+        "employername": ""
+    },
+    "jointdetails": {
+        "firstname": "",
+        "middlename": "",
+        "lastname": "",
+        "suffix": "",
+        "dob": "",
+        "ssn": null,
+        "restrictedcustomer": false,
+        "phonenumber": null,
+        "extension": null,
+        "phonetype": "",
+        "email": "",
+        "mothermaiden": "",
+        "identification": {
+            "type": "",
+            "number": "",
+            "issuestate": "",
+            "issuedate": "",
+            "expirydate": ""
+        },
+        "physicaladdress": {
+            "numberandstreet": "",
+            "aptorsuite": "",
+            "zipcode": null,
+            "city": "",
+            "state": ""
+        },
+        "occupation": "",
+        "employername": ""
+    }
+}

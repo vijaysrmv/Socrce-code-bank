@@ -1,0 +1,227 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        employment.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for employment page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="details_form personal_form employment-information">
+    <form [formGroup]="employment">
+        <div class="row">
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-employmentStatus" id="{{applicantId}}-employmentStatusDropDown">Employment Status
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <select class="form-control" name="employmentStatus" attr.aria-describedby="{{applicantId}}-employmentStatusError" id="{{applicantId}}-employmentStatus" formControlName="employmentstatus" [hidden]="!editEmpDetails || (pid ===1 && accountType ==='businessDeposit')"
+                    (change)="onEmploymentChange(true)">
+                    <option value="" [selected]="!employment.getRawValue().employmentstatus" disabled>Select Employment Status</option>
+                    <option *ngFor="let item of employmentStatus" [attr.aria-label]="item.value" [value]="item.value">{{item.type}}</option>
+                </select>
+                <select class="form-control" name="employmentStatus" attr.aria-describedby="{{applicantId}}-employmentStatusError" attr.aria-labelledby="{{applicantId}}-employmentStatusDropDown" formControlName="employmentstatus" [hidden]="!editEmpDetails || !(pid ===1 && isSoleProprietorship && accountType ==='businessDeposit')"
+                    (change)="onEmploymentChange(true)">
+                    <option value="" [selected]="!employment.getRawValue().employmentstatus" disabled>Select Employment Status</option>
+                    <option *ngFor="let item of filteredEmploymentStatus" [attr.aria-label]="item.value" [value]="item.value">{{item.type}}</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Select Employment Status" attr.aria-describedby="{{applicantId}}-employmentStatusError" attr.aria-labelledby="{{applicantId}}-employmentStatusDropDown" name="employmentstatusLabel" [value]="employment.getRawValue().employmentstatus ? getEmploymentStatusValue(employment.getRawValue().employmentstatus) : ''"
+                    *ngIf="!editEmpDetails || (pid ===1 && !isSoleProprietorship && accountType ==='businessDeposit')" readonly />
+                <div class="error-div" id="{{applicantId}}-employmentStatusError">
+                    <ng-container *ngIf="employment['controls'].employmentstatus.errors && (employment['controls'].employmentstatus.dirty || employment['controls'].employmentstatus.touched)">
+                        <div *ngIf="employment['controls'].employmentstatus.errors?.required">
+                            Please provide your employment status.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4 searchable-input" *ngIf="!hideEmployerName">
+                <label for="{{applicantId}}-employerName">{{getEmployerFieldName()}}
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <input autocomplete="off" type="text" (blur)="trim('employername')" class="form-control" placeholder="Enter Company Name" name="employerName" id="{{applicantId}}-employerName" attr.aria-describedby="{{applicantId}}-employerNameError" formControlName="employername"
+                    [readonly]="!editEmpDetails" *ngIf="!disableEmployerNameField" />
+                <input type="text" class="form-control" name="employername-disabled" id="{{applicantId}}-employerName" readonly [value]="employment.getRawValue()['employername']" *ngIf="disableEmployerNameField" />
+
+                <div class="error-div" id="{{applicantId}}-employerNameError">
+                    <ng-container *ngIf="employment['controls'].employername.errors && (employment['controls'].employername.dirty || employment['controls'].employername.touched)">
+                        <div *ngIf="employment['controls'].employername.errors?.required">
+                            Please enter your employer name.
+                        </div>
+                        <div *ngIf="employment['controls'].employername.errors?.pattern">
+                            Please note the text entered for employer name has invalid special character(s).
+                        </div>
+                        <div *ngIf="employment['controls'].employername.errors?.minlength && !employment['controls'].employername.errors?.pattern">
+                            Please note a minimum of 3 characters are required for employer name.
+                        </div>
+                        <div *ngIf="employment['controls'].employername.errors?.maxlength && !employment['controls'].employername.errors?.pattern">
+                            Please note a maximum of 50 characters (including spaces) are allowed for employer name.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" *ngIf="!hideOccuption">
+                <label for="{{applicantId}}-jobTitle">{{getOccupationFieldName()}}
+                    <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                    <span class="sr-only" title="required">Required</span>
+                </label>
+                <input type="text" autocomplete="off" (blur)="trim('occupation')" class="form-control" placeholder="Enter Job Title" name="jobTitle" id="{{applicantId}}-jobTitle" attr.aria-describedby="{{applicantId}}-jobTitleError" formControlName="occupation" [readonly]="!editEmpDetails"
+                />
+                <div class="error-div" id="{{applicantId}}-jobTitleError">
+                    <ng-container *ngIf="employment['controls'].occupation.errors && (employment['controls'].occupation.dirty || employment['controls'].occupation.touched)">
+                        <div *ngIf="employment['controls'].occupation.errors?.required">
+                            Please enter your job title.
+                        </div>
+                        <div *ngIf="employment['controls'].occupation.errors?.pattern">
+                            Please note the text entered for job title cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="employment['controls'].occupation.errors?.minlength && !employment['controls'].occupation.errors?.pattern">
+                            Please note a minimum of 2 characters are required for job title.
+                        </div>
+                        <div *ngIf="employment['controls'].occupation.errors?.maxlength && !employment['controls'].occupation.errors?.pattern">
+                            Please note a maximum of 40 characters are allowed for job title.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4 input-prefix" [ngClass]="editEmpDetails || employment.getRawValue().workphonenumber ? 'align-prefix-review' : ''" *ngIf="!hideEmployerName">
+                <label for="{{applicantId}}-workPhoneNumber">Work Phone Number</label>
+                <span class="input-prefix-box" [ngClass]="editEmpDetails ? '': 'non-editable'" *ngIf="editEmpDetails || employment.getRawValue().workphonenumber">+1</span>
+                <input type="text" autocomplete="off" class="form-control" [placeholder]="editEmpDetails && !employment.getRawValue().workphonenumber ? 'Enter Phone Number' : '---'" name="workPhoneNumber" id="{{applicantId}}-workPhoneNumber" attr.aria-describedby="{{applicantId}}-workPhoneNumberError"
+                    formControlName="workphonenumber" [textMask]="phoneMask" [readonly]="!editEmpDetails" />
+                <!-- <input type="text" class="form-control display-inline-block" name="loanlinkedWorkPhone" id="loanlinkedWorkPhone" [value]="employment.getRawValue().workphonenumber" readonly *ngIf="loanLinkedApp" /> -->
+                <span customMask [maskType]="'phone'" [maskData]="employment.getRawValue().workphonenumber" [ngClass]="editEmpDetails ? '': 'non-edit-state'"></span>
+                <div class="error-div" id="{{applicantId}}-workPhoneNumberError">
+                    <ng-container *ngIf="employment['controls'].workphonenumber.errors && (employment['controls'].workphonenumber.dirty || employment['controls'].workphonenumber.touched)">
+                        <div *ngIf="employment['controls'].workphonenumber.errors?.minlength">
+                            Please note 10 digits are required for phone number.
+                        </div>
+                        <div *ngIf="employment['controls'].workphonenumber.errors?.maxlength">
+                            Please note a maximum of 10 digits are allowed for phone number.
+                        </div>
+                        <div *ngIf="employment['controls'].workphonenumber.errors?.pattern && !employment['controls'].workphonenumber.errors?.maxlength && !employment['controls'].workphonenumber.errors?.minlength">
+                            Please enter a valid phone number.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" *ngIf="!hideEmployerName">
+                <label for="{{applicantId}}-extension">Extension</label>
+                <input numbersOnly type="text" autocomplete="off" (blur)="trim('', 'extension')" class="form-control" [placeholder]="editEmpDetails && !employment.getRawValue().extension ? 'Enter Extension' : '---'" name="phoneExt" id="{{applicantId}}-extension" attr.aria-describedby="{{applicantId}}-extensionError"
+                    formControlName="extension" [readonly]="!editEmpDetails" />
+                <!-- <input type="text" class="form-control display-inline-block" name="loanlinkedExtension" id="loanlinkedExtension" [value]="employment.getRawValue().extension" readonly *ngIf="loanLinkedApp" /> -->
+                <div class="error-div" id="{{applicantId}}-extensionError">
+                    <ng-container *ngIf="employment['controls'].extension.errors && (employment['controls'].extension.dirty || employment['controls'].extension.touched)">
+                        <div *ngIf="employment['controls'].extension.errors?.maxlength && !employment['controls'].extension.errors?.pattern">
+                            Please note extension cannot be more than 6 digits.
+                        </div>
+                        <div *ngIf="employment['controls'].extension.errors?.pattern">
+                            Please enter a valid extension.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- <div class="row" *ngIf="!(hideEmployerName || hideOccuption)">
+            <div class="col-xs-12 col-md-12">
+                <label class="font-weight-bold">{{employment.getRawValue().employmentstatus === 'Self Employed' ? 'Business': 'Employer'}} Address</label>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-street-{{pid}}">Number & Street</label>
+                <input type="text" autocomplete="nope" (blur)="trim('numberandstreet'); standardizeAddress()" class="form-control" [placeholder]="(editEmpDetails || employment.getRawValue().numberandstreet) ? 'Enter Number and Street Address': '---'" name="numberStreet" id="{{applicantId}}-street-{{pid}}"
+                    attr.aria-describedby="{{applicantId}}-street-{{pid}}-error" formControlName="numberandstreet" [readonly]="!editEmpDetails" />
+                <div class="error-div" id="{{applicantId}}-street-{{pid}}-error">
+                    <ng-container *ngIf="employment['controls'].numberandstreet.errors && (employment['controls'].numberandstreet.dirty || employment['controls'].numberandstreet.touched)">
+                        <div *ngIf="employment['controls'].numberandstreet.errors?.pattern">
+                            Please enter a valid street address in a format similar to 123 Main Street. Special characters are not allowed.
+                        </div>
+                        <div *ngIf="employment['controls'].numberandstreet.errors?.minlength && !employment['controls'].numberandstreet.errors?.pattern">
+                            Please enter your complete number and street address.
+                        </div>
+                        <div *ngIf="employment['controls'].numberandstreet.errors?.maxlength && !employment['controls'].numberandstreet.errors?.pattern">
+                            Please note a maximum of 40 characters (including spaces) are allowed for number and street address.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-aptorsuite-{{pid}}">Apt or Suite</label>
+
+                <input type="text" autocomplete="nope" (blur)="trim('aptorsuite')" class="form-control" [placeholder]="(editEmpDetails || employment.getRawValue().aptorsuite) ? 'Enter Apt or Suite': '---'" name="aptSuite" id="{{applicantId}}-aptorsuite-{{pid}}" attr.aria-describedby="{{applicantId}}-aptorsuiteError-{{pid}}"
+                    formControlName="aptorsuite" [readonly]="!editEmpDetails" />
+                <div class="error-div" id="{{applicantId}}-aptorsuiteError-{{pid}}">
+                    <ng-container *ngIf="employment['controls'].aptorsuite.errors && (employment['controls'].aptorsuite.dirty || employment['controls'].aptorsuite.touched)">
+                        <div *ngIf="employment['controls'].aptorsuite.errors?.maxlength && !employment['controls'].aptorsuite.errors?.pattern">
+                            Please note a maximum of 40 characters (including spaces) are allowed for apt or suite.
+                        </div>
+                        <div *ngIf="employment['controls'].aptorsuite.errors?.pattern">
+                            Please make sure you have entered valid characters for apt or suite.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-zipCode-{{pid}}">Zip Code</label>
+
+                <input type="text" autocomplete="nope" inputmode="numeric" [pattern]="zipCodePattern" [textMask]="zipcodeMask" class="form-control" [placeholder]="(editEmpDetails || employment.getRawValue().zipcode) ? 'Enter Zip Code': '---'" name="zipCode" id="{{applicantId}}-zipCode-{{pid}}"
+                    attr.aria-describedby="{{applicantId}}-zipCodeError-{{pid}}" formControlName="zipcode" (blur)="zipLookUp()" [readonly]="!editEmpDetails" />
+                <div class="error-div" id="{{applicantId}}-zipCodeError-{{pid}}">
+                    <ng-container *ngIf="employment['controls'].zipcode.errors && (employment['controls'].zipcode.dirty || employment['controls'].zipcode.touched)">
+                        <div *ngIf="employment['controls'].zipcode.errors?.minlength">
+                            Please enter a valid 5 digit Zip Code.
+                        </div>
+                        <div *ngIf="employment['controls'].zipcode.errors?.maxlength">
+                            Please note a maximum of 5 digits are allowed for Zip Code.
+                        </div>
+                        <div *ngIf="employment['controls'].zipcode.errors?.incorrect">
+                            Please enter a valid Zip Code.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-city-{{pid}}">City</label>
+
+                <input type="text" autocomplete="nope" (blur)="trim('city')" class="form-control" [placeholder]="(editEmpDetails || employment.getRawValue().city) ? 'Enter City': '---'" name="city" id="{{applicantId}}-city-{{pid}}" attr.aria-describedby="{{applicantId}}-cityError-{{pid}}"
+                    formControlName="city" [readonly]="!editEmpDetails" />
+                <div class="error-div" id="{{applicantId}}-cityError-{{pid}}">
+                    <ng-container *ngIf="employment['controls'].city.errors && (employment['controls'].city.dirty || employment['controls'].city.touched)">
+                        <div *ngIf="employment['controls'].city.errors?.pattern">
+                            Please note the text entered for city cannot contain special characters or numbers.
+                        </div>
+                        <div *ngIf="employment['controls'].city.errors?.minlength && !employment['controls'].city.errors?.pattern">
+                            Please note a minimum of 2 characters are required for city.
+                        </div>
+                        <div *ngIf="employment['controls'].city.errors?.maxlength && !employment['controls'].city.errors?.pattern">
+                            Please note a maximum of 26 characters (including spaces) are allowed for city.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group col-xs-12 col-md-4">
+                <label for="{{applicantId}}-state-{{pid}}">State</label>
+
+                <select class="form-control" name="state" id="{{applicantId}}-state-{{pid}}" formControlName="state" [hidden]="!editEmpDetails" *ngIf="editEmpDetails">
+                    <option value='' disabled="true" [selected]="!employment.getRawValue().state">Select State</option>
+                    <option *ngFor="let item of allStates" [attr.aria-label]="item.statename" [ngValue]="item.statecode">{{item.statename}}</option>
+                </select>
+                <input type="text" class="form-control" [placeholder]="(editEmpDetails || employment.getRawValue().state) ? 'Select State': '---'" name="stateLabel" id="{{applicantId}}-state-{{pid}}" [value]="getStateText(employment.getRawValue().state) || ''" *ngIf="!editEmpDetails"
+                    readonly />
+              //<div class="error-div" id="{{applicantId}}-stateError-{{pid}}" *ngIf="employment['controls'].state.errors && (employment['controls'].state.dirty || employment['controls'].state.touched)">
+               //     <div *ngIf="employment['controls'].state.errors?.required">
+               //         Please select your state.
+               //     </div>
+              //  </div> 
+            </div>
+        </div> -->
+    </form>
+</div>

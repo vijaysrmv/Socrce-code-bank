@@ -1,0 +1,13 @@
+{
+    "API_ENDPOINT_GATEWAY": "http://poc-ccofabmkt.eastus.cloudapp.azure.com:5050/ccfapi/",
+    "ROUTING_NUMBER_API_ENDPOINT_GATEWAY": "https://www.routingnumbers.info/api/data.json",
+    "RESEND_OTP_TIME": 60,
+    "TOKEN_TIMEOUT": 540000,
+    "LOADER_INIT_TIME": 0,
+    "SSN_TEST_PATTERN": true,
+    "ErrorTimeOut": 10000,
+    "CONTACT_NUMBER": "000-000-1234",
+    "PLAID_ENV": "sandbox",
+    "PLAID_KEY": "3fa3bbe170f85d077c03967749c86d",
+    "ENABLE_ROUTE_GUARD": false
+}

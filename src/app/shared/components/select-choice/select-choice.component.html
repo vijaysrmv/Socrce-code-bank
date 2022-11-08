@@ -1,0 +1,65 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        select-choice.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for select choice page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ng-template #selectchoice>
+    <div appModalFocus aria-modal="true" role="dialog">
+        <div id="main-header" class="banner-header banner-alignment discard-funding">
+            <div class="container">
+                <h1 class="heading" *ngIf="selectEmail">Choose any one email for OTP</h1>
+                <h1 class="heading" *ngIf="checkOrder">Choose any one applicant to order checks</h1>
+                <h1 class="heading" *ngIf="overdraft">Choose any one checking product for Overdraft Line of Credit</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="mfa-box">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="mfa-box-inner">
+                        <div class="challenge">
+                            <div class="challenge-header" id="selectChoiceHeading">
+                                <ng-container *ngIf="selectEmail">
+                                    Select email for otp verification
+                                </ng-container>
+                                <ng-container *ngIf="checkOrder">
+                                    Select one applicant
+                                </ng-container>
+                                <ng-container *ngIf="overdraft">
+                                    Select one checking product
+                                </ng-container>
+                            </div>
+                            <div class="challenge-option">
+                                <ul class="list-unstyled" aria-labelledby="selectChoiceHeading" role="radiogroup">
+                                    <ng-container *ngIf="choices && choices.length>0">
+                                        <li *ngFor="let choice of choices">
+                                            <label>
+                                                <input type="radio" name="challenge" class="mfa-option" [(ngModel)]="choiceId" [value]="choice" />
+                                                <span class="select-btn" *ngIf="selectEmail">{{choice.email}}</span>
+                                                <span class="select-btn" *ngIf="checkOrder">{{choice.name}}</span>
+                                                <span class="select-btn" *ngIf="overdraft">{{choice.name}}</span>
+                                            </label>
+                                        </li>
+                                    </ng-container>
+                                    <button class="btn btn-select" [disabled]="!choiceId" (click)="submitChoice()">
+                                        Submit
+                                    </button>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

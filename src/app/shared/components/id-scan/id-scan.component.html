@@ -1,0 +1,146 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        id-scan.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        22/01/2019
+Description            :        Template for id-scan component        
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+<div class="id-scan-container margin-bottom20">
+	<div class="row d-flex justify-content-start">
+		<div class="col-xs-12 col-sm-10 col-md-10 text-left">
+			<p class="docs-subtitle">
+				We have made it easy for you! Simply upload your driver's license, passport or State ID and we will
+				pre-fill your details.
+			</p>
+			<p class="docs-subtitle">
+				Please note ID uploads must be in .jpg, .jpeg or .png file formats 4MB or smaller.
+			</p>
+			<!--<h2 class="heading">Do you have your identification document?</h2>-->
+		</div>
+	</div>
+	<div class="row d-flex justify-content-start no-margin">
+		<div class="upload-dl upload-dl-div768 col-md-10 no-padding">
+			<!-- <div class="upload-dl upload-dl-div768 col-md-7 no-padding" [ngClass]="(jointCount > 1) ? 'col-md-12 jointPage':'col-md-6'"> -->
+			<div class="col-xs-12 col-sm-12 col-md-12 no-padding" id="idFormDiv">
+				<label class="id-label" id="identificationType">
+					Identification Type
+					<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+					<span class="sr-only" title="required">Required</span>
+					:
+				</label>
+				<div class="rdaio-container" role="radiogroup" aria-labelledby="identificationType">
+					<label class="custom-radio" for="driverLicense-{{ index }}">
+						<!-- [ngClass]="(jointCount > 1) ? 'margin-5': ''" -->
+						<input
+							type="radio"
+							id="driverLicense-{{ index }}"
+							value="DL"
+							name="idtype{{ index }}"
+							aria-describedby="idscanError"
+							[(ngModel)]="idscantype"
+							(change)="idScanTypeChange()"
+						/>
+						Driver's License
+						<span class="radio-check"></span>
+					</label>
+					<label class="custom-radio" for="passport-{{ index }}">
+						<input
+							type="radio"
+							id="passport-{{ index }}"
+							value="PS"
+							name="idtype{{ index }}"
+							aria-describedby="idscanError"
+							[(ngModel)]="idscantype"
+							(change)="idScanTypeChange()"
+						/>
+						Passport
+						<span class="radio-check"></span>
+					</label>
+					<label class="custom-radio" for="stateId-{{ index }}">
+						<input
+							type="radio"
+							id="stateId-{{ index }}"
+							value="ST"
+							name="idtype{{ index }}"
+							aria-describedby="idscanError"
+							[(ngModel)]="idscantype"
+							(change)="idScanTypeChange()"
+						/>
+						State ID
+						<span class="radio-check"></span>
+					</label>
+					<!-- <label class="custom-radio" for="others-{{index}}">
+                        <input type="radio" id="others-{{index}}" value="OTHERS" name="idtype{{index}}" aria-describedby="idscanError" [(ngModel)]="idscantype" (change)="idScanTypeChange()" /> Others
+                        <span class="radio-check"></span>
+                    </label> -->
+				</div>
+			</div>
+			<div class="upload-docs d-flex">
+				<div class="upload-docs-box text-center">
+					<div class="images-list">
+						<div class="upload-icon"><i class="fa fa-camera"></i></div>
+						<div class="upload-img-prev" [ngClass]="ids.FRONT.img === '' ? 'display-none' : ''">
+							<img [src]="ids.FRONT.img" id="frontside" alt="" />
+							<span class="close-img-pre fa fa-times-circle" (click)="clearImage('FRONT')"></span>
+						</div>
+						<input
+							#idFront
+							id="frontSideDocument-{{ index }}"
+							aria-describedby="idscanError"
+							[disabled]="!idscantype"
+							(change)="onUploadImage($event, 'FRONT', 'personal')"
+							type="file"
+							[title]="passportID ? 'Choose Information Page' : 'Choose front side document'"
+							accept=".jpeg,.jpg,.png"
+						/>
+					</div>
+					<label for="frontSideDocument-{{ index }}">
+						{{ passportID ? "Information Page" : "Front Side of Document" }}
+						<!-- <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span> -->
+					</label>
+				</div>
+				<div class="upload-docs-box text-center">
+					<div class="images-list">
+						<div class="upload-icon"><i class="fa fa-camera"></i></div>
+						<div class="upload-img-prev" [ngClass]="ids.BACK.img === '' ? 'display-none' : ''">
+							<img [src]="ids.BACK.img" id="backside" alt="" />
+							<span class="close-img-pre fa fa-times-circle" (click)="clearImage('BACK')"></span>
+						</div>
+						<input
+							#idBack
+							id="backSideDocument-{{ index }}"
+							aria-describedby="idscanError"
+							[disabled]="!idscantype"
+							(change)="onUploadImage($event, 'BACK', 'personal')"
+							type="file"
+							[title]="passportID ? 'Choose  Signature Page' : 'Choose back side document'"
+							accept=".jpeg,.jpg,.png"
+						/>
+					</div>
+					<label for="backSideDocument-{{ index }}">
+						{{ passportID ? "Signature Page" : "Back Side of Document" }}
+						<!-- <span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+                        <span class="sr-only" title="required">Required</span> -->
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="error-div text-left" id="idscanError">
+		<div class="display-block" *ngIf="imgerror || imgrequired">
+			<ng-container *ngIf="imgerror">
+				Only .jpg, .jpeg or .png files with size less than or equal to 4MB are allowed.
+			</ng-container>
+			<ng-container *ngIf="imgrequired"> Please provide an identification document. </ng-container>
+		</div>
+	</div>
+</div>

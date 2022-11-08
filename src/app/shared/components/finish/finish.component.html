@@ -1,0 +1,260 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        finish.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for finish page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+<div class="banner-header banner-alignment">
+	<div class="container">
+		<h1 class="heading" id="userNameHeader">
+			Thank you <span class="text-uppercase">{{ userName ? ", " + userName : "" }}</span> !
+		</h1>
+	</div>
+</div>
+<div class="container" [ngSwitch]="applicationStatus">
+	<div class="thank-msg_block" id="reviewApplication" *ngSwitchCase="'review'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for completing the application. Your application is being reviewed. We will connect with you
+				shortly.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="additionalDocusignPending" *ngSwitchCase="'additional-sign-pending'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				We have sent the documents to the {{ applicant }}'s provided email address through DocuSign. Once all
+				the applicants provide their signature, you will receive an email notification to resume and finish
+				this application.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="offerCreditCard" *ngSwitchCase="'creditcard'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for completing the application. You will soon receive an email notification with the
+				updates.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="cancel" *ngSwitchCase="'denied'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				We are sorry but we can't open your account(s) at this time. You will receive an email from us about
+				this.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+
+	<div class="thank-you-block" *ngSwitchCase="'denied-qualifile'">
+		<div class="">
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				We regret to inform you we are not able to open a new account, based on information contained in a
+				consumer report.
+			</p>
+			<p class="text-small">
+				In evaluating your application the following consumer reporting agency/agencies provided us with
+				information that in whole or in part influenced our decision. These agencies did not make the decision
+				to disapprove your account application and are unable to provide you with specific reasons why the
+				decision was made.
+			</p>
+			<p class="text-small text-italics">
+				You have rights under state and federal laws. Included in these rights are: <br />The right to obtain
+				a free copy of your consumer report if you make such a request to the consumer reporting agency within
+				60 days of your receipt of this notice; and the right to dispute the completeness or accuracy of any
+				information contained in such report by notifying the consumer reporting agency directly of your
+				dispute.
+			</p>
+			<p class="font-weight-bold">For information pertaining to your credit account history contact:</p>
+			<p class="text-small no-margin">
+				<span class="org-name">ChexSystem </span> <span class="text-italics">(Consumer Accounts)</span> You
+				may contact ChexSystems at
+				<a href="https://www.consumerdebit.com" target="_blank">www.consumerdebit.com</a>, by telephone using
+				their voice messaging system at 1-800-428-9623, by mail at ChexSystems,
+			</p>
+			<p class="font-weight-bold">
+				Attn: Consumer Relations,
+				<br />7805 Hudson Road, <br />Suite 100, <br />Woodbury, MN, 55125.
+			</p>
+			<p class="finish-exit-btn text-right">
+				<a href="https://www.Newgen Bank.org/" role="button" class="btn btn-select">Exit</a>
+			</p>
+		</div>
+	</div>
+
+	<div class="thank-msg_block" id="reffered" *ngSwitchCase="'referred'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for completing the application. Your application is being reviewed. We will connect with you
+				shortly.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="unserved" *ngSwitchCase="'unserved-state'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>Thank you for your interest in opening an account with Newgen Bank.</p>
+			<p>
+				Currently the information you have entered does not qualify you to open an account with Newgen Bank.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="saveexit" *ngSwitchCase="'save-exit'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for your interest in opening a new account with us. For your convenience, we have saved your
+				information from earlier, so resuming your application is easy. The information entered in your
+				application will be saved for 30 days.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="fundingInProgress" *ngSwitchCase="'funding-inprogress'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for completing the application. Your funding for application is in progress. We will connect
+				with you shortly. You will soon receive an email notification with the updates.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="fundingLocked" *ngSwitchCase="'funding-locked'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>You have exceeded maximum number of attempts to fund your account.</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="fundingAch" *ngSwitchCase="'ach-inprogress'">
+		<p>
+			Application #
+			<span class="font-weight-bold">{{ workitem }}</span>
+		</p>
+		<div *ngIf="!hideExpected">
+			<p>
+				Thank you for your payment. The confirmation below verifies that you have authorized Newgen Bank to
+				initiate an electronic payment from your bank account.
+			</p>
+			<p class="font-weight-bold">Authorized Payment Amount: ${{ paymentAmount }}</p>
+			<p class="font-weight-bold">Date Authorized: {{ authorizedDate }}</p>
+			<p class="font-weight-bold">Expected Payment Date: {{ expectedDate }}</p>
+			<p class="font-weight-bold">
+				Your account(s) will be opened as soon as funds are received on the Expected Payment Date mentioned
+				above. If you have any questions, please contact {{ contactNumber }}
+			</p>
+		</div>
+		<div *ngIf="hideExpected">
+			<p>
+				Thank you for completing the application. Your account verification for fund transfer is in progress.
+				Please check after 2-3 days for the status of your application.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="fundingPlaid" *ngSwitchCase="'plaid'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				Thank you for completing the application. Your funding for application is in progress. We will connect
+				with you shortly. You will soon receive an email notification with the updates.
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+		</div>
+	</div>
+	<div class="thank-msg_block" id="uploadSuccess" *ngSwitchCase="'document-upload-success'">
+		<!-- <h3>Documents successfully uploaded.</h3> -->
+		<p>
+			Application #
+			<span class="font-weight-bold">{{ workitem }}</span>
+		</p>
+		<div>
+			<p>Documents successfully uploaded.</p>
+			<!-- <p>We are verifying the documents you have uploaded. Once the documents are reviewed, you will receive an email notification to resume and finish this application.</p> -->
+			<p>
+				We are verifying the documents you have uploaded. We will connect with you shortly. You will soon
+				receive an email notification with the updates.
+			</p>
+			<!-- <p>Document(s) upload successful! We will review your application and keep you updated on the progress.</p>
+            <p class="font-weight-bold">If you have any questions, please contact {{contactNumber}}</p> -->
+			<!-- <div class="d-flex justify-content-center">
+                <button type="button" class="btn session-btn" (click)="resume()">
+                    Resume Application
+                </button>
+            </div> -->
+		</div>
+	</div>
+	<div class="thank-msg_block" id="uploadCancelled" *ngSwitchCase="'document-upload-exit'">
+		<div>
+			<p>
+				Application #
+				<span class="font-weight-bold">{{ workitem }}</span>
+			</p>
+			<p>
+				We have not saved any document(s) you might have uploaded in the previous page. To process this
+				application further, please resume again and upload the document(s).
+			</p>
+			<p class="font-weight-bold">If you have any questions, please contact {{ contactNumber }}</p>
+			<!-- <div class="d-flex justify-content-center">
+                <button type="button" class="btn session-btn" (click)="resume()">
+                    Resume Application
+                </button>
+            </div> -->
+		</div>
+	</div>
+</div>

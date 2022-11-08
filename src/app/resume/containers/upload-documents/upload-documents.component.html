@@ -1,0 +1,62 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        upload-document.component.html
+Author                 :        Amir Masood
+Date (DD/MM/YYYY)      :        07/11/2019
+Description            :        Template for upload document page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="upload-document">
+    <div class="banner-header banner-alignment">
+        <div class="container">
+            <h1 class="heading" id="main-header">Upload Document</h1>
+        </div>
+    </div>
+    <div class="container">
+        <p>Kindly upload following documents required to support your application.</p>
+        <div class="upload-document-form" *ngFor="let doclist of documentList; let parentIndex = index;">
+            <!-- <div class="upload-document-form" *ngFor="let doclist of documentList | filterDocuments; let parentIndex = index;"> -->
+            <div class="upload-docs" *ngIf="doclist.documents && doclist.documents.length > 0">
+                <p>{{doclist.applicantname}}</p>
+                <div class="upload-docs-row">
+                    <div class="display-inline-block text-center" *ngFor="let doc of doclist.documents; let childIndex = index;">
+                        <div class="images-list display-inline-block">
+                            <div class="upload-icon">
+                                <i class="fa fa-upload"></i>
+                            </div>
+                            <div class="upload-img-prev" [ngClass]="doc.image === '' || doc.image === undefined || doc.image === null ? 'display-none' : ''">
+                                <img [src]="doc.image ? doc.image : ''" id="frontside-{{parentIndex+1}}_{{childIndex+1}}" alt="Front side of ID" *ngIf="!doc.isPdf" />
+                                <img src="./ccf-oao-assets/images/pdf-icon.png" alt="" *ngIf="doc.isPdf" />
+                                <span class="close-img-pre fa fa-times-circle" (click)="removeImage(parentIndex, childIndex)"></span>
+                            </div>
+                            <input type="file" id="uploadDocument-{{parentIndex+1}}_{{childIndex+1}}" (change)="onUploadImage($event, parentIndex, childIndex)" title="Upload Document" accept=".jpeg,.jpg,.pdf,.png" />
+                        </div>
+                        <p class="document-title" style="font-size:14px; padding:0px 10px">{{doc.doctype}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-div display-block" *ngIf="imgerror">
+                    Only .jpg, .jpeg, .png or .pdf files with size less than or equal to 5MB are allowed.
+                </div>
+                <div class="error-div display-block" *ngIf="validationError">
+                    Please upload the required documents to proceed further.
+                </div>
+                <p class="docs-subtitle">
+                    Please note documents uploads must be in .jpg, .jpeg, .png or .pdf file formats 5MB or smaller.
+                </p>
+            </div>
+        </div>
+        <app-footer-action [showExit]="true" [changeExitColor]="true" [showContinue]="true" (clickExit)="onExit()" (clickContinue)="nextStep()"></app-footer-action>
+    </div>
+</div>

@@ -1,0 +1,144 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        business-details.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for business details page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import "../../../../ccf-oao-assets/scss/variables.scss";
+@import "../../../../ccf-oao-assets/scss/mixins.scss";
+
+.sanction-country {
+	&.non-edit-state {
+		margin-bottom: 30px;
+		.table {
+			tbody {
+				tr {
+					td {
+						input,
+						select {
+							background-color: #e2e2e2;
+							cursor: not-allowed;
+							pointer-events: none;
+						}
+					}
+				}
+			}
+		}
+	}
+	.table {
+		border: 1px solid #e2e2e2;
+		border: 1px solid $border-color;
+		thead {
+			tr {
+				background: $border-color;
+				th {
+					font-weight: bold;
+					padding: 5px 10px;
+				}
+			}
+		}
+		tbody {
+			tr {
+				td {
+					padding: 5px 5px;
+					vertical-align: middle;
+					border-top: 1px solid $border-color;
+					// font-size: 16px;
+					background: #e9f2fd;
+					&:first-child {
+						background: #fff;
+					}
+					input,
+					select {
+						padding: 5px !important;
+						border-radius: 2px !important;
+						font-size: 13px !important;
+					}
+					a {
+						cursor: pointer;
+						text-decoration: none;
+						color: $heading-color;
+					}
+					button {
+						background: none;
+						color: $heading-color;
+						border: none;
+						cursor: pointer;
+						font-weight: bold;
+						text-decoration: underline;
+						&:disabled {
+							color: $body-color;
+							cursor: not-allowed;
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.business-information {
+	.business-heading-sep {
+		border-bottom: 1px solid $border-color;
+		margin-bottom: 20px;
+		padding-bottom: 8px;
+	}
+	label {
+		font-weight: inherit;
+	}
+	.info-section {
+		margin-bottom: 10px;
+		.info-header-main {
+			margin-bottom: 12px;
+		}
+		.details-info {
+			.invalidTotalError {
+				display: block;
+				width: 100%;
+				padding-left: 15px;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	// Changed width for only iPad due to bad UX exp, to show more width than actual witdh of col-md-*
+	.business-information {
+		.info-section {
+			.details-info {
+				.row {
+					.col-md-4 {
+						-webkit-box-flex: 0;
+						-ms-flex: 0 0 50% !important;
+						flex: 50% !important;
+						max-width: 50% !important;
+					}
+					.col-md-8 {
+						-webkit-box-flex: 0;
+						-ms-flex: 0 0 100% !important;
+						flex: 100% !important;
+						max-width: 100% !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.owner-list {
+		margin-bottom: 0px;
+	}
+}
+
+

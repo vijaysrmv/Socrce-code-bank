@@ -1,0 +1,53 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        review.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for review page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.label-value {
+    font-weight: bold;
+    text-align: justify;
+}
+
+.details-seprator {
+    // margin: 0px 15px;
+    border-bottom: 1px solid $border-color;
+    margin: 0px -15px 15px;
+    background: $heading-color;
+    padding: 10px 15px;
+    .heading {
+        font-size: 18px;
+        margin: 0px;
+        color: $white-color
+    }
+}
+
+.selected-product {
+    margin-bottom: 30px;
+    // p {
+    //     margin: 0px;
+    // }
+    // .product-name {
+    //     margin-right: 10px;
+    //     &:after {
+    //         content: (',');
+    //     }
+    //     &:last-child {
+    //         &:after {
+    //             content: ('.');
+    //         }
+    //     }
+    // }
+}

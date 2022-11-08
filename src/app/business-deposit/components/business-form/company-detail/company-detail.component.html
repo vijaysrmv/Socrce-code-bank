@@ -1,0 +1,256 @@
+<div class="container mt-5">
+    <form [formGroup]="businessForm" novalidate autocomplete="off">
+        <div class="info-section" [ngClass]="editBusinessDetails ? '' : 'non-editable-view'">
+            <div class="info-header-main">
+                <div class="info-header">
+                    Company Details
+                    <div class="separator_div"></div>
+                </div>
+            </div>
+
+            <div class="details-info">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="IDType">ID Type</label>
+                        <select class="form-control" name="IDType" id="IDType" formControlName="type">
+							<option *ngFor="let id of identificationType" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="companyNumber">Number
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="companyNumber" placeholder="Enter Company Number" attr.aria-describedby="BusinessNameError" formControlName="companyNumber" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="businessFormationDate">Issue Date </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="issueDate" id="issueDate" placeholder="MM/DD/YYYY" attr.aria-describedby="businessFormationDateError" formControlName="businessformationdate" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="businessFormationDate">Expiry Date </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="expiryDate" id="expiryDate" placeholder="MM/DD/YYYY" attr.aria-describedby="expiryDate" formControlName="expiryDate" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="companyNumber">Place Of Issue
+							<span class="mandatory-field"><sup aria-hidden="true">*</sup></span>
+							<span class="sr-only" title="required">Required</span>
+						</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="pissue" placeholder="Place Of Issue" attr.aria-describedby="pissue" formControlName="pissue" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="LegalEntityName">Entity Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="LegalEntityName" placeholder="Entity Name" attr.aria-describedby="LegalEntityName" formControlName="LegalEntityName" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="shortName">Short Name</label>
+                        <input type="text" autocomplete="nope" class="form-control" id="shortName" placeholder="Short Name" attr.aria-describedby="shortName" formControlName="shortName" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="cName">Country Of Incorporation</label>
+                        <select class="form-control" name="cName" id="cName" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="cDomecile">Country Of Domecile / Physical Presence</label>
+                        <select class="form-control" name="cDomecile" id="cDomecile" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="cBuisness">Country Of Buisness Operations</label>
+                        <select class="form-control" name="cBuisness" id="cBuisness" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 datepicker col-md-4">
+                        <label for="IncorporationDate">Date Of Incorporation </label>
+                        <input type="date" inputmode="numeric" autocomplete="nope" class="form-control display-inline-block" name="IncorporationDate" id="IncorporationDate" placeholder="MM/DD/YYYY" attr.aria-describedby="IncorporationDate" formControlName="IncorporationDate"
+                        />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="wAddress">WebSite Address </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="wAddress" placeholder="Website Address" attr.aria-describedby="websiteAddress" formControlName="wAddress" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="rAuthority">Registration Authority</label>
+                        <select class="form-control" name="rAuthority" id="rAuthority" formControlName="type">
+							<option *ngFor="let id of idTypes" [attr.aria-label]="id.description" [value]="id.idtype">
+								{{ id.description }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="eRegistration">Emirates Of Registration</label>
+                        <select class="form-control" name="eRegistration" id="eRegistration" formControlName="type">
+							<option *ngFor="let id of countries" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="rAuthorityOptional">Registration Authority Name(If Others) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="rAuthorityOptional" placeholder="Registration Authority Name(If Others)" attr.aria-describedby="rAuthorityOptional" formControlName="rAuthorityOptional" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="ltype">Legal Entity Type</label>
+                        <select class="form-control" name="ltype" id="ltype" formControlName="type">
+							<option *ngFor="let id of legalEntityType" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="lcategory">Legal Entity Category</label>
+                        <select class="form-control" name="lcategory" id="lcategory" formControlName="type">
+							<option *ngFor="let id of idTypes" [attr.aria-label]="id.description" [value]="id.idtype">
+								{{ id.description }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="vNumber">VAT Number </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="vNumber" placeholder="VAT Number" attr.aria-describedby="vNumber" formControlName="vNumber" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="pIndustry">Prime Industry</label>
+                        <select class="form-control" name="pIndustry" id="pIndustry" formControlName="type">
+							<option *ngFor="let id of primaryIndustry" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="sIndustry">Secondary Industry</label>
+                        <select class="form-control" name="sIndustry" id="sIndustry" formControlName="type">
+							<option *ngFor="let id of primaryIndustry" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="sector">Sector</label>
+                        <select class="form-control" name="sector" id="sector" formControlName="type">
+							<option *ngFor="let id of sectorOfCustomer" [attr.aria-label]="id" [value]="id">
+								{{ id }}
+							</option>
+						</select>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="bDescription">Buisness Detail Description </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="bDescription" placeholder="Buisness Detail Description" attr.aria-describedby="bDescription" formControlName="bDescription" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="sector">Number Of Employees</label>
+                        <input type="text" class="form-control" name="sector" id="sector" formControlName="sector" placeholder="Number Of Employee" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="TurnOver">Current Company TurnOver(AED)</label>
+                        <input type="text" class="form-control" name="TurnOver" id="TurnOver" formControlName="TurnOver" placeholder="Current Company TurnOver(AED)" />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-md-4">
+                        <label for="pTurnOver">Projected Company TurnOver(AED)</label>
+                        <input type="text" class="form-control" name="pTurnOver" id="pTurnOver" placeholder="Projected Company TurnOver(AED)" formControlName="pTurnOver" />
+                    </div>
+
+                    <!-- <div class="form-group col-xs-12 col-md-4">
+                        <label for="sector">Sister Companies</label>
+                        <select class="form-control" name="sector" id="sector" formControlName="type">
+							<option>Yes</option>
+							<option>No</option>
+						</select>
+                    </div> -->
+
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4">
+                        <label for="aCapital">Authorized Capital(AED) </label>
+                        <input type="text" autocomplete="nope" class="form-control" id="aCapital" placeholder="Authorized Capital" attr.aria-describedby="aCapital" formControlName="aCapital" />
+                    </div>
+                </div>
+            </div>
+            <div class="colID">
+                <div class="form-group rowNew p-2">
+                    <div class="rowNew">
+                        <label for="label"><b>Expected Types of Transections : </b></label>
+                    </div>
+                </div>
+
+                <div class="rowNew p-2">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input checkboxId" id="exampleCheck1" />
+                        <label class="form-check-label labelcls" for="exampleCheck1">Cash Deposit</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-sm inputId" id="exampleInputPassword1" />
+                    </div>
+
+                    <div class="form-group">
+                        <p class="percentage">%</p>
+                    </div>
+                </div>
+
+                <div class="rowNew p-2">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input checkboxId" id="exampleCheck2" />
+                        <label class="form-check-label labelcls" for="exampleCheck1">Cheque Deposit</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-sm inputId" id="exampleInputPassword1" />
+                    </div>
+
+                    <div class="form-group">
+                        <p class="percentage">%</p>
+                    </div>
+                </div>
+                <div class="rowNew p-2">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input checkboxId" id="exampleCheck1" />
+                        <label class="form-check-label labelcls" for="exampleCheck1">Bank Transfer</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-sm inputId" id="exampleInputPassword1" />
+                    </div>
+
+                    <div class="form-group">
+                        <p class="percentage">%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

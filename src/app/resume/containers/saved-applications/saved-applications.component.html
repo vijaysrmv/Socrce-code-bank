@@ -1,0 +1,113 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        saved-applications.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for saved application page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="banner-header banner-alignment">
+    <div class="container">
+        <!-- <h1 class="heading">Welcome!</h1> -->
+        <h1 class="heading" id="main-header">Welcome{{userName ? ', ' + userName + '!' : ''}}</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="logout-row">
+        <!--<p>Last Login: Mar 25th 2019</p>-->
+        <p><button type="button" class="btn btn-select" (click)="logout()">Logout</button></p>
+    </div>
+    <div class="saved-application-list">
+        <p class="darshboard-para">You have {{savedApplications.length}} application{{savedApplications.length > 1 ? 's' : ''}} with us! Simply resume your pending application by clicking on the Application Type</p>
+        <div class="application-list">
+            <table class="table">
+                <!-- table-responsive -->
+                <thead>
+                    <tr>
+                        <th>Application Type</th>
+                        <th>Products/Accounts</th>
+                        <th>Application Status</th>
+                        <th>Application Initiated On</th>
+                        <th>Last Modified On</th>
+                        <th>Upload Document</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let application of savedApplications">
+                        <td>
+                            <button type="button" (click)="resumeApplication(application)" [disabled]="disableApplication(application.ibpsstate)">{{applicationType[application.applicationtype]}}</button>
+                            <!-- <a [routerLink]="[/{{application.uistate === 'personalInfo' ? 'personal': 'business'}}/{{application.uistate === 'personalInfo' ? 'personal-details': 'business-details', 'resume']}}">{{application.uistate === 'personalInfo' ? 'Personal Deposit': 'Business Deposit'}}</a> -->
+                            <!-- [routerLink]="'/'" -->
+                        </td>
+                        <td>
+                            <span *ngIf="application.product">
+                                <p class="no-margin" *ngFor="let product of application.product; let i = index">
+                                    {{product}}{{(application.product.length - i > 1) ? ', ': ''}}
+                                </p>
+                            </span>
+                        </td>
+                        <td class="status-pending">{{ibpsStatus[application.ibpsstate]}}</td>
+                        <td>{{application.created | date}} {{getTimeStamp(application.created)}}</td>
+                        <td>{{application.modified | date}} {{getTimeStamp(application.modified)}}</td>
+                        <td>
+                            <button type="button" (click)="uploadDocument(application)" [disabled]="application.ibpsstate !== 'COMMUNICATION_HOLD'">Upload Document</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-view">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 application-box" *ngFor="let application of savedApplications">
+                    <div class="application-box-inner">
+                        <div class="form-group">
+                            <label>Application Type</label>
+                            <p>{{applicationType[application.applicationtype]}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Products/Accounts</label>
+                            <ng-container *ngIf="application.product">
+                                <p class="no-margin" *ngFor="let product of application.product; let i = index">{{product}}{{(application.product.length - i > 1) ? ', ': ''}}</p>
+                            </ng-container>
+                        </div>
+                        <div class="form-group">
+                            <label>Application Status</label>
+                            <p class="status-pending">{{ibpsStatus[application.ibpsstate]}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Application Initiated Date</label>
+                            <p class="no-margin">{{application.created | date}} {{getTimeStamp(application.created)}}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Modified Date</label>
+                            <p class="no-margin">{{application.modified | date}} {{getTimeStamp(application.modified)}}</p>
+                        </div>
+                        <div class="form-group remove-bottom-margin">
+                            <p class="no-margin resume-icon-action">
+                                <button type="button" class="btn btn-select" (click)="uploadDocument(application)" [disabled]="application.ibpsstate !== 'COMMUNICATION_HOLD'">
+                                    Upload Document
+                                </button>
+                                <button type="button" class="btn btn-select" (click)="resumeApplication(application)" [disabled]="disableApplication(application.ibpsstate)">
+                                    <!-- <button type="button" class="btn btn-select" (click)="resumeApplication(application)" [disabled]="application.uistate === 'referred'"> -->
+                                    Resume
+                                </button>
+                            </p>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="upload-document-row">
+        <p><button type="button" (click)="uploadDocument()">Upload Document</button></p>
+    </div> -->
+</div>

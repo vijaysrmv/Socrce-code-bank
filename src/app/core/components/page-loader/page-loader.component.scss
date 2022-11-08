@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        page-loader.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for page loader
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    z-index: 999;
+    // background: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    .modal-dialog {
+        width: 28rem;
+        margin: 1.875rem;
+    }
+    .loading-icon {
+        width: 80px;
+        height: 80px;
+        float: none;
+    }
+}

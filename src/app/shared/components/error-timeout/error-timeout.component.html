@@ -1,0 +1,30 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        error-timeout.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for timeout page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+<!-- <div class="banner-header banner-alignment">
+    <div class="container">
+        <h1 class="heading">Thank you, {{userName}}</h1>
+    </div>
+</div> -->
+<div id="main-header" class="container">
+    <div class="thank-msg_block" id="sessionError">
+        <div class="text-center choose-option-links">
+            <p>Your session has expired. Please select from below options to continue.</p>
+            <a href="/resume" class="btn btn-select">Resume Here</a>
+            <a [href]="createApplicationUrl" class="btn btn-select">Create Application</a>
+            <p class="font-weight-bold">If you have any questions, please contact <br/>{{contactNumber}}</p>
+        </div>
+    </div>
+</div>

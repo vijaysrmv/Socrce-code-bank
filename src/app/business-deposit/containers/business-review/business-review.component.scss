@@ -1,0 +1,232 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Business Deposit
+File Name              :        business-review.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for business review page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import "../../../../ccf-oao-assets/scss/mixins.scss";
+@import "../../../../ccf-oao-assets/scss/variables.scss";
+@import "../../../../ccf-oao-assets/scss/input.scss";
+.label-value {
+	font-weight: bold;
+	text-align: justify;
+}
+
+.details-seprator {
+	border-bottom: 1px solid $border-color;
+	margin: 0px -15px 15px;
+	background: $heading-color;
+	padding: 10px 15px;
+	.heading {
+		font-size: 18px;
+		margin: 0px;
+		color: $white-color;
+	}
+}
+
+.identity-modal {
+	.verification-list {
+		padding-left: 20px;
+		margin: 0px;
+		list-style-type: none;
+		li {
+			margin-bottom: 15px;
+			list-style-type: decimal;
+			p {
+				color: #000;
+			}
+			.selected-city {
+				background: $heading-color;
+				color: $white-color;
+			}
+			label {
+				input[type="radio"],
+				input[type="checkbox"] {
+					opacity: 0;
+				}
+				.identity-option {
+					&:checked ~ .select-btn {
+						color: $white-color;
+						background: $heading-color;
+						padding: 5px 15px;
+						margin-right: 0px;
+						transition: all 0.1s ease-in;
+						cursor: pointer;
+					}
+					& ~ .select-btn {
+						border: 1px solid $heading-color;
+						color: $heading-color;
+						background: $white-color;
+						padding: 5px 15px;
+						margin-right: 0px;
+						transition: all 0.1s ease-in;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}
+.preferred-mode-option {
+	margin: 0px 0px 25px;
+	padding-left: 0px;
+	list-style: none;
+	display: flex;
+	justify-content: flex-start;
+	li {
+		&:not(:last-child) {
+			margin-right: 40px;
+		}
+	}
+}
+.verification-btn .prev-step {
+	display: none;
+}
+
+.identity-option ~ .select-btn:hover {
+	background-color: #eee;
+}
+
+.identity-option:checked ~ .select-btn:hover {
+	background: $heading-color;
+}
+
+.business-disclosure {
+	margin: 15px 0px 30px;
+	.disclosure-list {
+		margin: 0px 0px 20px;
+		padding-left: 0px;
+		li {
+			list-style: none;
+			position: relative;
+			z-index: 5;
+			margin-bottom: 5px;
+			text-transform: inherit;
+			label {
+				list-style: none;
+				position: relative;
+				z-index: 5;
+				text-transform: inherit;
+			}
+			ul {
+				margin: 10px 3px;
+				li {
+					margin-bottom: 10px;
+					label {
+						font-weight: bold;
+						font-size: 14px;
+						a {
+							color: $heading-color;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.details-form {
+	margin-bottom: 0px;
+	padding: 0px 0px 5px;
+	label {
+		font-weight: inherit;
+	}
+	.row {
+		margin-right: -15px;
+		margin-left: -15px;
+	}
+	&::before {
+		display: table;
+		content: " ";
+	}
+	.responsible-list-table {
+		margin: 0px 0px 15px;
+		// padding: 5px 0px;
+		// border-radius: 4px;
+		overflow-x: scroll;
+		h5 {
+			color: $body-color;
+			font-weight: 500;
+		}
+		table {
+			margin-bottom: 0px;
+			width: 100%;
+			max-width: 100%;
+			border: 1px solid $border-color;
+			background-color: transparent;
+			border-spacing: 0;
+			th {
+				width: 20%;
+				&.add-row-column {
+					padding: 7px 0.75rem;
+					text-align: center;
+					width: 8%;
+				}
+			}
+			td {
+				padding: 8px 0.75rem;
+				// line-height: 1.42857143;
+				position: relative;
+				input + span[customMask] {
+					top: 16px;
+					left: 61px !important;
+					width: calc(100% - 81px);
+				}
+				&.input-prefix.dollar-prefix-review {
+					.input-prefix-box {
+						top: 9px;
+						left: 13px;
+					}
+				}
+			}
+			&.table-review {
+				td {
+					input + span[customMask] {
+						top: 9px;
+						left: 26px !important;
+						width: calc(100% - 46px);
+					}
+				}
+			}
+			.dropdown-circle {
+				// margin: 0px auto;
+				font-size: 16px;
+				height: 30px;
+				width: 30px;
+				padding: 5px;
+				// cursor: pointer;
+				// text-align: center;
+				border-radius: 50%;
+				background: $secondary-color;
+				color: $heading-color;
+			}
+		}
+	}
+}
+
+.selected-product {
+	margin-bottom: 30px;
+}
+
+@media (max-width: 768px) and (min-width: 768px) {
+	.responsible-list {
+		.row {
+			.col-md-4 {
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 50% !important;
+				flex: 50% !important;
+				max-width: 50% !important;
+			}
+		}
+	}
+}

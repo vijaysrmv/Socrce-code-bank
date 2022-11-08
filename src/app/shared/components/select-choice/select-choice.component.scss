@@ -1,0 +1,110 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        select-choice.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for select choice page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/input.scss';
+.mfa-box {
+    margin-top: 25px;
+    .mfa-box-inner {
+        width: 100%;
+        max-width: 300px;
+        min-width: 300px;
+    }
+    .challenge {
+        border: 1px solid $border-color;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+        .challenge-header {
+            padding: 10px 0px;
+            border-bottom: 1px solid $border-color;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
+    .challenge-option {
+        ul {
+            margin: 20px 0px 0px;
+            padding-left: 0px;
+            text-align: center;
+            li {
+                margin-bottom: 10px;
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+                label {
+                    word-wrap: break-word;
+                    margin-bottom: 15px;
+                    width: 90%;
+                    margin-right: 0px;
+                    input[type="radio"],
+                    input[type="checkbox"] {
+                        opacity: 0;
+                        position: absolute;
+                    }
+                    .mfa-option {
+                        &:checked~.select-btn {
+                            color: $white-color;
+                            background: $checkbox-bg;
+                            padding: 5px 15px;
+                            margin-right: 0px;
+                            transition: all .1s ease-in;
+                            cursor: pointer;
+                        }
+                        &~.select-btn {
+                            border: 1px solid $checkbox-bg;
+                            color: $checkbox-bg;
+                            background: $white-color;
+                            padding: 5px 15px;
+                            margin-right: 0px;
+                            transition: all .1s ease-in;
+                            cursor: pointer;
+                            display: block;
+                            word-break: break-all;
+                        }
+                        &:focus~.select-btn {
+                            @include prefix(box-shadow, 0 0 0 0.2rem rgba(0, 123, 255, 0.25));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:1120px) {
+    .mfa-box {
+        .challenge-option {
+            ul {
+                li {
+                    label {
+                        width: 90%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:384px) {
+    .mfa-box {
+        .mfa-box-inner {
+            width: 100%;
+            max-width: 300px;
+            min-width: auto;
+        }
+    }
+}

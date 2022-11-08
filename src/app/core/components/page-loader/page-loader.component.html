@@ -1,0 +1,37 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Core
+File Name              :        page-loader.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for page loader
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<div class="overlay loader-modal d-flex align-items-center justify-content-center" [ngClass]="showSpinner ? '': 'display-none'" appModalFocus aria-modal="true" role="dialog" attr.aria-describedby="loadingText">
+    <!-- <div class="loading-container"> -->
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center" id="loadingText">
+                <div class="row">
+                    <p class="text-center col-md-12">
+                        <img class="loading-icon" src="../ccf-oao-assets/images/loader.gif" width="80px" height="80px" alt="Loading" />
+                    </p>
+                    <p [hidden]="processingLabel" class="col-md-12">
+                        Loading...
+                    </p>
+                    <p [hidden]="!processingLabel" class="col-md-12">
+                        Please wait while we're processing your application. Kindly do not press BACK or REFRESH button.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

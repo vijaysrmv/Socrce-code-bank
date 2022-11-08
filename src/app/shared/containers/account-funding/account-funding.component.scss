@@ -1,0 +1,145 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        account-funding.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for account funding page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.account-funding-section {
+    margin: 30px 0px 0px;
+    .dropdown-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: $accordion-toggle-btn-bg;
+        color: $accordion-toggle-btn-color;
+        font-size: 22px;
+        margin-top: -5px;
+        padding: 0px;
+        cursor: pointer;
+        text-align: center;
+        border: none;
+        &.fa-sort-up {
+            padding-top: 10px;
+        }
+        i {
+            &.fa-sort-up {
+                vertical-align: middle;
+            }
+            &.fa-sort-down {
+                vertical-align: top;
+            }
+        }
+    }
+    .account-info {
+        font-weight: normal;
+        font-size: 18px;
+        color: $body-color;
+        margin: 10px 0px 30px;
+    }
+    .row {
+        .border-right {
+            border-right: 1px dashed $border-color !important;
+        }
+        label {
+            font-weight: normal;
+        }
+        h4.heading {
+            color: $body-color;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .total-amount-paid {
+            .sub-heading {
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0px;
+            }
+            .total-amount {
+                font-size: 26px;
+                margin-top: 15px;
+                font-weight: 600;
+            }
+        }
+        .amount-div {
+            text-align: center;
+            padding: 30px 40px;
+            span {
+                font-size: 28px;
+            }
+        }
+    }
+    .account-funding-method {
+        margin-top: 35px;
+        // min-height: 475px;
+        .funding-tab-row {
+            margin-top: 30px;
+        }
+        .applied-box {
+            cursor: pointer;
+            padding: 15px 10px;
+            background: transparent;
+            border: none;
+            margin: 0px 15px 30px;
+            text-align: center;
+            border-top: 5px solid $white-color;
+            @include prefix(box-shadow, 2px 2px 2px 2px rgba(196, 196, 196, 0.54));
+            p {
+                font-size: 14px;
+                color: $body-color;
+            }
+            .product-title {
+                margin: 3px;
+                // font-weight: bold;
+                line-height: 20px;
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+            &.selected-account-type {
+                border-top: 5px solid $secondary-color;
+                .product-title {
+                    color: $heading-color;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+    .other-payments-method {
+        payment-card-form {
+            width: 100%;
+        }
+        div.heading {
+            color: $heading-color;
+            font-weight: bold;
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+        select.form-control {
+            margin-right: 15px;
+        }
+    }
+    .funding-options {
+        // margin-top: 45px;
+        .amount-accounts-section,
+        .questions-section {
+            padding: 15px 0px;
+        }
+        .disable-radio {
+            opacity: 0.5;
+        }
+        .pay-btn {
+            margin-top: 20px;
+        }
+    }
+}

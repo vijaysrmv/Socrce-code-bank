@@ -1,0 +1,214 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Resume
+File Name              :        saved-application.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for saved application page.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.logout-row {
+    margin: -10px 0px 0px;
+    p {
+        text-align: right;
+        margin: 0px 0px 5px;
+    }
+}
+
+.saved-application-list {
+    .heading {
+        font-weight: normal;
+    }
+    .application-list {
+        margin-top: 25px;
+        table {
+            border: 1px solid $border-color;
+            thead {
+                tr {
+                    background: $border-color;
+                    th {
+                        font-weight: bold;
+                        padding: 5px 10px;
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        padding: 5px 5px;
+                        vertical-align: middle;
+                        border-top: 1px solid $border-color;
+                        // font-size: 16px;
+                        a {
+                            cursor: pointer;
+                            text-decoration: none;
+                            color: $heading-color;
+                        }
+                        button {
+                            background: none;
+                            color: $heading-color;
+                            border: none;
+                            cursor: pointer;
+                            font-weight: bold;
+                            text-decoration: underline;
+                            &:disabled {
+                                color: $body-color;
+                                cursor: not-allowed;
+                                text-decoration: none;
+                            }
+                        }
+                        a:hover,
+                        button:hover {
+                            text-decoration: underline;
+                            &:disabled {
+                                text-decoration: none;
+                            }
+                        }
+                        &.status-pending {
+                            color: $error-color;
+                        }
+                        &.status-approve {
+                            color: $green-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .card-view {
+        display: none;
+        margin-top: 20px;
+        .application-box {
+            text-align: center;
+            padding-bottom: 15px;
+            cursor: pointer;
+            .application-box-inner {
+                padding: 10px;
+                height: 100%;
+                // margin-bottom: 15px;
+                background: #ececec;
+                border-radius: 5px;
+                text-align: left;
+                .form-group {
+                    margin-bottom: 15px;
+                    label {
+                        margin-bottom: 0px;
+                    }
+                    p {
+                        margin-bottom: 0px;
+                        font-weight: bold;
+                        &.resume-icon-action {
+                            button {
+                                width: 48%;
+                                &.btn {
+                                    padding: 7px 5px;
+                                }
+                                &:first-child {
+                                    float: left;
+                                }
+                                &:last-child {
+                                    float: right;
+                                }
+                                &:disabled {
+                                    // color: $body-color;
+                                    cursor: not-allowed;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                .status-pending {
+                    color: $error-color;
+                }
+                .status-approve {
+                    color: $green-color;
+                }
+            }
+        }
+    }
+}
+
+.upload-document-row {
+    button {
+        cursor: pointer;
+        text-decoration: none;
+        background: none;
+        border: none;
+        color: $heading-color;
+    }
+    button:hover {
+        text-decoration: underline;
+    }
+}
+
+@media(max-width:667px) {
+    .application-list,
+    .darshboard-para {
+        display: none;
+    }
+    .card-view {
+        display: block !important;
+    }
+    .logout-row {
+        margin: 10px 0px 0px;
+    }
+}
+
+@media(max-width:667px) {
+    .card-view {
+        .application-box {
+            .application-box-inner {
+                .form-group {
+                    &.remove-bottom-margin {
+                        margin-bottom: 0px !important;
+                    }
+                    p {
+                        &.resume-icon-action {
+                            button {
+                                &.btn {
+                                    padding: 7px 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:414px) {
+    .card-view {
+        .application-box {
+            .application-box-inner {
+                .form-group {
+                    p {
+                        &.resume-icon-action {
+                            button {
+                                width: 100% !important;
+                                margin-bottom: 15px;
+                                &:first-child {
+                                    float: none;
+                                }
+                                &:last-child {
+                                    float: none;
+                                    margin-bottom: 0px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

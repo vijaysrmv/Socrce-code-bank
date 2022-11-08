@@ -1,0 +1,53 @@
+<!--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Shared
+File Name              :        mfa-form.component.html
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        Template for mfa form page 
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+-------------------------------------------------------------------------------------------------------->
+
+<ng-template #mfa>
+    <div appModalFocus aria-modal="true" role="dialog" aria-labelledby="mfaTitle" aria-describedby="mfaContent">
+        <div class="banner-header banner-alignment no-margin">
+            <div class="container">
+                <h1 class="heading" id="mfaTitle">Choose Secure Access Code delivery method</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="mfa-box">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="mfa-box-inner" id="mfaContent">
+                        <div class="challenge">
+                            <div class="challenge-header text-left" id="mfaOptions">
+                                {{questionnarie.displayname}}
+                            </div>
+                            <div class="challenge-option">
+                                <ul class="list-unstyled" role="radiogroup" aria-labelledby="mfaOptions">
+                                    <ng-container *ngIf="questionnarie.choicelist && questionnarie.choicelist.length>0">
+                                        <li *ngFor="let choice of questionnarie.choicelist">
+                                            <label>
+                                                <input type="radio" name="challenge" class="mfa-option" [(ngModel)]="choiceId" [value]="choice.key" name="{{questionnarie.name}}" />
+                                                <span class="select-btn">{{choice.display}}</span>
+                                            </label>
+                                        </li>
+                                    </ng-container>
+                                    <button class="btn btn-select" [disabled]="!choiceId" (click)="submitMFA()">
+                                        Submit
+                                    </button>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

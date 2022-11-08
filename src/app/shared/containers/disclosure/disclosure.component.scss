@@ -1,0 +1,235 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        Personal Deposit
+File Name              :        disclosure.component.scss
+Author                 :        Deepak Kumar
+Date (DD/MM/YYYY)      :        
+Description            :        style for disclosure page
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@import '../../../../ccf-oao-assets/scss/variables.scss';
+@import '../../../../ccf-oao-assets/scss/mixins.scss';
+.container {
+    //margin-top: -20px;
+    .renew-checking-heading {
+        margin: 20px 0px;
+        font-size: 18px;
+        color: $body-color;
+    }
+    .selected-product {
+        @include prefix(box-shadow, 0px 3px 16px 2px rgba(23, 85, 197, 0.36));
+        .checked-product-mark {
+            display: block !important;
+        }
+    }
+    .service-offered-section {
+        padding: 0px 0px 20px;
+        .heading {
+            margin: 25px 0px;
+        }
+        .service-box {
+            min-width: 285px;
+            padding-bottom: 30px;
+            .services {
+                overflow: hidden;
+                height: 100%;
+                border: 1px solid $border-color;
+                background: $white-color;
+                padding: 15px;
+                margin-bottom: 25px;
+                text-align: center;
+                position: relative;
+                // min-height: 509px;
+                p {
+                    img {
+                        height: 55px;
+                    }
+                }
+                .service-type {
+                    margin: 10px 0px;
+                    font-size: 16px;
+                    // text-transform: uppercase;
+                    color: $heading-color;
+                    height: 25px;
+                    line-height: 18px;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                }
+                .service-text {
+                    //height: 250px;
+                    // min-height: 275px;
+                    height: calc(100% - 160px);
+                    .service-content {
+                        margin-bottom: 10px;
+                        font-size: 14px;
+                        line-height: 22px;
+                    }
+                }
+                .atm-opted {
+                    height: auto;
+                    font-size: 13px;
+                    margin: 0px 0px 0px;
+                    span {
+                        margin-right: 5px;
+                        &:last-child() {
+                            margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .disclosure {
+        .disclosure-list {
+            margin: 0px 0px 20px;
+            padding-left: 0px;
+            li {
+                list-style: none;
+                position: relative;
+                z-index: 5;
+                margin-bottom: 5px;
+                text-transform: inherit;
+                label {
+                    list-style: none;
+                    position: relative;
+                    z-index: 5;
+                    text-transform: inherit;
+                }
+                ul {
+                    margin: 10px 3px;
+                    li {
+                        margin-bottom: 10px;
+                        label {
+                            font-weight: bold;
+                            font-size: 14px;
+                            a {
+                                color: $heading-color;
+                            }
+                        }
+                        &.e-sign-disclosure {
+                            font-weight: bold;
+                            font-size: 14px;
+                            label {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .product-overlay {
+        input[type="radio"] {
+            position: absolute;
+        }
+        .custom-radio {
+            font-size: 13px;
+            font-weight: normal;
+            .inline-block {
+                display: inline-block;
+                // padding-left: 5px;
+            }
+        }
+        background: #f4f7ff;
+        height: auto;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        right: 0;
+        left: 0;
+        padding: 5px 15px 10px;
+        ul {
+            li {
+                padding: 8px 0px;
+            }
+        }
+        .applicant-list {
+            .checkbox {
+                margin: 0px 0px 5px;
+            }
+        }
+        .proceed-service {
+            margin-top: 5px;
+        }
+        .feature-list {
+            margin: 0px;
+            padding-left: 0px;
+            li {
+                vertical-align: middle;
+                padding: 0px 0px 8px;
+                .product-feature-title {
+                    width: 100%;
+                    p {
+                        a {
+                            font-size: 12px;
+                            margin: 0px 5px;
+                            font-weight: bold;
+                        }
+                    }
+                }
+                .product-feature-value {
+                    font-weight: bold;
+                    .access-granted {
+                        color: $heading-color;
+                        font-size: 21px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        .service-offered-section {
+            .service-box {
+                min-width: 50%;
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        .service-offered-section {
+            padding: 0px 0px 20px;
+            .heading {
+                margin: 10px 0px 25px;
+                font-size: 16px;
+            }
+            .service-box {
+                min-width: 90%;
+                .services {
+                    .service-text {
+                        height: auto;
+                        // margin-bottom: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:567px) {
+    .container {
+        .service-offered-section {
+            .service-box {
+                min-height: auto;
+                .services {
+                    min-height: auto;
+                    .service-text {
+                        min-height: auto;
+                    }
+                }
+            }
+        }
+    }
+}

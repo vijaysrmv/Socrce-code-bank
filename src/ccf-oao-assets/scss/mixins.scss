@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------------------------------------------------
+                NEWGEN SOFTWARE TECHNOLOGIES LIMITED
+Group                  :        PES
+Project/Product        :        Newgen - OAO
+Application            :        Newgen Portal
+Module                 :        assets
+File Name              :        mixins.scss
+Author                 :        Deepak kumar
+Date (DD/MM/YYYY)      : 
+Description            :        defined css functions, which we are using for cross browser.
+-------------------------------------------------------------------------------------------------------
+                CHANGE HISTORY
+-------------------------------------------------------------------------------------------------------
+Problem No/CR No     Change Date     Changed By        Change Description
+--------------------------------------------------------------------------------------------------------*/
+
+@mixin prefix($property, $propertyValue) {
+    @each $prefix in -webkit-,
+    -moz-,
+    -ms-,
+    -o-,
+    "" {
+        #{$prefix}#{$property}: $propertyValue;
+    }
+}
+
+// font weight mixin
+@mixin font-weight($fontValue) {
+    font-weight: $fontValue;
+}
+
+//for display flex
+@mixin flexbox {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
